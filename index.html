@@ -1,112 +1,390 @@
 <!DOCTYPE html>
-<html lang="en-US">
-  <head>
-    <!-- Global site tag (gtag.js) - Google Analytics -->
-    <script async src="https://www.googletagmanager.com/gtag/js?id=G-9YBKGHFV34"></script>
-    <script>
-      window.dataLayer = window.dataLayer || [];
-      function gtag() { dataLayer.push(arguments); }
-      gtag('js', new Date());
+<html lang="en" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Vishnuprasad Kamalon - Software Engineer | Portfolio</title>
+    <meta name="description" content="Vishnuprasad Kamalon - Highly experienced Software Engineer with nearly 8 years in driving scalable software solutions using Ruby, Ruby on Rails, and Python. Explore my portfolio, projects, and professional experience.">
+    <meta name="keywords" content="Vishnuprasad Kamalon, vpk11, Software Engineer, Full-Stack Developer, Backend Developer, Ruby, Ruby on Rails, Python, Flask, FastAPI, Ember.js, Typescript, AWS, Docker, Kubernetes, CI/CD, Agile, DevOps, Portfolio, Software Development, Tech Portfolio, Frankfurt, GenerativeAI, GenAI, Gemini, LLM, RAG, vector db, ATScribe, LoweCLI">
+    <meta name="author" content="Vishnuprasad Kamalon">
+    <link rel="icon" href="https://placehold.co/32x32/3B82F6/FFFFFF?text=VK&font=Inter" type="image/png">
 
-      gtag('config', 'G-9YBKGHFV34');
-    </script>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" xintegrity="sha512-DTOQO9RWCH3ppGqcWaEA1BIZOC6xxalwEsw9c2QQeAIftl+Vegovlnee1c9QX4TctnWMn13TZye+giMm8e2LwA==" crossorigin="anonymous" referrerpolicy="no-referrer" />
 
-    <title>VPK</title>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <meta name="Keywords"
-      content="vpk,vpk11,devvpk,ruby on rails,ruby on rails developer,ror,ror developer,kafka,redis,elasticsearch,sidekiq,graphql,rabbitmq,javascript,flask,python,vishnu prasad k,git,back-end developer,developer,software engineer,vishnuprasad kamalon">
-    <meta name="Description"
-      content="Backend Engineer with 6+ years of experience in Ruby On Rails, GraphQL, Redis, ElasticSearch, Kafka, RabbitMQ, Flask(Python) and Agile Methodology">
-    <meta name="author" content="Vishnu Prasad K">
-      <!-- OG Meta tags -->
-    <meta property="og:title" content="Vishnuprasad Kamalon: Everything You Need to Know" />
-    <meta property="og:url" content="https://www.vishnuprasadkamalon.com" />
-    <meta property="og:image" content="https://vishnuprasadkamalon/img/cover.jpeg" />
-    <meta property="og:type" content="website" />
-    <meta property="og:description" content="I am a Back-end Engineer having 6+ years experience. Click to know more" />
-    <!-- Twitter Card Meta tags -->
-    <meta name="twitter:card" content="summary" />
-    <meta name=”twitter:site” content=”@vpk11>
-    <meta name=”twitter:creator” content=”@vpk11>
-    <meta name="twitter:title" content="Vishnuprasad Kamalon: Everything You Need to Know" />
-    <meta name="twitter:description" content="I am a Back-end Engineer having 6+ years experience. Click to know more" />
-    <meta name="twitter:image" content="https://vishnuprasadkamalon.com/img/cover.jpeg" />
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Roboto+Slab:wght@700&display=swap" rel="stylesheet">
 
-    <link rel="icon" href="img/favicon.ico" type="image/x-icon">
-    <!-- Load an icon library to show a hamburger menu (bars) on small screens -->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
-    <!-- CSS -->
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/css/bootstrap.min.css"
-      integrity="sha384-TX8t27EcRE3e/ihU7zmQxVncDAy5uIKz4rEkgIXeMed4M0jlfIDPvg6uqKI2xXr2" crossorigin="anonymous">
-    <link href="https://fonts.googleapis.com/css2?family=Vollkorn:wght@900&display=swap" rel="stylesheet">
-    <link href="https://fonts.googleapis.com/css2?family=Crimson+Text:wght@600;700&display=swap" rel="stylesheet">
-    <link href="https://fonts.googleapis.com/css2?family=Roboto&display=swap" rel="stylesheet">
     <style>
-      /** Bold Use for headings */
-      .vollkorn {
-        font-family: 'Vollkorn', serif;
-      }
-      .crimson {
-        font-family: 'Crimson Text', serif;
-      }
-      .roboto {
-        font-family: 'Roboto', sans-serif;
-      }
-      .max-width-left {
-        width: 100%;
-        float: left;
-      }
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #f8fafc; /* Tailwind gray-50 */
+        }
+        .hero-bg {
+            background: linear-gradient(135deg, #1e3a8a 0%, #3b82f6 100%); /* Dark blue to lighter blue gradient */
+        }
+        .section-title {
+            font-family: 'Roboto Slab', serif;
+            color: #1e3a8a; /* Tailwind blue-800 */
+        }
+        .card-hover {
+            transition: transform 0.3s ease-in-out, box-shadow 0.3s ease-in-out;
+        }
+        .card-hover:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
+        }
+        .nav-link {
+            position: relative;
+            padding-bottom: 4px;
+        }
+        .nav-link::after {
+            content: '';
+            position: absolute;
+            left: 0;
+            bottom: 0;
+            width: 0;
+            height: 2px;
+            background-color: #3b82f6; /* Tailwind blue-500 */
+            transition: width 0.3s ease;
+        }
+        .nav-link:hover::after {
+            width: 100%;
+        }
+        .icon-link:hover i {
+            transform: scale(1.2);
+            color: #3b82f6; /* Tailwind blue-500 */
+        }
+        .icon-link i {
+            transition: transform 0.2s ease-in-out, color 0.2s ease-in-out;
+        }
+
+        /* Mobile Menu Toggle */
+        #mobile-menu {
+            display: none; /* Hidden by default, JS will toggle */
+        }
+        #mobile-menu.active {
+            display: block;
+        }
+
+        /* Smooth scroll for anchor links */
+        html {
+            scroll-behavior: smooth;
+        }
+
+        /* ATS-friendly headers (example, ensure content is also keyword rich) */
+        h1, h2, h3 {
+            font-weight: 700; /* Bold for emphasis */
+        }
     </style>
-  </head>
-  <body>
-    <nav class="navbar navbar-expand-lg navbar-light bg-light crimson">
-      <a class="navbar-brand rounded px-1" style="border: 3px solid !important" href="https://devvpk.com">VPK</a>
-    </nav>
+</head>
+<body class="text-gray-800 antialiased">
 
-    <div class="container">
-      <div class="row vollkorn mt-4">
-        <h1 class="max-width-left">Hi,</h1>
-        <h2 class="max-width-left">I'm <span style="color: #ab003c">Vishnuprasad</span>,</h2>
-        <h3 class="max-width-left">back-end developer.</h3>
+    <!-- Header & Navigation -->
+    <header class="bg-white shadow-lg sticky top-0 z-50">
+        <nav class="container mx-auto px-4 sm:px-6 lg:px-8 py-3">
+            <div class="flex justify-between items-center">
+                <a href="#" class="flex items-center space-x-3 text-3xl font-bold text-blue-700 hover:text-blue-800 transition-colors duration-300" style="font-family: 'Roboto Slab', serif;">
+                    <span>Vishnuprasad Kamalon</span>
+                </a>
 
-        <h5 class="max-width-left mt-5">• How many years of industrial experience do I have?</h5>
-        <p class="max-width-left">
-          6+ years
-        </p>
-        <h5 class="max-width-left mt-2">• Which language and framework do I use?</h5>
-        <p class="max-width-left">
-          Language: <span style="color: #ab003c">Ruby</span> and Framework: <span style="color: #ab003c">Ruby On Rails</span>
-        </p>
-        <h5 class="max-width-left mt-2">• What all database sytems have I used?</h5>
-        <p class="max-width-left">
-          <span style="color: #ab003c">PostgreSQL</span> and <span style="color: #ab003c">MySQL</span>.
-        </p>
-        <h5 class="max-width-left mt-2">• Have I ever worked with Python?</h5>
-        <p class="max-width-left">
-          Yes, worked with a project on <span style="color: #ab003c">Flask</span> framework.
-        </p>
-        <h5 class="max-width-left mt-2">• What else?</h5>
-        <p class="max-width-left">
-          ElasticSearch, Redis, Kafka, RabbitMQ, Sidekiq, Agile Methodology...
-        </p>
-      </div>
+                <!-- Desktop Menu -->
+                <div class="hidden md:flex items-center space-x-5 lg:space-x-7">
+                    <a href="#about" class="text-gray-700 hover:text-blue-600 nav-link font-medium">About</a>
+                    <a href="#experience" class="text-gray-700 hover:text-blue-600 nav-link font-medium">Experience</a>
+                    <a href="#projects" class="text-gray-700 hover:text-blue-600 nav-link font-medium">Projects</a>
+                    <a href="#contact" class="text-gray-700 hover:text-blue-600 nav-link font-medium">Contact</a>
+                    <a href="assets/vpk_resume.pdf" target="_blank" class="text-gray-700 hover:text-blue-600 nav-link font-medium" title="View Resume">Resume</a>
+                    <span class="text-gray-300">|</span>
+                    <a href="https://github.com/vpk11" target="_blank" class="text-gray-700 hover:text-blue-600 icon-link" title="GitHub">
+                        <i class="fab fa-github text-xl"></i><span class="sr-only">GitHub</span>
+                    </a>
+                    <a href="https://linkedin.com/in/vpk11" target="_blank" class="text-gray-700 hover:text-blue-600 icon-link" title="LinkedIn">
+                        <i class="fab fa-linkedin text-xl"></i><span class="sr-only">LinkedIn</span>
+                    </a>
+                    <a href="https://www.xing.com/profile/Vishnuprasad_Kamalon" target="_blank" class="text-gray-700 hover:text-blue-600 icon-link" title="Xing">
+                        <i class="fab fa-xing text-xl"></i><span class="sr-only">Xing</span>
+                    </a>
+                </div>
 
-      <div class="border-top my-3"></div>
+                <!-- Mobile Menu Button -->
+                <div class="md:hidden">
+                    <button id="mobile-menu-button" class="text-gray-700 hover:text-blue-600 focus:outline-none">
+                        <i class="fas fa-bars text-2xl"></i>
+                    </button>
+                </div>
+            </div>
 
-      <div class="row justify-content-center mt-4 roboto">
-        <a href="https://www.vishnuprasadkamalon.com" target="_blank" class="btn btn-outline-dark mr-3 mt-2" role="button">Blog</a>
-        <a href="https://github.com/vpk11" target="_blank" class="btn btn-outline-dark mr-3 mt-2" role="button">GitHub</a>
-        <a href="https://linkedin.com/in/vpk11" target="_blank" class="btn btn-outline-dark mr-3 mt-2" role="button">LinkedIn</a>
-        <a href="https://twitter.com/vpk11" target="_blank" class="btn btn-outline-dark mr-3 mt-2" role="button">Twitter</a>
-        <a href="https://instagram.com/me.vpk" target="_blank" class="btn btn-outline-dark mt-2" role="button">Instagram</a>
-      </div>
-    </div>
-    <!-- See more examples of how to use Formbutton at formspree.io/formbutton/docs -->
-    <script src="https://formspree.io/js/formbutton-v1.min.js" defer></script>
+            <!-- Mobile Menu -->
+            <div id="mobile-menu" class="md:hidden mt-3 py-2 bg-white rounded-md shadow-xl">
+                <a href="#about" class="block px-4 py-2 text-sm text-gray-700 hover:bg-blue-50 hover:text-blue-600">About</a>
+                <a href="#experience" class="block px-4 py-2 text-sm text-gray-700 hover:bg-blue-50 hover:text-blue-600">Experience</a>
+                <a href="#projects" class="block px-4 py-2 text-sm text-gray-700 hover:bg-blue-50 hover:text-blue-600">Projects</a>
+                <a href="#contact" class="block px-4 py-2 text-sm text-gray-700 hover:bg-blue-50 hover:text-blue-600">Contact</a>
+                <hr class="my-2">
+                <a href="assets/vpk_resume.pdf" target="_blank" class="block px-4 py-2 text-sm text-gray-700 hover:bg-blue-50 hover:text-blue-600"><i class="fas fa-file-pdf w-5 mr-2"></i>Resume</a>
+                <a href="https://github.com/vpk11" target="_blank" class="block px-4 py-2 text-sm text-gray-700 hover:bg-blue-50 hover:text-blue-600"><i class="fab fa-github w-5 mr-2"></i>GitHub</a>
+                <a href="https://linkedin.com/in/vpk11" target="_blank" class="block px-4 py-2 text-sm text-gray-700 hover:bg-blue-50 hover:text-blue-600"><i class="fab fa-linkedin w-5 mr-2"></i>LinkedIn</a>
+                <a href="https://www.xing.com/profile/Vishnuprasad_Kamalon" target="_blank" class="block px-4 py-2 text-sm text-gray-700 hover:bg-blue-50 hover:text-blue-600"><i class="fab fa-xing w-5 mr-2"></i>Xing</a>
+            </div>
+        </nav>
+    </header>
+
+    <!-- Main Content -->
+    <main>
+
+        <!-- Hero Section -->
+        <section id="hero" class="hero-bg text-white py-20 md:py-32">
+            <div class="container mx-auto px-6 text-center">
+                <h1 class="text-4xl md:text-6xl font-extrabold mb-4 leading-tight" style="font-family: 'Roboto Slab', serif;">
+                    Hello, I'm Vishnuprasad Kamalon.
+                </h1>
+                <p class="text-xl md:text-2xl font-light mb-8 max-w-2xl mx-auto">
+                    A passionate <strong class="font-semibold">Software Engineer</strong> transforming ideas into high-impact, scalable software solutions.
+                </p>
+                <a href="#experience" class="bg-white text-blue-700 font-semibold px-8 py-3 rounded-lg hover:bg-gray-100 transition duration-300 text-lg shadow-md hover:shadow-xl transform hover:scale-105">
+                    View My Work
+                </a>
+            </div>
+        </section>
+
+        <!-- About Me Section -->
+        <section id="about" class="py-16 md:py-24 bg-white">
+            <div class="container mx-auto px-6">
+                <h2 class="section-title text-3xl md:text-4xl font-bold text-center mb-12">About Me</h2>
+                <img src="assets/profile-photo.jpg" alt="Vishnuprasad Kamalon - Software Engineer" class="w-40 h-40 md:w-48 md:h-48 mx-auto rounded-full mb-8 shadow-lg border-4 border-blue-200">
+                <div class="max-w-3xl mx-auto text-center md:text-left">
+                    <div class="md:flex md:items-center md:space-x-8">
+                        <div>
+                            <p class="text-gray-700 text-lg leading-relaxed mb-4">
+                                I am a highly experienced <strong class="font-medium">Software Engineer</strong> with nearly 8 years of expertise in driving scalable software solutions. My primary focus has been on utilizing <strong class="font-medium">Ruby, Ruby on Rails, and Python</strong> to build robust applications.
+                            </p>
+                            <p class="text-gray-700 text-lg leading-relaxed mb-4">
+                                I possess strong skills in cloud environments, particularly <strong class="font-medium">AWS</strong>, and I'm proficient with <strong class="font-medium">Docker</strong> and <strong class="font-medium">Kubernetes</strong> for containerization and orchestration. My experience extends to CI/CD pipelines and DevOps practices, ensuring efficient and reliable software delivery. I have a proven track record in integrating <strong class="font-medium">AI-powered capabilities</strong> to create tangible business impact.
+                            </p>
+                            <p class="text-gray-700 text-lg leading-relaxed">
+                                Passionate about leveraging technology to solve complex problems, I thrive in collaborative environments and am committed to continuous learning and adopting best practices in <strong class="font-medium">software architecture</strong> and <strong class="font-medium">Agile development (Scrum, TDD, BDD)</strong>.
+                            </p>
+                        </div>
+                    </div>
+
+                    <div class="mt-12">
+                        <h3 class="text-2xl font-semibold text-gray-800 mb-6 text-center">Core Technical Skills</h3>
+                        <div class="flex flex-wrap justify-center gap-3">
+                            <span class="bg-blue-100 text-blue-700 px-4 py-2 rounded-full text-sm font-medium shadow-sm">Ruby</span>
+                            <span class="bg-blue-100 text-blue-700 px-4 py-2 rounded-full text-sm font-medium shadow-sm">Ruby on Rails</span>
+                            <span class="bg-blue-100 text-blue-700 px-4 py-2 rounded-full text-sm font-medium shadow-sm">Python</span>
+                            <span class="bg-blue-100 text-blue-700 px-4 py-2 rounded-full text-sm font-medium shadow-sm">Flask</span>
+                            <span class="bg-blue-100 text-blue-700 px-4 py-2 rounded-full text-sm font-medium shadow-sm">FastAPI</span>
+                            <span class="bg-blue-100 text-blue-700 px-4 py-2 rounded-full text-sm font-medium shadow-sm">TypeScript</span>
+                            <span class="bg-blue-100 text-blue-700 px-4 py-2 rounded-full text-sm font-medium shadow-sm">Ember.js</span>
+                            <span class="bg-blue-100 text-blue-700 px-4 py-2 rounded-full text-sm font-medium shadow-sm">MySQL</span>
+                            <span class="bg-blue-100 text-blue-700 px-4 py-2 rounded-full text-sm font-medium shadow-sm">PostgreSQL</span>
+                            <span class="bg-blue-100 text-blue-700 px-4 py-2 rounded-full text-sm font-medium shadow-sm">Docker</span>
+                            <span class="bg-blue-100 text-blue-700 px-4 py-2 rounded-full text-sm font-medium shadow-sm">Kubernetes</span>
+                            <span class="bg-blue-100 text-blue-700 px-4 py-2 rounded-full text-sm font-medium shadow-sm">Jenkins</span>
+                            <span class="bg-blue-100 text-blue-700 px-4 py-2 rounded-full text-sm font-medium shadow-sm">Terraform</span>
+                            <span class="bg-blue-100 text-blue-700 px-4 py-2 rounded-full text-sm font-medium shadow-sm">Kafka</span>
+                            <span class="bg-blue-100 text-blue-700 px-4 py-2 rounded-full text-sm font-medium shadow-sm">Redis</span>
+                            <span class="bg-blue-100 text-blue-700 px-4 py-2 rounded-full text-sm font-medium shadow-sm">Rspec</span>
+                            <span class="bg-blue-100 text-blue-700 px-4 py-2 rounded-full text-sm font-medium shadow-sm">PyTest</span>
+                            <span class="bg-blue-100 text-blue-700 px-4 py-2 rounded-full text-sm font-medium shadow-sm">Cucumber</span>
+                            <span class="bg-blue-100 text-blue-700 px-4 py-2 rounded-full text-sm font-medium shadow-sm">Playwright</span>
+                            <span class="bg-blue-100 text-blue-700 px-4 py-2 rounded-full text-sm font-medium shadow-sm">RESTful APIs</span>
+                            <span class="bg-blue-100 text-blue-700 px-4 py-2 rounded-full text-sm font-medium shadow-sm">GraphQL</span>
+                            <span class="bg-blue-100 text-blue-700 px-4 py-2 rounded-full text-sm font-medium shadow-sm">Git</span>
+                            <span class="bg-blue-100 text-blue-700 px-4 py-2 rounded-full text-sm font-medium shadow-sm">Agile/Scrum</span>
+                            <span class="bg-blue-100 text-blue-700 px-4 py-2 rounded-full text-sm font-medium shadow-sm">TDD/BDD</span>
+                            <span class="bg-blue-100 text-blue-700 px-4 py-2 rounded-full text-sm font-medium shadow-sm">Elasticsearch</span>
+                            <span class="bg-blue-100 text-blue-700 px-4 py-2 rounded-full text-sm font-medium shadow-sm">Jira</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Experience Section -->
+        <section id="experience" class="py-16 md:py-24 bg-gray-50">
+            <div class="container mx-auto px-6">
+                <h2 class="section-title text-3xl md:text-4xl font-bold text-center mb-12">Professional Experience</h2>
+                <div class="max-w-4xl mx-auto space-y-10">
+                    <div class="bg-white p-6 md:p-8 rounded-xl shadow-lg card-hover">
+                        <div class="flex flex-col sm:flex-row justify-between items-start sm:items-center mb-3">
+                            <h3 class="text-2xl font-semibold text-blue-700">Senior Software Engineer</h3>
+                            <p class="text-gray-500 text-sm mt-1 sm:mt-0">Clark Holding SE, Frankfurt</p>
+                        </div>
+                        <p class="text-gray-500 text-sm mb-3">November 2021 - Present</p>
+                        <p class="text-gray-700 leading-relaxed">
+                            Developed InsureTech (FinTech) software using Ruby on Rails, FastAPI, Ember.js, TypeScript, Node.js & PostgreSQL. Integrated a third-party AI bot, uplifting in-app appointments. Migrated AWS RDS Postgres (11 to 13) via Blue/Green deployment and optimized Jenkins pipeline & Kubernetes deployment, reducing build time by 40%.
+                        </p>
+                         <p class="text-xs text-gray-500 mt-3"><strong>Key Technologies:</strong> Ruby on Rails, FastAPI, Ember.js, Postgres, Redis, Sidekiq, Cucumber, Git, Docker, Kubernetes, Jenkins</p>
+                    </div>
+
+                    <div class="bg-white p-6 md:p-8 rounded-xl shadow-lg card-hover">
+                        <div class="flex flex-col sm:flex-row justify-between items-start sm:items-center mb-3">
+                            <h3 class="text-2xl font-semibold text-blue-700">Software Engineer</h3>
+                            <p class="text-gray-500 text-sm mt-1 sm:mt-0">Synup Digital Pvt Ltd, Bangalore</p>
+                        </div>
+                        <p class="text-gray-500 text-sm mb-3">May 2019 - November 2021</p>
+                        <p class="text-gray-700 leading-relaxed">
+                            Designed and built REST & GraphQL APIs. Developed backend structures using ElasticSearch, Redis, Kafka & RabbitMQ. Integrated Trustpilot, Google My Business, Facebook, and Bing APIs. Introduced real-time notifications with Rails Action Cable(WebSockets). Core developer in making the product voice-ready, increasing sales by 15% in Q4 2020.
+                        </p>
+                        <p class="text-xs text-gray-500 mt-3"><strong>Key Technologies:</strong> Ruby on Rails, Flask, Postgres, Redshift, ElasticSearch, Redis, GraphQL, Kafka, RabbitMQ, Sidekiq, Git</p>
+                    </div>
+
+                    <div class="bg-white p-6 md:p-8 rounded-xl shadow-lg card-hover">
+                        <div class="flex flex-col sm:flex-row justify-between items-start sm:items-center mb-3">
+                            <h3 class="text-2xl font-semibold text-blue-700">Software Engineer</h3>
+                            <p class="text-gray-500 text-sm mt-1 sm:mt-0">Foradian Technologies Pvt Ltd, Bangalore</p>
+                        </div>
+                        <p class="text-gray-500 text-sm mb-3">July 2017 - May 2019</p>
+                        <p class="text-gray-700 leading-relaxed">
+                            Designed and developed Applicant Enquiry, Applicant Registration, and Transfer Certificate features for Fedena ERP. Built REST API for Fedena Connect mobile application. Wrote and optimized complex SQL queries in the Finance module.
+                        </p>
+                        <p class="text-xs text-gray-500 mt-3"><strong>Key Technologies:</strong> Ruby on Rails, HTML5, JavaScript, MySQL, CSS, Git</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Personal Projects Section -->
+        <section id="projects" class="py-16 md:py-24 bg-white">
+            <div class="container mx-auto px-6">
+                <h2 class="section-title text-3xl md:text-4xl font-bold text-center mb-12">Personal Projects</h2>
+                <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+                    <div class="bg-gray-50 p-6 rounded-xl shadow-lg flex flex-col card-hover">
+                        <h3 class="text-xl font-semibold text-blue-700 mb-2">LoweCLI</h3>
+                        <p class="text-gray-700 leading-relaxed mb-3 flex-grow text-sm">
+                            Generative AI powered command line tool to assist developers with code debugging, command suggestions, document lookup and more.
+                        </p>
+                        <p class="text-xs text-gray-500 mb-4"><strong>Technologies:</strong> Python, FastAPI, GenAI - Gemini AI, RAG</p>
+                        <div class="mt-auto">
+                            <a href="https://github.com/vpk11/lowe-cli" target="_blank" class="inline-block bg-blue-600 text-white text-sm font-medium px-4 py-2 rounded-md hover:bg-blue-700 transition duration-300 mr-2">
+                                <i class="fab fa-github mr-1"></i> GitHub
+                            </a>
+                        </div>
+                    </div>
+
+                    <div class="bg-gray-50 p-6 rounded-xl shadow-lg flex flex-col card-hover">
+                        <h3 class="text-xl font-semibold text-blue-700 mb-2">ATScribe</h3>
+                        <p class="text-gray-700 leading-relaxed mb-3 flex-grow text-sm">
+                            Generative AI powered ATS compatible resume generator command line tool.
+                        </p>
+                        <p class="text-xs text-gray-500 mb-4"><strong>Technologies:</strong> Python, GenAI - Gemini AI, Ollama</p>
+                        <div class="mt-auto">
+                            <a href="https://github.com/vpk11/atscribe" target="_blank" class="inline-block bg-blue-600 text-white text-sm font-medium px-4 py-2 rounded-md hover:bg-blue-700 transition duration-300">
+                                <i class="fab fa-github mr-1"></i> GitHub
+                            </a>
+                        </div>
+                    </div>
+
+                    <div class="bg-gray-50 p-6 rounded-xl shadow-lg flex flex-col card-hover">
+                        <h3 class="text-xl font-semibold text-blue-700 mb-2">PyVaccine Tracker</h3>
+                        <p class="text-gray-700 leading-relaxed mb-3 flex-grow text-sm">
+                            Python app to check COVID vaccination slot availability and publish to a Telegram group.
+                        </p>
+                        <p class="text-xs text-gray-500 mb-4"><strong>Technologies:</strong> Python, Telegram API, Telegram Bot</p>
+                        <div class="mt-auto">
+                            <a href="https://github.com/vpk11/PyVaccineTracker" target="_blank" class="inline-block bg-blue-600 text-white text-sm font-medium px-4 py-2 rounded-md hover:bg-blue-700 transition duration-300">
+                                <i class="fab fa-github mr-1"></i> GitHub
+                            </a>
+                        </div>
+                    </div>
+                     <div class="bg-gray-50 p-6 rounded-xl shadow-lg flex flex-col card-hover">
+                        <h3 class="text-xl font-semibold text-blue-700 mb-2">Personal Portfolio Website</h3>
+                        <p class="text-gray-700 leading-relaxed mb-3 flex-grow text-sm">
+                            This responsive website, designed to showcase my professional profile, skills, and projects.
+                        </p>
+                        <p class="text-xs text-gray-500 mb-4"><strong>Technologies:</strong> HTML5, Tailwind CSS, JavaScript</p>
+                        <div class="mt-auto">
+                            <a href="https://github.com/vpk11/vpk11.github.io" target="_blank" class="inline-block bg-blue-600 text-white text-sm font-medium px-4 py-2 rounded-md hover:bg-blue-700 transition duration-300">
+                                <i class="fab fa-github mr-1"></i> GitHub
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Contact Section -->
+        <section id="contact" class="py-16 md:py-24 hero-bg text-white">
+            <div class="container mx-auto px-6 text-center">
+                <h2 class="text-3xl md:text-4xl font-bold mb-6" style="font-family: 'Roboto Slab', serif;">Let's Connect!</h2>
+                <p class="text-lg md:text-xl mb-8 max-w-xl mx-auto font-light">
+                    I'm always excited to discuss new projects, innovative ideas, or potential collaboration opportunities. Feel free to reach out!
+                </p>
+                <a href="https://linkedin.com/in/vpk11" target="_blank" class="bg-white text-blue-700 font-semibold px-8 py-3 rounded-lg hover:bg-gray-100 transition duration-300 text-lg shadow-md hover:shadow-xl transform hover:scale-105">
+                    Message me on LinkedIn <i class="fab fa-linkedin ml-2"></i>
+                </a>
+                <p class="mt-8 text-sm">
+                    You can also email me at: <a href="mailto:vishnuprasad.kamalon@gmail.com" class="underline hover:text-blue-200">vishnuprasad.kamalon@gmail.com</a>
+                </p>
+            </div>
+        </section>
+
+    </main>
+
+    <!-- Footer -->
+    <footer class="bg-gray-900 text-gray-400 py-12">
+        <div class="container mx-auto px-6 text-center">
+            <div class="mb-6 flex justify-center space-x-6">
+                <a href="https://github.com/vpk11" target="_blank" class="text-gray-400 hover:text-white transition duration-300 icon-link" title="GitHub">
+                    <i class="fab fa-github text-2xl"></i>
+                </a>
+                <a href="https://linkedin.com/in/vpk11" target="_blank" class="text-gray-400 hover:text-white transition duration-300 icon-link" title="LinkedIn">
+                    <i class="fab fa-linkedin text-2xl"></i>
+                </a>
+                <a href="https://www.xing.com/profile/Vishnuprasad_Kamalon" target="_blank" class="text-gray-400 hover:text-white transition duration-300 icon-link" title="Xing">
+                    <i class="fab fa-xing text-2xl"></i>
+                </a>
+                 <a href="assets/vpk_resume.pdf" target="_blank" class="text-gray-400 hover:text-white transition duration-300 icon-link" title="Resume">
+                    <i class="fas fa-file-pdf text-2xl"></i>
+                </a>
+            </div>
+            <p class="text-sm">&copy; <span id="currentYear"></span> Vishnuprasad Kamalon. All rights reserved.</p>
+            <p class="text-xs text-gray-500 mt-1">
+                Built with <a href="https://tailwindcss.com/" target="_blank" class="hover:text-blue-400">Tailwind CSS</a> and a sprinkle of <i class="fas fa-mug-hot text-sm mx-1"></i>.
+            </p>
+        </div>
+    </footer>
+
     <script>
-      window.formbutton = window.formbutton || function () { (formbutton.q = formbutton.q || []).push(arguments) };
-      formbutton("create", { action: "https://formspree.io/f/xvovavqv" })
+        // Set current year in footer
+        document.getElementById('currentYear').textContent = new Date().getFullYear();
+
+        // Mobile menu toggle
+        const menuButton = document.getElementById('mobile-menu-button');
+        const mobileMenu = document.getElementById('mobile-menu');
+        menuButton.addEventListener('click', () => {
+            mobileMenu.classList.toggle('active');
+            // Toggle icon between bars and times
+            const icon = menuButton.querySelector('i');
+            if (mobileMenu.classList.contains('active')) {
+                icon.classList.remove('fa-bars');
+                icon.classList.add('fa-times');
+            } else {
+                icon.classList.remove('fa-times');
+                icon.classList.add('fa-bars');
+            }
+        });
+
+        // Close mobile menu when a link is clicked
+        const mobileMenuLinks = mobileMenu.querySelectorAll('a');
+        mobileMenuLinks.forEach(link => {
+            link.addEventListener('click', (event) => {
+                // Check if the link is an anchor link to a section on the same page
+                if (link.getAttribute('href').startsWith('#')) {
+                    if (mobileMenu.classList.contains('active')) {
+                        mobileMenu.classList.remove('active');
+                        menuButton.querySelector('i').classList.remove('fa-times');
+                        menuButton.querySelector('i').classList.add('fa-bars');
+                    }
+                }
+            });
+        });
+
     </script>
-  </body>
+
+</body>
 </html>

@@ -1,0 +1,255 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Learning Hub - Vishnuprasad Kamalon</title>
+    <meta name="description" content="A collection of learning paths and tutorials on various software development topics by Vishnuprasad Kamalon. Explore interactive guides on JavaScript, Ruby, and more.">
+    <meta name="keywords" content="Vishnuprasad Kamalon, Learning Hub, Tutorials, JavaScript, Ruby, Asynchronous JavaScript, Software Development, Coding Guides, Tech Tutorials">
+    <meta name="author" content="Vishnuprasad Kamalon">
+    <link rel="icon" href="https://placehold.co/32x32/3B82F6/FFFFFF?text=VK&font=Inter" type="image/png">
+
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Roboto+Slab:wght@700&display=swap" rel="stylesheet">
+
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #f8fafc; /* Tailwind gray-50 */
+        }
+        .section-title {
+            font-family: 'Roboto Slab', serif;
+            color: #1e3a8a; /* Tailwind blue-800 */
+        }
+        .card-hover {
+            transition: transform 0.3s ease-in-out, box-shadow 0.3s ease-in-out;
+        }
+        .card-hover:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
+        }
+        .nav-link {
+            position: relative;
+            padding-bottom: 4px;
+        }
+        .nav-link::after {
+            content: '';
+            position: absolute;
+            left: 0;
+            bottom: 0;
+            width: 0;
+            height: 2px;
+            background-color: #3b82f6; /* Tailwind blue-500 */
+            transition: width 0.3s ease;
+        }
+        .nav-link:hover::after {
+            width: 100%;
+        }
+        .icon-link:hover i {
+            transform: scale(1.2);
+            color: #3b82f6; /* Tailwind blue-500 */
+        }
+        .icon-link i {
+            transition: transform 0.2s ease-in-out, color 0.2s ease-in-out;
+        }
+    </style>
+</head>
+<body class="text-gray-800 antialiased flex flex-col min-h-screen">
+
+    <!-- Header & Navigation -->
+    <header class="bg-white shadow-lg sticky top-0 z-50">
+        <nav class="container mx-auto px-4 sm:px-6 lg:px-8 py-3">
+            <div class="flex justify-between items-center">
+                <a href="https://vpk11.github.io/" class="flex items-center space-x-3 text-2xl md:text-3xl font-bold text-blue-700 hover:text-blue-800 transition-colors duration-300" style="font-family: 'Roboto Slab', serif;">
+                    <span>Vishnuprasad Kamalon</span>
+                </a>
+                <div class="flex items-center space-x-5 lg:space-x-7">
+                    <a href="https://vpk11.github.io/#about" class="text-gray-700 hover:text-blue-600 nav-link font-medium hidden md:inline">About</a>
+                    <a href="https://vpk11.github.io/#projects" class="text-gray-700 hover:text-blue-600 nav-link font-medium hidden md:inline">Projects</a>
+                    <a href="https://vpk11.github.io/#contact" class="text-gray-700 hover:text-blue-600 nav-link font-medium hidden md:inline">Contact</a>
+                </div>
+            </div>
+        </nav>
+    </header>
+
+    <!-- Main Content -->
+    <main class="flex-grow">
+        <section id="learning-hub-section" class="py-16 md:py-24 bg-gray-50">
+            <div class="container mx-auto px-6">
+                <h2 class="section-title text-3xl md:text-4xl font-bold text-center mb-4">Learning Hub</h2>
+                <p class="text-center text-gray-600 text-lg mb-12 max-w-2xl mx-auto">A collection of interactive guides and tutorials I've created to explore various technologies.</p>
+                
+                <div id="learning-paths-container" class="grid md:grid-cols-2 lg:grid-cols-3 gap-8 max-w-6xl mx-auto">
+                    <!-- Learning path cards will be dynamically inserted here -->
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- Footer -->
+    <footer class="bg-gray-900 text-gray-400 py-12">
+        <div class="container mx-auto px-6 text-center">
+            <div class="mb-6 flex justify-center space-x-6">
+                <a href="https://github.com/vpk11" target="_blank" class="text-gray-400 hover:text-white transition duration-300 icon-link" title="GitHub">
+                    <i class="fab fa-github text-2xl"></i>
+                </a>
+                <a href="https://linkedin.com/in/vpk11" target="_blank" class="text-gray-400 hover:text-white transition duration-300 icon-link" title="LinkedIn">
+                    <i class="fab fa-linkedin text-2xl"></i>
+                </a>
+                <a href="https://www.xing.com/profile/Vishnuprasad_Kamalon" target="_blank" class="text-gray-400 hover:text-white transition duration-300 icon-link" title="Xing">
+                    <i class="fab fa-xing text-2xl"></i>
+                </a>
+            </div>
+            <p class="text-sm">© <span id="currentYear"></span> Vishnuprasad Kamalon. All rights reserved.</p>
+            <p class="text-xs text-gray-500 mt-1">
+                Built with Tailwind CSS and a sprinkle of JavaScript.
+            </p>
+        </div>
+    </footer>
+
+    <!-- Paths Modal -->
+    <div id="paths-modal" class="fixed inset-0 bg-black bg-opacity-60 z-50 hidden items-center justify-center p-4">
+        <div class="bg-white rounded-xl shadow-xl w-full max-w-lg transform transition-all duration-300 scale-95 opacity-0">
+            <div class="flex justify-between items-center p-4 border-b border-gray-200">
+                <h3 id="modal-title" class="section-title text-2xl font-bold"></h3>
+                <button id="close-modal-btn" class="text-gray-400 hover:text-gray-800 text-3xl leading-none">&times;</button>
+            </div>
+            <div id="modal-content" class="p-6 space-y-3">
+                <!-- Links will be injected here -->
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // --- Data for Learning Paths ---
+        const learningData = {
+            "JavaScript": {
+                icon: "fab fa-js-square text-4xl text-yellow-500",
+                description: "Dive into advanced JavaScript concepts with these tutorials, covering everything from asynchronous operations to modern ES6+ features.",
+                paths: [
+                    {
+                        title: "Asynchronous JavaScript Learning Path",
+                        url: "/learn/js/async_js.html"
+                    },
+                ]
+            }
+        };
+
+        // --- DOM Elements ---
+        const container = document.getElementById('learning-paths-container');
+        const modal = document.getElementById('paths-modal');
+        const modalBox = modal.querySelector('div');
+        const modalTitle = document.getElementById('modal-title');
+        const modalContent = document.getElementById('modal-content');
+        const closeModalBtn = document.getElementById('close-modal-btn');
+        
+        // --- Function to build and render the learning hub ---
+        function renderLearningHub() {
+            container.innerHTML = ''; // Clear previous content
+
+            Object.keys(learningData).forEach(category => {
+                const categoryData = learningData[category];
+                
+                const card = document.createElement('div');
+                card.className = "bg-white p-6 rounded-xl shadow-lg flex flex-col card-hover cursor-pointer category-card";
+                card.dataset.category = category;
+
+                card.innerHTML = `
+                    <div class="flex items-center mb-4 pointer-events-none">
+                         <i class="${categoryData.icon}"></i>
+                         <h3 class="text-2xl font-semibold text-blue-700 ml-3">${category}</h3>
+                    </div>
+                    <p class="text-gray-700 leading-relaxed mb-4 flex-grow text-sm pointer-events-none">
+                        ${categoryData.description}
+                    </p>
+                    <div class="mt-auto border-t border-gray-200 pt-4 pointer-events-none">
+                       <span class="text-blue-600 font-medium group-hover:text-blue-800">
+                           View Paths <i class="fas fa-arrow-right ml-1 text-xs"></i>
+                       </span>
+                    </div>
+                `;
+                container.appendChild(card);
+            });
+
+            // Add the "Coming Soon" card (not clickable)
+            const comingSoonCard = `
+                <div class="bg-white p-6 rounded-xl shadow-lg flex flex-col border-2 border-dashed border-gray-300">
+                     <div class="flex items-center mb-4 text-gray-400">
+                         <i class="fas fa-plus-circle text-4xl"></i>
+                         <h3 class="text-2xl font-semibold ml-3">More Coming Soon</h3>
+                    </div>
+                    <p class="text-gray-500 leading-relaxed mb-4 flex-grow text-sm">
+                       New learning paths and tutorials on other technologies are under construction. Check back later for more content!
+                    </p>
+                </div>
+            `;
+            container.insertAdjacentHTML('beforeend', comingSoonCard);
+        }
+
+        // --- Modal Logic ---
+        function openPathsModal(category) {
+            const categoryData = learningData[category];
+            if (!categoryData) return;
+
+            modalTitle.textContent = `${category} Learning Paths`;
+            
+            let pathsHtml = categoryData.paths.map(path => `
+                <a href="${path.url}" class="flex items-center justify-between text-blue-600 font-medium hover:bg-blue-50 p-3 rounded-md transition-colors group">
+                    <span>${path.title}</span>
+                    <i class="fas fa-arrow-right text-sm text-gray-400 transform transition-transform group-hover:translate-x-1 group-hover:text-blue-600"></i>
+                </a>
+            `).join('');
+
+            modalContent.innerHTML = pathsHtml;
+            modal.classList.remove('hidden');
+            modal.classList.add('flex');
+            setTimeout(() => { // For transition effect
+                modalBox.classList.remove('scale-95', 'opacity-0');
+            }, 10);
+        }
+        
+        function closePathsModal() {
+            modalBox.classList.add('scale-95', 'opacity-0');
+            setTimeout(() => { // For transition effect
+                modal.classList.add('hidden');
+                modal.classList.remove('flex');
+            }, 200);
+        }
+
+        // --- Event Listeners ---
+        container.addEventListener('click', (event) => {
+            const card = event.target.closest('.category-card');
+            if (card) {
+                const category = card.dataset.category;
+                openPathsModal(category);
+            }
+        });
+
+        closeModalBtn.addEventListener('click', closePathsModal);
+
+        modal.addEventListener('click', (e) => {
+            if (e.target === modal) {
+                closePathsModal();
+            }
+        });
+        
+        document.addEventListener('keydown', (e) => {
+            if (e.key === "Escape" && !modal.classList.contains('hidden')) {
+                closePathsModal();
+            }
+        });
+
+        // --- Initial setup ---
+        document.addEventListener('DOMContentLoaded', () => {
+            document.getElementById('currentYear').textContent = new Date().getFullYear();
+            renderLearningHub();
+        });
+
+    </script>
+
+</body>
+</html>

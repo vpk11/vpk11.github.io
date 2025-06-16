@@ -1,0 +1,375 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Asynchronous JavaScript Learning Path by Vishnuprasad Kamalon | Interactive Tutorial</title>
+    <meta name="description" content="An interactive tutorial and learning path for mastering asynchronous JavaScript, created by Vishnuprasad Kamalon. Covers Promises, async/await, the event loop, and advanced coding challenges.">
+    <meta name="keywords" content="Vishnuprasad Kamalon, Asynchronous JavaScript, Async/Await, Promises, setTimeout, Event Loop, JavaScript Tutorial, Coding Challenge, Frontend Developer, Software Engineer, JavaScript, Node.js, Callback Hell, Promise.all, Promise.race, Promise.any, Promise.allSettled">
+    <meta name="author" content="Vishnuprasad Kamalon">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;700&family=Roboto+Slab:wght@700&family=Fira+Code&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #f8fafc; /* Tailwind gray-50 */
+        }
+        .code-block {
+            font-family: 'Fira Code', monospace;
+        }
+        .section-title {
+            font-family: 'Roboto Slab', serif;
+            color: #1e3a8a; /* Tailwind blue-900 */
+        }
+        .sidebar-item.active {
+            background-color: #dbeafe; /* blue-200 */
+            color: #1e3a8a; /* blue-900 */
+            font-weight: 600;
+        }
+         .sidebar-item:hover {
+            background-color: #eff6ff; /* blue-50 */
+        }
+        .module-title.active {
+             background-color: #eff6ff;
+             color: #1d4ed8;
+        }
+        .icon-link i {
+            transition: transform 0.2s ease-in-out, color 0.2s ease-in-out;
+        }
+        .icon-link:hover i {
+            transform: scale(1.2);
+            color: #3b82f6; /* Tailwind blue-500 */
+        }
+        .nav-link {
+            position: relative;
+            padding-bottom: 4px;
+        }
+        .nav-link::after {
+            content: '';
+            position: absolute;
+            left: 0;
+            bottom: 0;
+            width: 0;
+            height: 2px;
+            background-color: #3b82f6; /* Tailwind blue-500 */
+            transition: width 0.3s ease;
+        }
+        .nav-link:hover::after {
+            width: 100%;
+        }
+    </style>
+</head>
+<body class="text-gray-800 antialiased flex flex-col min-h-screen">
+
+    <!-- Header & Navigation -->
+    <header class="bg-white shadow-lg sticky top-0 z-50">
+        <nav class="container mx-auto px-4 sm:px-6 lg:px-8 py-3">
+            <div class="flex justify-between items-center">
+                <a href="#" class="flex items-center space-x-3 text-2xl font-bold text-blue-700 hover:text-blue-800 transition-colors duration-300" style="font-family: 'Roboto Slab', serif;">
+                    <span>Vishnuprasad Kamalon</span>
+                </a>
+                <div class="flex items-center space-x-5 lg:space-x-7">
+                    <a href="https://vpk11.github.io/" target="_blank" class="text-gray-700 hover:text-blue-600 nav-link font-medium">Back to Portfolio</a>
+                    <span class="text-gray-300 hidden sm:block">|</span>
+                    <a href="https://github.com/vpk11" target="_blank" class="text-gray-700 hover:text-blue-600 icon-link hidden sm:block" title="GitHub">
+                        <i class="fab fa-github text-xl"></i><span class="sr-only">GitHub</span>
+                    </a>
+                    <a href="https://linkedin.com/in/vpk11" target="_blank" class="text-gray-700 hover:text-blue-600 icon-link hidden sm:block" title="LinkedIn">
+                        <i class="fab fa-linkedin text-xl"></i><span class="sr-only">LinkedIn</span>
+                    </a>
+                </div>
+            </div>
+        </nav>
+    </header>
+
+    <div class="flex flex-col md:flex-row flex-grow bg-white">
+        
+        <nav id="sidebar" class="w-full md:w-80 lg:w-96 bg-white p-4 shadow-lg overflow-y-auto flex-shrink-0 border-r border-gray-200">
+            <h1 class="section-title text-3xl font-bold mb-2 px-2">Async JS Learning Path</h1>
+            <p class="text-sm text-gray-500 mb-6 px-2">Select a challenge to begin.</p>
+            <div id="challenges-menu" class="space-y-2"></div>
+        </nav>
+
+        <!-- Main Content -->
+        <main id="main-content" class="flex-1 flex flex-col bg-gray-50">
+             <div id="challenge-display" class="flex-grow max-w-4xl mx-auto w-full p-6 md:p-10">
+                <!-- Challenge content will be injected here -->
+                <div class="bg-white p-8 rounded-xl shadow-lg">
+                    <h2 class="section-title text-3xl font-bold mb-4">Welcome!</h2>
+                    <p class="text-lg text-gray-700 leading-relaxed">This interactive application is your personal guide to mastering asynchronous JavaScript. It was created as a way to explore complex JS topics.</p>
+                    <p class="mt-4 text-gray-600">Please select a module and challenge from the menu on the left to get started. Each challenge includes a description of the task and a starter code snippet to help you begin.</p>
+                    <div class="mt-6 p-4 bg-blue-50 border-l-4 border-blue-500 text-blue-800 rounded-r-lg">
+                        <p><strong class="font-medium">How to use:</strong> Click on a module title to expand the list of challenges. Click on a challenge to view its details here.</p>
+                    </div>
+                </div>
+            </div>
+        </main>
+    </div>
+
+    <!-- Footer -->
+    <footer class="bg-gray-900 text-gray-400 py-8 w-full">
+        <div class="container mx-auto px-6 text-center">
+            <div class="mb-4 flex justify-center space-x-6">
+                <a href="https://github.com/vpk11" target="_blank" class="text-gray-400 hover:text-white transition duration-300 icon-link" title="GitHub">
+                    <i class="fab fa-github text-2xl"></i>
+                </a>
+                <a href="https://linkedin.com/in/vpk11" target="_blank" class="text-gray-400 hover:text-white transition duration-300 icon-link" title="LinkedIn">
+                    <i class="fab fa-linkedin text-2xl"></i>
+                </a>
+                <a href="https://www.xing.com/profile/Vishnuprasad_Kamalon" target="_blank" class="text-gray-400 hover:text-white transition duration-300 icon-link" title="Xing">
+                    <i class="fab fa-xing text-2xl"></i>
+                </a>
+            </div>
+            <p class="text-sm">© <span id="currentYear">2025</span> Vishnuprasad Kamalon. All rights reserved.</p>
+            <p class="text-xs text-gray-500 mt-1">
+                Built with Tailwind CSS & JavaScript.
+            </p>
+        </div>
+    </footer>
+
+    <script>
+        const challenges = [
+            {
+                module: 1,
+                title: "The Classic setTimeout Puzzle",
+                task: "Predict the output of this code *before* running it. Then, explain *why* it behaves that way. How does variable scope (`var` vs `let`) and the event loop cause this?\n\n**Follow-up:** How would you fix it to print 1, 2, 3, 4, 5? Provide two solutions: one using `let` and one using only `var` (hint: IIFE).",
+                code: `function challenge1() {\n  for (var i = 1; i <= 5; i++) {\n    setTimeout(function() {\n      console.log('Challenge 1:', i);\n    }, 10);\n  }\n}\nchallenge1();`
+            },
+            {
+                module: 1,
+                title: "The Callback Chain (\"Callback Hell\")",
+                task: "Simulate a multi-step asynchronous operation. Create a function `performSteps` that:\n1. After 1 second, logs \"Step 1 complete\".\n2. After another 1.5 seconds, logs \"Step 2 complete\".\n3. After another 0.5 seconds, logs \"Step 3 complete\".\nYou must use `setTimeout` and nested callbacks for this challenge.",
+                code: `// Starter code\nfunction performSteps() {\n  // Your nested callbacks here\n}\nperformSteps();`
+            },
+            {
+                module: 1,
+                title: "Building a `delay` Promise",
+                task: "Promisify `setTimeout`. Create a function called `delay` that accepts a time `ms` and returns a Promise that resolves after `ms` milliseconds.",
+                code: `function delay(ms) {\n  // Your code here\n}\n\nconsole.log("Starting delay...");\ndelay(2000).then(() => {\n  console.log("2 seconds have passed.");\n});`
+            },
+            {
+                module: 1,
+                title: "Chaining Promises (`.then`)",
+                task: "Re-implement Challenge 2 using your new `delay` function and `.then()` chaining. The output should be the same, but the code structure should be flat, not nested.",
+                code: `function performStepsWithPromises() {\n  console.log('Starting steps...');\n  // Your .then() chain here\n}\nperformStepsWithPromises();`
+            },
+            {
+                module: 1,
+                title: "Promise Error Handling (`.catch`)",
+                task: "Create a function `fetchData(url)` that returns a promise. The promise should reject with an error message if the `url` does not contain the word 'data', and resolve with `{ success: true, url: url }` otherwise. Use a 1-second delay to simulate a network request. Test both a successful and a failing case, ensuring you handle the error with `.catch()`.",
+                code: `function fetchData(url) {\n  // Your code here\n}\n\nfetchData('api/get/data/users').then(response => console.log(response));\nfetchData('api/get/users').catch(error => console.error(error.message));`
+            },
+            {
+                module: 2,
+                title: "`Promise.all()` - The Parallel Executor",
+                task: "You have three \"APIs\" that fetch data. Use `Promise.all()` to fetch data from all of them concurrently. Log a final message \"All data fetched!\" only after all three have successfully completed. Log the array of results.",
+                code: `// You'll need your 'delay' function from Challenge 3\nconst api1 = () => delay(1500).then(() => ({ user: 'Alice' }));\nconst api2 = () => delay(1000).then(() => ({ posts: ['Post 1', 'Post 2'] }));\nconst api3 = () => delay(2000).then(() => ({ settings: { theme: 'dark' } }));\n\n// Your code using Promise.all() here`
+            },
+            {
+                module: 2,
+                title: "`Promise.all()` with an Error",
+                task: "Modify the previous challenge. Make `api2` reject after 1 second. What happens to your `Promise.all()`? How do you catch the error? Does `api3`'s result ever get used? Explain the \"fail-fast\" behavior."
+            },
+            {
+                module: 2,
+                title: "`Promise.allSettled()` - The Resilient Executor",
+                task: "Using the same failing `api2` from Challenge 7, refactor your code to use `Promise.allSettled()`. Log the results. How does the output differ from `Promise.all`? Why is this useful?"
+            },
+            {
+                module: 2,
+                title: "`Promise.race()` - The Quickest Responder",
+                task: "Imagine you are fetching a resource from two redundant servers. You want to use the result from whichever server responds first. Implement this using `Promise.race()`.",
+                code: `const server1 = () => delay(1200).then(() => 'Response from Server 1');\nconst server2 = () => delay(900).then(() => 'Response from Server 2');\n\n// Your code using Promise.race() here`
+            },
+            {
+                module: 2,
+                title: "`Promise.any()` - The First Success",
+                task: "Now imagine one of your servers might fail. You want the result from the first server that *successfully* responds. Modify Challenge 9 so that `server2` rejects. Use `Promise.any()` to get the successful result from `server1`."
+            },
+            {
+                module: 2,
+                title: "The `.finally()` Cleanup Crew",
+                task: "Create a function `processData()` that shows a loading spinner, fetches data (use your `fetchData` function from Challenge 5), and then hides the spinner, regardless of whether the fetch succeeded or failed. Use `.finally()` to handle the spinner logic.",
+                code: `function showSpinner() { console.log('Loading...'); }\nfunction hideSpinner() { console.log('Done loading.'); }\n\nfunction processData(url) {\n  showSpinner();\n  // Your code using fetchData(url) and .finally() here\n}\n\nprocessData('api/get/data/users');\nprocessData('api/get/users');`
+            },
+            {
+                module: 3,
+                title: "Refactoring Promise Chains to Async/Await",
+                task: "Take your solution for Challenge 4 (`performStepsWithPromises`) and rewrite it as an `async` function using `await`."
+            },
+            {
+                module: 3,
+                title: "`try...catch` in Async Functions",
+                task: "Rewrite your solution for Challenge 5 (`fetchData`) inside an `async` function that uses a `try...catch` block to handle potential rejections."
+            },
+            {
+                module: 3,
+                title: "The `forEach` Async Trap",
+                task: "Predict the output of the following code. Why doesn't it work as you might expect? Explain why `Array.prototype.forEach` is not \"await-aware\".",
+                code: `// You'll need your 'delay' function\nasync function processArray(arr) {\n  console.log('Start processing...');\n  arr.forEach(async (item) => {\n    await delay(item * 100);\n    console.log(\`Processed item \${item}\`);\n  });\n  console.log('...finished processing.');\n}\n\nprocessArray([1, 2, 3, 4]);`
+            },
+            {
+                module: 3,
+                title: "Sequential Loops with `for...of`",
+                task: "Fix Challenge 14. Rewrite the `processArray` function so that it processes the items sequentially, waiting for each `delay` to finish before starting the next. The final log message must appear last. (Hint: Use a `for...of` loop)."
+            },
+            {
+                module: 3,
+                title: "Parallel Execution with `async/await` and `Promise.all`",
+                task: "Rewrite your solution for Challenge 6 (the parallel API calls) using `async/await` syntax. Show how cleanly `await` can be used with `Promise.all()`."
+            },
+            {
+                module: 4,
+                title: "The Rate Limiter",
+                task: "Write an `async` function `rateLimit` that takes an array of \"tasks\" (which are functions that return promises) and a `concurrency` number. The function should execute the tasks, ensuring that no more than `concurrency` tasks are running at any given time.",
+                code: `// You'll need your 'delay' function\nconst tasks = [\n  () => delay(1000).then(() => console.log('Task 1 done')),\n  () => delay(500).then(() => console.log('Task 2 done')),\n  () => delay(1200).then(() => console.log('Task 3 done')),\n  () => delay(800).then(() => console.log('Task 4 done')),\n  () => delay(1500).then(() => console.log('Task 5 done')),\n  () => delay(400).then(() => console.log('Task 6 done'))\n];\n\nasync function rateLimit(tasks, concurrency) {\n  // Your code here\n}\n\nrateLimit(tasks, 3); // Should run 3 tasks at a time`
+            },
+            {
+                module: 4,
+                title: "Implementing an Asynchronous `debounce`",
+                task: "Create a `debounceAsync` function. It should take an async function `fn` and a delay `ms`. The debounced function, when called, should only execute `fn` after `ms` has passed without any new calls. It should also return a promise that resolves with the result of the `fn`'s execution."
+            },
+            {
+                module: 4,
+                title: "The Caching API Fetcher",
+                task: "Create a function `getCachedData(url)` that fetches data. It should store the *promise* of a request in a cache. If the function is called again with the same URL while a request is already in flight, it should return the existing promise instead of making a new network call. If the data has already been successfully fetched, it should return a resolved promise with the cached data."
+            },
+            {
+                module: 4,
+                title: "The Chained API Request",
+                task: "Write an `async` function `getUserProfile(userId)` that performs a sequence of dependent API calls:\n1. Fetch user data from `https://api.example.com/users/{userId}`.\n2. From the user data, get their `postsUrl`.\n3. Fetch the list of posts from `postsUrl`.\n4. From the list of posts, take the first post's `commentsUrl`.\n5. Fetch the comments from `commentsUrl`.\n6. Return an object containing the user, their posts, and the comments from the first post.\n\n*You will need to create dummy functions that simulate these API calls with your `delay` function.*"
+            },
+            {
+                module: 4,
+                title: "The `AbortController` Timeout",
+                task: "Use the modern `fetch` API and an `AbortController`. Write a function `fetchWithTimeout(url, duration)` that tries to fetch a resource. If the fetch takes longer than `duration` milliseconds, it should be aborted, and the promise should reject with a 'TimeoutError'."
+            }
+        ];
+
+        const menuContainer = document.getElementById('challenges-menu');
+        const challengeDisplay = document.getElementById('challenge-display');
+
+        const modules = {
+            1: { title: 'Foundations of Asynchronous JavaScript', challenges: [] },
+            2: { title: 'Mastering Promises', challenges: [] },
+            3: { title: 'The Elegance of Async/Await', challenges: [] },
+            4: { title: 'Real-World Scenarios & Advanced Concepts', challenges: [] }
+        };
+
+        challenges.forEach((challenge, index) => {
+            modules[challenge.module].challenges.push({ ...challenge, originalIndex: index });
+        });
+        
+        function displayChallenge(challengeIndex) {
+            const challenge = challenges[challengeIndex];
+            if (!challenge) return;
+            
+            let codeBlockHtml = '';
+            if(challenge.code) {
+                codeBlockHtml = `
+                    <div class="mt-6 relative">
+                        <button onclick="copyCode(this, ${challengeIndex})" class="absolute top-3 right-3 bg-blue-600 hover:bg-blue-700 text-white text-xs font-semibold py-1 px-3 rounded-md transition-colors shadow-sm">Copy Code</button>
+                        <pre class="bg-gray-900 text-white p-4 rounded-lg overflow-x-auto"><code class="code-block">${challenge.code.replace(/</g, "&lt;").replace(/>/g, "&gt;")}</code></pre>
+                    </div>`;
+            }
+
+            challengeDisplay.innerHTML = `
+                <div class="bg-white p-8 rounded-xl shadow-lg animate-fade-in">
+                    <h2 class="section-title text-3xl font-bold text-gray-900 mb-4">${challenge.title}</h2>
+                    <div class="text-gray-700 leading-relaxed space-y-2">
+                        ${challenge.task.replace(/\n/g, '<br>')}
+                    </div>
+                    ${codeBlockHtml}
+                </div>
+            `;
+
+            document.querySelectorAll('.sidebar-item').forEach(el => el.classList.remove('active'));
+            const activeEl = document.querySelector(`[data-challenge-index='${challengeIndex}']`);
+            if (activeEl) {
+                activeEl.classList.add('active');
+
+                const parentModule = activeEl.closest('.module-container');
+                const content = parentModule.querySelector('.module-content');
+                const title = parentModule.querySelector('.module-title');
+                if (content.classList.contains('hidden')) {
+                     content.classList.remove('hidden');
+                     title.classList.add('active');
+                }
+            }
+        }
+        
+        function copyCode(button, challengeIndex) {
+            const challenge = challenges[challengeIndex];
+            if (challenge && challenge.code) {
+                navigator.clipboard.writeText(challenge.code).then(() => {
+                    button.textContent = 'Copied!';
+                    setTimeout(() => {
+                        button.textContent = 'Copy Code';
+                    }, 2000);
+                }).catch(err => {
+                    console.error('Failed to copy code: ', err);
+                });
+            }
+        }
+
+        function buildMenu() {
+            Object.values(modules).forEach((module, moduleIndex) => {
+                if(module.challenges.length === 0) return;
+
+                const moduleContainer = document.createElement('div');
+                moduleContainer.className = "module-container";
+
+                const titleEl = document.createElement('h3');
+                titleEl.innerHTML = `Module ${moduleIndex + 1}: ${module.title}`;
+                titleEl.className = 'module-title section-title text-xl font-semibold text-blue-900 p-3 rounded-md cursor-pointer hover:bg-gray-100 transition-colors';
+                
+                const contentEl = document.createElement('div');
+                contentEl.className = 'module-content hidden pl-4 mt-1 space-y-1';
+                
+                titleEl.onclick = () => {
+                    contentEl.classList.toggle('hidden');
+                    titleEl.classList.toggle('active');
+                };
+
+                module.challenges.forEach(challenge => {
+                    const itemEl = document.createElement('a');
+                    itemEl.href = '#';
+                    itemEl.textContent = `${challenge.title}`;
+                    itemEl.className = 'sidebar-item block text-sm text-gray-700 p-2 rounded-md transition-colors';
+                    itemEl.dataset.challengeIndex = challenge.originalIndex;
+                    itemEl.onclick = (e) => {
+                        e.preventDefault();
+                        displayChallenge(challenge.originalIndex);
+                    };
+                    contentEl.appendChild(itemEl);
+                });
+
+                moduleContainer.appendChild(titleEl);
+                moduleContainer.appendChild(contentEl);
+                menuContainer.appendChild(moduleContainer);
+            });
+        }
+        
+        buildMenu();
+        
+        // Set current year in footer
+        document.getElementById('currentYear').textContent = new Date().getFullYear();
+
+        const style = document.createElement('style');
+        style.innerHTML = `
+        @keyframes fade-in {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        .animate-fade-in {
+            animation: fade-in 0.5s ease-out forwards;
+        }
+        `;
+        document.head.appendChild(style);
+
+    </script>
+</body>
+</html>

@@ -136,19 +136,19 @@
             {
                 module: 1,
                 title: "The Classic setTimeout Puzzle",
-                task: "Predict the output of this code *before* running it. Then, explain *why* it behaves that way. How does variable scope (`var` vs `let`) and the event loop cause this?\n\n**Follow-up:** How would you fix it to print 1, 2, 3, 4, 5? Provide two solutions: one using `let` and one using only `var` (hint: IIFE).",
+                task: "Predict the output of this code *before* running it. Then, explain *why* it behaves that way. How does variable scope (`var` vs `let`) and the event loop cause this?\n\n**Follow-up:** How would you fix it to print `1`, `2`, `3`, `4`, `5`? Provide two solutions: one using `let` and one using only `var` (hint: IIFE).",
                 code: `function challenge1() {\n  for (var i = 1; i <= 5; i++) {\n    setTimeout(function() {\n      console.log('Challenge 1:', i);\n    }, 10);\n  }\n}\nchallenge1();`
             },
             {
                 module: 1,
                 title: "The Callback Chain (\"Callback Hell\")",
-                task: "Simulate a multi-step asynchronous operation. Create a function `performSteps` that:\n1. After 1 second, logs \"Step 1 complete\".\n2. After another 1.5 seconds, logs \"Step 2 complete\".\n3. After another 0.5 seconds, logs \"Step 3 complete\".\nYou must use `setTimeout` and nested callbacks for this challenge.",
+                task: "Simulate a multi-step asynchronous operation. Create a function `performSteps` that:\n1. After 1 second, logs `Step 1 complete`.\n2. After another 1.5 seconds, logs `Step 2 complete`.\n3. After another 0.5 seconds, logs `Step 3 complete`.\nYou must use `setTimeout` and nested callbacks for this challenge.",
                 code: `// Starter code\nfunction performSteps() {\n  // Your nested callbacks here\n}\nperformSteps();`
             },
             {
                 module: 1,
                 title: "Building a `delay` Promise",
-                task: "Promisify `setTimeout`. Create a function called `delay` that accepts a time `ms` and returns a Promise that resolves after `ms` milliseconds.",
+                task: "Promisify `setTimeout`. Create a function called `delay` that accepts a time `ms` and returns a `Promise` that resolves after `ms` milliseconds.",
                 code: `function delay(ms) {\n  // Your code here\n}\n\nconsole.log("Starting delay...");\ndelay(2000).then(() => {\n  console.log("2 seconds have passed.");\n});`
             },
             {
@@ -160,19 +160,19 @@
             {
                 module: 1,
                 title: "Promise Error Handling (`.catch`)",
-                task: "Create a function `fetchData(url)` that returns a promise. The promise should reject with an error message if the `url` does not contain the word 'data', and resolve with `{ success: true, url: url }` otherwise. Use a 1-second delay to simulate a network request. Test both a successful and a failing case, ensuring you handle the error with `.catch()`.",
+                task: "Create a function `fetchData(url)` that returns a promise. The promise should reject with an error message if the `url` does not contain the word `data`, and resolve with `{ success: true, url: url }` otherwise. Use a 1-second delay to simulate a network request. Test both a successful and a failing case, ensuring you handle the error with `.catch()`.",
                 code: `function fetchData(url) {\n  // Your code here\n}\n\nfetchData('api/get/data/users').then(response => console.log(response));\nfetchData('api/get/users').catch(error => console.error(error.message));`
             },
             {
                 module: 2,
                 title: "`Promise.all()` - The Parallel Executor",
-                task: "You have three \"APIs\" that fetch data. Use `Promise.all()` to fetch data from all of them concurrently. Log a final message \"All data fetched!\" only after all three have successfully completed. Log the array of results.",
+                task: "You have three \"APIs\" that fetch data. Use `Promise.all()` to fetch data from all of them concurrently. Log a final message `All data fetched!` only after all three have successfully completed. Log the array of results.",
                 code: `// You'll need your 'delay' function from Challenge 3\nconst api1 = () => delay(1500).then(() => ({ user: 'Alice' }));\nconst api2 = () => delay(1000).then(() => ({ posts: ['Post 1', 'Post 2'] }));\nconst api3 = () => delay(2000).then(() => ({ settings: { theme: 'dark' } }));\n\n// Your code using Promise.all() here`
             },
             {
                 module: 2,
                 title: "`Promise.all()` with an Error",
-                task: "Modify the previous challenge. Make `api2` reject after 1 second. What happens to your `Promise.all()`? How do you catch the error? Does `api3`'s result ever get used? Explain the \"fail-fast\" behavior."
+                task: "Modify the previous challenge. Make `api2` reject after 1 second. What happens to your `Promise.all()`? How do you catch the error? Does `api3`'s result ever get used? Explain the **fail-fast** behavior."
             },
             {
                 module: 2,
@@ -209,7 +209,7 @@
             {
                 module: 3,
                 title: "The `forEach` Async Trap",
-                task: "Predict the output of the following code. Why doesn't it work as you might expect? Explain why `Array.prototype.forEach` is not \"await-aware\".",
+                task: "Predict the output of the following code. Why doesn't it work as you might expect? Explain why `Array.prototype.forEach` is not **await-aware**.",
                 code: `// You'll need your 'delay' function\nasync function processArray(arr) {\n  console.log('Start processing...');\n  arr.forEach(async (item) => {\n    await delay(item * 100);\n    console.log(\`Processed item \${item}\`);\n  });\n  console.log('...finished processing.');\n}\n\nprocessArray([1, 2, 3, 4]);`
             },
             {
@@ -246,7 +246,7 @@
             {
                 module: 4,
                 title: "The `AbortController` Timeout",
-                task: "Use the modern `fetch` API and an `AbortController`. Write a function `fetchWithTimeout(url, duration)` that tries to fetch a resource. If the fetch takes longer than `duration` milliseconds, it should be aborted, and the promise should reject with a 'TimeoutError'."
+                task: "Use the modern `fetch` API and an `AbortController`. Write a function `fetchWithTimeout(url, duration)` that tries to fetch a resource. If the fetch takes longer than `duration` milliseconds, it should be aborted, and the promise should reject with a `TimeoutError`."
             }
         ];
 
@@ -264,6 +264,20 @@
             modules[challenge.module].challenges.push({ ...challenge, originalIndex: index });
         });
         
+        function formatTaskText(text) {
+            let formattedText = text;
+            // IMPORTANT: Order matters. Process double asterisks first.
+            // Bold: **text**
+            formattedText = formattedText.replace(/\*\*(.*?)\*\*/g, '<strong class="font-semibold text-gray-900">$1</strong>');
+            // Bold from single asterisks: *text*
+            formattedText = formattedText.replace(/\*([^*]+)\*/g, '<strong class="font-semibold text-gray-900">$1</strong>');
+            // Inline code: `text`
+            formattedText = formattedText.replace(/`([^`]+)`/g, '<code class="bg-blue-100 text-blue-800 font-mono text-sm px-1.5 py-0.5 rounded-md">$1</code>');
+            // Newlines
+            formattedText = formattedText.replace(/\n/g, '<br>');
+            return formattedText;
+        }
+
         function displayChallenge(challengeIndex) {
             const challenge = challenges[challengeIndex];
             if (!challenge) return;
@@ -276,12 +290,14 @@
                         <pre class="bg-gray-900 text-white p-4 rounded-lg overflow-x-auto"><code class="code-block">${challenge.code.replace(/</g, "&lt;").replace(/>/g, "&gt;")}</code></pre>
                     </div>`;
             }
+            
+            const formattedTask = formatTaskText(challenge.task);
 
             challengeDisplay.innerHTML = `
                 <div class="bg-white p-8 rounded-xl shadow-lg animate-fade-in">
                     <h2 class="section-title text-3xl font-bold text-gray-900 mb-4">${challenge.title}</h2>
                     <div class="text-gray-700 leading-relaxed space-y-2">
-                        ${challenge.task.replace(/\n/g, '<br>')}
+                        ${formattedTask}
                     </div>
                     ${codeBlockHtml}
                 </div>
@@ -359,6 +375,7 @@
         // Set current year in footer
         document.getElementById('currentYear').textContent = new Date().getFullYear();
 
+        // Add a simple fade-in animation for the content
         const style = document.createElement('style');
         style.innerHTML = `
         @keyframes fade-in {

@@ -1,0 +1,471 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Interactive A1 Exam Battle Plan</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;700;800&family=Roboto+Slab:wght@700&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #f8fafc; /* Tailwind gray-50 */
+            color: #1f2937; /* Tailwind gray-800 */
+        }
+        html {
+            scroll-behavior: smooth;
+            scroll-padding-top: 5rem; /* Offset for sticky header */
+        }
+        .section-title {
+            font-family: 'Roboto Slab', serif;
+            color: #1e3a8a; /* Tailwind blue-900 */
+        }
+        .card-hover {
+            transition: transform 0.3s ease-in-out, box-shadow 0.3s ease-in-out;
+        }
+        .card-hover:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
+        }
+        .tab-active {
+            border-bottom-color: #3b82f6; /* Tailwind blue-500 */
+            color: #3b82f6;
+            font-weight: 600;
+        }
+        .timeline-button.active {
+            background-color: #eff6ff; /* blue-50 */
+            border-left-color: #3b82f6 !important;
+        }
+        .content-section { display: none; }
+        .content-section-active { display: block; }
+        .chart-container {
+            position: relative;
+            width: 100%;
+            max-width: 300px;
+            margin-left: auto;
+            margin-right: auto;
+            height: 300px;
+        }
+        .nav-link {
+            position: relative;
+            padding-bottom: 4px;
+            color: #374151; /* gray-700 */
+            font-weight: 500;
+        }
+        .nav-link:hover {
+             color: #3b82f6; /* blue-500 */
+        }
+        .nav-link::after {
+            content: '';
+            position: absolute;
+            left: 0;
+            bottom: 0;
+            width: 0;
+            height: 2px;
+            background-color: #3b82f6; /* blue-500 */
+            transition: width 0.3s ease;
+        }
+        .nav-link:hover::after {
+            width: 100%;
+        }
+        .icon-link:hover i {
+            transform: scale(1.2);
+            color: #3b82f6;
+        }
+        .icon-link i {
+            transition: transform 0.2s ease-in-out, color 0.2s ease-in-out;
+        }
+    </style>
+</head>
+<body class="bg-gray-50 text-gray-800 antialiased">
+
+    <!-- Header & Navigation -->
+    <header class="bg-white shadow-lg sticky top-0 z-50">
+        <nav class="container mx-auto px-4 sm:px-6 lg:px-8 py-3">
+            <div class="flex justify-between items-center">
+                <div class="flex items-center gap-4">
+                    <a href="/learn" title="Back" class="text-gray-700 hover:text-blue-600 icon-link">
+                        <i class="fas fa-arrow-left text-2xl"></i>
+                    </a>
+                    <a href="#" class="flex items-center space-x-3 text-3xl font-bold text-blue-700 hover:text-blue-800 transition-colors duration-300" style="font-family: 'Roboto Slab', serif;">
+                        <span>Vishnuprasad Kamalon</span>
+                    </a>
+                </div>
+
+                <!-- Desktop Menu -->
+                <div class="hidden md:flex items-center space-x-5 lg:space-x-7">
+                    <a href="#framework" class="text-gray-700 hover:text-blue-600 nav-link font-medium">Framework</a>
+                    <a href="#battle-plan" class="text-gray-700 hover:text-blue-600 nav-link font-medium">Battle Plan</a>
+                    <a href="#tactics" class="text-gray-700 hover:text-blue-600 nav-link font-medium">Tactics</a>
+                </div>
+
+                <!-- Mobile Menu Button -->
+                <div class="md:hidden">
+                    <button id="mobile-menu-button" class="text-gray-700 hover:text-blue-600 focus:outline-none">
+                        <i class="fas fa-bars text-2xl"></i>
+                    </button>
+                </div>
+            </div>
+
+            <!-- Mobile Menu -->
+            <div id="mobile-menu" class="hidden md:hidden mt-3 py-2 bg-white rounded-md shadow-xl">
+                <a href="#framework" class="block px-4 py-2 text-sm text-gray-700 hover:bg-blue-50 hover:text-blue-600">Framework</a>
+                <a href="#battle-plan" class="block px-4 py-2 text-sm text-gray-700 hover:bg-blue-50 hover:text-blue-600">Battle Plan</a>
+                <a href="#tactics" class="block px-4 py-2 text-sm text-gray-700 hover:bg-blue-50 hover:text-blue-600">Tactics</a>
+            </div>
+        </nav>
+    </header>
+
+    <main class="container mx-auto p-4 sm:p-6 lg:p-8">
+
+        <header class="text-center mb-10 pt-8">
+            <h1 class="text-4xl md:text-5xl font-bold text-blue-900 section-title">The A1 Exam Gauntlet</h1>
+            <p class="mt-2 text-lg text-gray-600">Your Interactive 24-Hour Battle Plan to Conquer the Goethe-Zertifikat</p>
+        </header>
+
+        <section id="framework" class="mb-12 py-12">
+            <h2 class="text-3xl font-bold mb-8 text-center section-title">Strategic Framework: Understanding the Battlefield</h2>
+            <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+                
+                <div class="bg-white p-6 rounded-xl shadow-lg lg:col-span-2 card-hover">
+                    <h3 class="text-xl font-semibold mb-4 text-blue-800">Exam Structure at a Glance</h3>
+                    <p class="text-gray-700 mb-4 leading-relaxed">The Goethe A1 exam assesses four core language skills. Each module is equally weighted, contributing 25 points towards a total of 100. Understanding this balanced structure is the first step to crafting a winning strategy, as it allows you to see where you can play to your strengths.</p>
+                    <div class="chart-container" style="max-width: 400px; height: 200px; max-height:250px;">
+                        <canvas id="examStructureChart"></canvas>
+                    </div>
+                </div>
+
+                <div class="bg-white p-6 rounded-xl shadow-lg card-hover">
+                    <h3 class="text-xl font-semibold mb-4 text-blue-800">The 60-Point Strategy</h3>
+                    <p class="text-gray-700 mb-4 leading-relaxed">Your mission is to score 60 out of 100 total points. Crucially, there is no minimum score required per section. This means you can use your high-scoring sections to compensate for weaker ones. Focus on excelling where you can, and you'll build the buffer needed to pass.</p>
+                    <div class="chart-container" style="max-width: 200px; height: 200px; max-height:250px;">
+                        <canvas id="passingScoreChart"></canvas>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="battle-plan" class="mb-12 py-12 bg-gray-50 rounded-xl">
+            <h2 class="text-3xl font-bold mb-6 text-center section-title">The One-Day Battle Plan: Your Timeline</h2>
+            <p class="text-center text-gray-600 mb-8 max-w-3xl mx-auto leading-relaxed">This is an intensive sprint. Click on each time block to reveal your assignments for that period. Discipline is the key to securing the predictable points and setting yourself up for success. Each step is designed to build on the last, creating momentum as you go.</p>
+            <div class="lg:flex lg:gap-8 px-4">
+                <div class="lg:w-1/3">
+                    <ol id="timeline" class="relative">
+                        <li class="mb-2">
+                            <button data-target="plan-1" class="timeline-button active w-full text-left p-4 rounded-lg transition-colors hover:bg-blue-50 border-l-4 border-blue-500">
+                                <time class="block font-semibold text-blue-600">09:00 - 13:00</time>
+                                <h3 class="text-lg font-semibold text-gray-900">Morning Session</h3>
+                                <p class="text-sm text-gray-500">Secure Predictable Points</p>
+                            </button>
+                        </li>
+                         <li class="mb-2">
+                            <button data-target="plan-2" class="timeline-button w-full text-left p-4 rounded-lg transition-colors hover:bg-blue-50 border-l-4 border-transparent">
+                                <time class="block font-semibold text-blue-600">14:00 - 18:00</time>
+                                <h3 class="text-lg font-semibold text-gray-900">Afternoon Session</h3>
+                                <p class="text-sm text-gray-500">Navigate Receptive Skills</p>
+                            </button>
+                        </li>
+                         <li class="mb-2">
+                            <button data-target="plan-3" class="timeline-button w-full text-left p-4 rounded-lg transition-colors hover:bg-blue-50 border-l-4 border-transparent">
+                                <time class="block font-semibold text-blue-600">19:00 - 21:00</time>
+                                <h3 class="text-lg font-semibold text-gray-900">Evening Session</h3>
+                                <p class="text-sm text-gray-500">Dress Rehearsal & Reinforcement</p>
+                            </button>
+                        </li>
+                    </ol>
+                </div>
+
+                <div class="lg:w-2/3 mt-8 lg:mt-0 bg-white p-6 rounded-xl shadow-lg card-hover">
+                    <div id="plan-1" class="timeline-content content-section content-section-active">
+                        <h4 class="text-xl font-bold mb-2 text-blue-800">Morning: Master Speaking & Writing</h4>
+                        <p class="mb-4 text-gray-600">Goal: Secure 30-40+ points through memorization of predictable formats.</p>
+                        <ul class="list-disc list-inside space-y-3 text-gray-700">
+                            <li><span class="font-semibold">09:00 - 10:30:</span> <span class="font-bold">Master the Speaking Module.</span> Memorize the self-introduction script. Drill the question/request formulas until they are second nature. This is about performance, not spontaneous conversation.</li>
+                            <li><span class="font-semibold">10:30 - 12:00:</span> <span class="font-bold">Master the Writing Module.</span> Analyze the form-filling task. Memorize the adaptable email templates for different scenarios. These two tasks are your highest-value targets for easy points.</li>
+                            <li><span class="font-semibold">12:00 - 13:00:</span> <span class="font-bold">Active Review & Lunch.</span> Lightly review your memorized scripts during lunch. Don't strain; just let the information settle.</li>
+                        </ul>
+                    </div>
+                     <div id="plan-2" class="timeline-content content-section">
+                        <h4 class="text-xl font-bold mb-2 text-blue-800">Afternoon: Deconstruct Reading & Listening</h4>
+                        <p class="mb-4 text-gray-600">Goal: Score 20-25+ points by understanding the logic behind the tasks.</p>
+                        <ul class="list-disc list-inside space-y-3 text-gray-700">
+                            <li><span class="font-semibold">14:00 - 15:30:</span> <span class="font-bold">Deconstruct Reading.</span> Work through the Reading module of a practice test without a timer. Apply the specific tactics for each part: keyword hunting and process of elimination are your best friends here.</li>
+                            <li><span class="font-semibold">15:30 - 17:00:</span> <span class="font-bold">Deconstruct Listening.</span> Practice active listening strategies with the official audio. Focus especially on the tactic for Part 2, which is only played once. Learn to anticipate the key information before it's spoken.</li>
+                            <li><span class="font-semibold">17:00 - 18:00:</span> <span class="font-bold">Break & Mental Recharge.</span> Take a complete break from all study materials. Your brain needs time to consolidate the information.</li>
+                        </ul>
+                    </div>
+                    <div id="plan-3" class="timeline-content content-section">
+                        <h4 class="text-xl font-bold mb-2 text-blue-800">Evening: Final Rehearsal & Reinforcement</h4>
+                        <p class="mb-4 text-gray-600">Goal: Experience the exam flow and lock in the most critical scripts.</p>
+                         <ul class="list-disc list-inside space-y-3 text-gray-700">
+                            <li><span class="font-semibold">19:00 - 20:30:</span> <span class="font-bold">Full Simulated Exam.</span> Complete a full practice test under strict time limits. The objective here is time management and building stamina, not achieving a perfect score.</li>
+                            <li><span class="font-semibold">20:30 - 21:00:</span> <span class="font-bold">Final Script Review.</span> Calmly review the Speaking script and Writing templates one last time. This ensures the most valuable, high-scoring content is fresh in your mind for exam day.</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="tactics" class="mb-12 py-12">
+            <h2 class="text-3xl font-bold mb-6 text-center section-title">Module-Specific Tactics & "Hacks"</h2>
+            <p class="text-center text-gray-600 mb-8 max-w-3xl mx-auto leading-relaxed">This is your arsenal. Here you will find the detailed instructions, scripts, and templates to maximize your score in each module. Select a section to explore the tactics.</p>
+            
+            <div class="mb-4 border-b border-gray-200">
+                <nav class="flex -mb-px" aria-label="Tabs">
+                    <button data-target="tab-speaking" class="tab-button tab-active w-1/4 py-4 px-1 text-center border-b-2 font-medium text-sm transition-colors hover:text-blue-500">Speaking</button>
+                    <button data-target="tab-writing" class="tab-button w-1/4 py-4 px-1 text-center border-b-2 border-transparent font-medium text-sm text-gray-500 transition-colors hover:text-blue-500">Writing</button>
+                    <button data-target="tab-reading" class="tab-button w-1/4 py-4 px-1 text-center border-b-2 border-transparent font-medium text-sm text-gray-500 transition-colors hover:text-blue-500">Reading</button>
+                    <button data-target="tab-listening" class="tab-button w-1/4 py-4 px-1 text-center border-b-2 border-transparent font-medium text-sm text-gray-500 transition-colors hover:text-blue-500">Listening</button>
+                </nav>
+            </div>
+
+            <div class="bg-white p-6 rounded-xl shadow-lg card-hover">
+                <div id="tab-speaking" class="tab-content content-section content-section-active">
+                    <h3 class="text-xl font-bold mb-4 text-blue-800">Speaking: The Scripted Performance (Target: 18-22/25)</h3>
+                    <p class="mb-4 text-gray-600">This isn't a conversation; it's a performance. Stick to the formulas to deliver a confident and competent presentation. The examiners are looking for specific structures, not fluency.</p>
+                    <div class="space-y-6">
+                        <div>
+                            <h4 class="font-semibold text-lg text-gray-800">Part 1: Self-Introduction Script</h4>
+                            <div class="mt-2 p-4 bg-blue-50 rounded-lg text-sm">
+                                <p class="text-gray-700">Hello. My name is [Your Name]. I come from [Your Country] and I live in [Your City]. I am [Your Age] years old. I am a [Your Profession]. My native language is [Your Language]. I also speak English and am now learning German. My hobby is [Your Hobby].</p>
+                                <p class="mt-2 font-semibold text-blue-700">Be prepared to spell your name and say your phone number!</p>
+                            </div>
+                        </div>
+                        <div>
+                            <h4 class="font-semibold text-lg text-gray-800">Parts 2 & 3: Formulaic Responses</h4>
+                            <p class="mb-2 text-gray-600">Use these sentence-starters mechanically for questions and requests.</p>
+                            <ul class="list-disc list-inside text-sm space-y-1 text-gray-700">
+                                <li><b>W-Question:</b> W-Word + Verb + du + ...? (e.g., *Was isst du am Sonntag?* - What do you eat on Sunday?)</li>
+                                <li><b>Yes/No Question:</b> Verb + du + gern + ...? (e.g., *Liest du gern Bücher?* - Do you like to read books?)</li>
+                                <li><b>Polite Request:</b> Können Sie mir bitte + [Object] + geben? (e.g., *Können Sie mir bitte den Stift geben?* - Can you please give me the pen?)</li>
+                                <li><b>Responses:</b> Ja, gern. (Yes, gladly.) / Nein, leider nicht. (No, unfortunately not.)</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+
+                <div id="tab-writing" class="tab-content content-section">
+                     <h3 class="text-xl font-bold mb-4 text-blue-800">Writing: The Point-Scoring Blueprint (Target: 18-22/25)</h3>
+                    <p class="mb-4 text-gray-600">This module is highly structured and offers a clear path to a high score by following simple, repeatable patterns.</p>
+                     <div class="space-y-6">
+                        <div>
+                            <h4 class="font-semibold text-lg text-gray-800">Part 1: The Form-Filling Hack</h4>
+                            <p class="mt-2 text-gray-700 text-sm">This is a precision task. First, read the form to know what 5 pieces of information you need. Then, hunt for those keywords in the text. Once you find one, write it down and cross out the sentence in the source text. This makes finding the next piece much easier.</p>
+                        </div>
+                        <div>
+                            <h4 class="font-semibold text-lg text-gray-800">Part 2: The Adaptable Email (10 Points!)</h4>
+                            <p class="mb-2 text-gray-600">Memorize this template. It covers the greeting, the reason for writing, the three required points, and the closing. Simply adapt the bolded parts for any scenario.</p>
+                            <div class="mt-2 p-4 bg-blue-50 rounded-lg text-sm">
+                                <p><span class="font-bold">Greeting:</span> Liebe/r [Name], OR Sehr geehrte/r Herr/Frau [Name],</p>
+                                <p><span class="font-bold">Sentence 1 (Reason):</span> ich schreibe dir/Ihnen, weil... (I am writing to you because...)</p>
+                                <p><span class="font-bold">Sentences 2-4 (3 Points):</span> Address each prompt with one simple sentence.</p>
+                                <p><span class="font-bold">Closing:</span> Viele Grüße, OR Mit freundlichen Grüßen,</p>
+                                <p class="font-bold">Your Name</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div id="tab-reading" class="tab-content content-section">
+                    <h3 class="text-xl font-bold mb-4 text-blue-800">Reading: The Information Hunt (Target: 10-15/25)</h3>
+                    <p class="mb-4 text-gray-600">This isn't about deep comprehension. It's about efficiently finding specific information. Always read the question or statement first, THEN scan the text for the answer.</p>
+                    <ul class="list-disc list-inside space-y-2 text-sm text-gray-700">
+                        <li><b>Part 1 (True/False):</b> Read the statement. Scan the email for keywords from that statement. Decide if it matches. Don't overthink.</li>
+                        <li><b>Part 2 (Ad Matching):</b> Read the situation (e.g., "You want to learn to dance"). Quickly scan ad 'a' and 'b' for the keyword (e.g., "tanzen"). The one that has it is usually the answer.</li>
+                        <li><b>Part 3 (Notices - True/False):</b> This is a test of precision. Compare the statement exactly with the info on the sign (e.g., opening times, rules). If it doesn't match perfectly, it's false.</li>
+                    </ul>
+                </div>
+
+                <div id="tab-listening" class="tab-content content-section">
+                    <h3 class="text-xl font-bold mb-4 text-blue-800">Listening: The Audio Gauntlet (Target: 10-15/25)</h3>
+                    <p class="mb-4 text-gray-600">The key to this section is using the brief pause before each audio clip to read the questions and anticipate what you need to listen for.</p>
+                    <ul class="list-disc list-inside space-y-2 text-sm text-gray-700">
+                        <li><b>Parts 1 & 3 (Played Twice):</b> Use the first listen to make a preliminary choice. Use the second listen to confirm or correct your choice. This two-pass approach minimizes errors.</li>
+                        <li><b class="text-red-600">Part 2 (Played Once - High Risk!):</b> This is an active information-filtering test. You must ignore irrelevant details.
+                            <ol class="list-decimal list-inside ml-4 mt-1">
+                                <li>Read the statement beforehand (e.g., "The train to Berlin leaves from platform 5").</li>
+                                <li>Identify THE ONE critical piece of information ("platform 5").</li>
+                                <li>Listen ONLY for that specific detail. Tune out everything else.</li>
+                                <li>Mark True/False based only on whether that single detail was confirmed or contradicted.</li>
+                            </ol>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </section>
+
+    </main>
+
+    <!-- Footer -->
+    <footer class="bg-gray-900 text-gray-400 py-12">
+        <div class="container mx-auto px-6 text-center">
+            <div class="mb-6 flex justify-center space-x-6">
+                <a href="https://github.com/vpk11" target="_blank" class="text-gray-400 hover:text-white transition duration-300 icon-link" title="GitHub">
+                    <i class="fab fa-github text-2xl"></i>
+                </a>
+                <a href="https://linkedin.com/in/vpk11" target="_blank" class="text-gray-400 hover:text-white transition duration-300 icon-link" title="LinkedIn">
+                    <i class="fab fa-linkedin text-2xl"></i>
+                </a>
+                <a href="https://www.xing.com/profile/Vishnuprasad_Kamalon" target="_blank" class="text-gray-400 hover:text-white transition duration-300 icon-link" title="Xing">
+                    <i class="fab fa-xing text-2xl"></i>
+                </a>
+            </div>
+            <p class="text-sm">© <span id="currentYear">2025</span> Vishnuprasad Kamalon. All rights reserved.</p>
+            <p class="text-xs text-gray-500 mt-1">
+                Built with <a href="https://tailwindcss.com/" target="_blank" class="hover:text-blue-400">Tailwind CSS</a> and a sprinkle of <i class="fas fa-mug-hot text-sm mx-1"></i>.
+            </p>
+        </div>
+    </footer>
+    
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            // Set current year in footer
+            document.getElementById('currentYear').textContent = new Date().getFullYear();
+
+            // Mobile menu toggle
+            const menuButton = document.getElementById('mobile-menu-button');
+            const mobileMenu = document.getElementById('mobile-menu');
+            
+            menuButton.addEventListener('click', () => {
+                mobileMenu.classList.toggle('hidden');
+                const icon = menuButton.querySelector('i');
+                if (mobileMenu.classList.contains('hidden')) {
+                    icon.classList.remove('fa-times');
+                    icon.classList.add('fa-bars');
+                } else {
+                    icon.classList.remove('fa-bars');
+                    icon.classList.add('fa-times');
+                }
+            });
+
+            // Close mobile menu when a link is clicked
+            const mobileMenuLinks = mobileMenu.querySelectorAll('a');
+            mobileMenuLinks.forEach(link => {
+                link.addEventListener('click', (event) => {
+                    if (link.getAttribute('href').startsWith('#')) {
+                        if (!mobileMenu.classList.contains('hidden')) {
+                            mobileMenu.classList.add('hidden');
+                            menuButton.querySelector('i').classList.remove('fa-times');
+                            menuButton.querySelector('i').classList.add('fa-bars');
+                        }
+                    }
+                });
+            });
+
+
+            // Charts
+            const examCtx = document.getElementById('examStructureChart').getContext('2d');
+            new Chart(examCtx, {
+                type: 'doughnut',
+                data: {
+                    labels: ['Listening', 'Reading', 'Writing', 'Speaking'],
+                    datasets: [{
+                        label: 'Points per Module',
+                        data: [25, 25, 25, 25],
+                        backgroundColor: ['#60a5fa', '#93c5fd', '#bfdbfe', '#1e40af'],
+                        borderColor: '#f8fafc',
+                        borderWidth: 4
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    plugins: {
+                        legend: {
+                            position: 'bottom',
+                             labels: {
+                                font: { size: 12, family: 'Inter' }
+                            }
+                        },
+                        tooltip: {
+                            callbacks: {
+                                label: function(context) {
+                                    return `${context.label}: ${context.raw} Points`;
+                                }
+                            }
+                        }
+                    }
+                }
+            });
+
+            const passingCtx = document.getElementById('passingScoreChart').getContext('2d');
+            new Chart(passingCtx, {
+                type: 'doughnut',
+                data: {
+                    labels: ['Points Needed', 'Remaining Points'],
+                    datasets: [{
+                        data: [60, 40],
+                        backgroundColor: ['#3b82f6', '#e5e7eb'],
+                        borderColor: '#f8fafc',
+                        borderWidth: 4,
+                        circumference: 180,
+                        rotation: 270,
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    plugins: {
+                        legend: { display: false },
+                        tooltip: { enabled: false }
+                    },
+                    cutout: '70%'
+                }
+            });
+
+            // Tabs Logic
+            const tabButtons = document.querySelectorAll('.tab-button');
+            const tabContents = document.querySelectorAll('.tab-content');
+
+            tabButtons.forEach(button => {
+                button.addEventListener('click', () => {
+                    const targetId = button.dataset.target;
+
+                    tabButtons.forEach(btn => {
+                        btn.classList.remove('tab-active');
+                        btn.classList.add('border-transparent', 'text-gray-500');
+                    });
+                    button.classList.add('tab-active');
+                    button.classList.remove('border-transparent', 'text-gray-500');
+
+                    tabContents.forEach(content => {
+                        content.classList.remove('content-section-active');
+                        if (content.id === targetId) {
+                            content.classList.add('content-section-active');
+                        }
+                    });
+                });
+            });
+
+            // Timeline Logic
+            const timelineButtons = document.querySelectorAll('.timeline-button');
+            const timelineContents = document.querySelectorAll('.timeline-content');
+
+            timelineButtons.forEach(button => {
+                button.addEventListener('click', () => {
+                    const targetId = button.dataset.target;
+
+                    timelineButtons.forEach(btn => {
+                       btn.classList.remove('active');
+                       btn.style.borderLeftColor = 'transparent';
+                    });
+                    
+                    button.classList.add('active');
+                    button.style.borderLeftColor = '#3b82f6';
+
+                    timelineContents.forEach(content => {
+                        content.classList.remove('content-section-active');
+                        if (content.id === targetId) {
+                            content.classList.add('content-section-active');
+                        }
+                    });
+                });
+            });
+        });
+    </script>
+</body>
+</html>

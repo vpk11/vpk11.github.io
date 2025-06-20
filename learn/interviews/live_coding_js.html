@@ -1,0 +1,834 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Senior JS Interview Playbook | Vishnuprasad Kamalon</title>
+    <meta name="description" content="An interactive playbook and learning path for mastering the senior JavaScript live coding interview, by Vishnuprasad Kamalon. Covers strategy, do's and don'ts, and advanced coding challenges.">
+    <meta name="keywords" content="Vishnuprasad Kamalon, Live Coding Interview, Senior Software Engineer, JavaScript, Node.js, CoderPad, Asynchronous, Algorithms, Data Structures, System Design, Interview Preparation">
+    <meta name="author" content="Vishnuprasad Kamalon">
+
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Roboto+Slab:wght@700&family=Fira+Code&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #f8fafc; /* Tailwind gray-50 */
+        }
+        .code-block, pre code {
+            font-family: 'Fira-Code', monospace;
+        }
+        .section-title {
+            font-family: 'Roboto Slab', serif;
+            color: #1e3a8a; /* Tailwind blue-900 */
+        }
+        .sidebar-item.active {
+            background-color: #dbeafe; /* blue-200 */
+            color: #1e3a8a; /* blue-900 */
+            font-weight: 600;
+        }
+        .sidebar-item:hover {
+            background-color: #eff6ff; /* blue-50 */
+        }
+        .nav-link {
+            position: relative;
+            padding-bottom: 4px;
+        }
+        .nav-link::after {
+            content: '';
+            position: absolute;
+            left: 0;
+            bottom: 0;
+            width: 0;
+            height: 2px;
+            background-color: #3b82f6; /* Tailwind blue-500 */
+            transition: width 0.3s ease;
+        }
+        .nav-link:hover::after {
+            width: 100%;
+        }
+        .icon-link i {
+            transition: transform 0.2s ease-in-out, color 0.2s ease-in-out;
+        }
+        .icon-link:hover i {
+            transform: scale(1.2);
+            color: #3b82f6; /* Tailwind blue-500 */
+        }
+        .chart-container {
+            position: relative;
+            width: 100%;
+            max-width: 800px;
+            margin-left: auto;
+            margin-right: auto;
+            height: 300px;
+            max-height: 400px;
+        }
+        pre {
+            background-color: #111827; /* gray-900 */
+            color: #e5e7eb; /* gray-200 */
+            padding: 1.25rem;
+            border-radius: 0.5rem;
+            overflow-x: auto;
+            font-size: 0.9em;
+            line-height: 1.6;
+        }
+        .animate-fade-in {
+            animation: fadeIn 0.5s ease-in-out;
+        }
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        /* Modal Styles */
+        .modal-enter-active {
+            animation: modal-bg-fade-in 0.3s ease;
+        }
+        .modal-leave-active {
+            animation: modal-bg-fade-in 0.3s ease reverse;
+        }
+        .modal-panel-enter-active {
+            animation: modal-panel-fade-in 0.3s ease;
+        }
+        .modal-panel-leave-active {
+            animation: modal-panel-fade-in 0.3s ease reverse;
+        }
+        @keyframes modal-bg-fade-in {
+            from { opacity: 0 }
+            to { opacity: 1 }
+        }
+        @keyframes modal-panel-fade-in {
+            from { opacity: 0; transform: translateY(20px) scale(0.95); }
+            to { opacity: 1; transform: translateY(0) scale(1); }
+        }
+    </style>
+</head>
+<body class="text-gray-800 antialiased flex flex-col min-h-screen">
+
+    <!-- Header & Navigation -->
+    <header class="bg-white shadow-lg sticky top-0 z-40">
+        <nav class="container mx-auto px-4 sm:px-6 lg:px-8 py-3">
+            <div class="flex justify-between items-center">
+                <div class="flex items-center gap-4">
+                    <a href="/learn" title="Back" class="text-gray-700 hover:text-blue-600 icon-link">
+                        <i class="fas fa-arrow-left text-2xl"></i>
+                    </a>
+                    <a href="/" class="flex items-center space-x-3 text-3xl font-bold text-blue-700 hover:text-blue-800 transition-colors duration-300" style="font-family: 'Roboto Slab', serif;">
+                        <span>Vishnuprasad Kamalon</span>
+                    </a>
+                </div>
+                <div class="flex items-center space-x-5 lg:space-x-7">
+                    <a href="/learn" class="text-gray-700 hover:text-blue-600 nav-link font-medium">Learn</a>
+                </div>
+            </div>
+        </nav>
+    </header>
+
+    <div class="flex flex-col md:flex-row flex-grow">
+        <!-- Sidebar Navigation -->
+        <nav id="sidebar" class="w-full md:w-80 bg-white p-4 md:p-6 shadow-lg overflow-y-auto flex-shrink-0 border-r border-gray-200">
+            <h1 class="section-title text-2xl font-bold mb-2 px-2">Senior's Playbook</h1>
+            <p class="text-sm text-gray-500 mb-6 px-2">Select a section to review.</p>
+            <ul id="nav-list" class="space-y-2">
+                <li><a href="#overview" class="sidebar-item block p-3 rounded-lg font-medium">Home / Strategy</a></li>
+                <li><a href="#game-plan" class="sidebar-item block p-3 rounded-lg font-medium">The Game Plan</a></li>
+                <li><a href="#coderpad" class="sidebar-item block p-3 rounded-lg font-medium">CoderPad Guide</a></li>
+                <li><a href="#dos-donts" class="sidebar-item block p-3 rounded-lg font-medium">Do's & Don'ts</a></li>
+                <li><a href="#practice" class="sidebar-item block p-3 rounded-lg font-medium">Practice Problems</a></li>
+            </ul>
+        </nav>
+
+        <!-- Main Content -->
+        <main class="flex-1 p-4 sm:p-6 md:p-10 bg-gray-50">
+            
+            <section id="overview" class="content-section space-y-8">
+                <h2 class="section-title text-4xl font-bold">Part I: The Strategic Foundation</h2>
+                <div class="bg-white p-6 rounded-xl shadow-md border border-gray-200 space-y-4">
+                    <h3 class="text-2xl font-semibold text-gray-800">1.1 Decoding the Interview's True Purpose</h3>
+                    <p class="text-gray-700 leading-relaxed">The live coding interview for a senior role is a simulation, not just a test. It’s designed to see how you think, communicate, and collaborate under pressure. The coding problem is the medium through which you demonstrate your experience, architectural thinking, and leadership. Your goal is to conduct a masterclass in collaborative, structured problem-solving.</p>
+                </div>
+                <div class="bg-white p-6 rounded-xl shadow-md border border-gray-200 space-y-4">
+                    <h3 class="text-2xl font-semibold text-gray-800">1.2 From Coder to Architect</h3>
+                    <p class="text-gray-700 leading-relaxed">A senior engineer must maintain a high-level, architectural perspective. This means consistently discussing scalability, maintainability, and performance trade-offs. Be prepared for the conversation to shift from a specific algorithm to broader system design questions. Your code should be clean and modular, and your analysis of complexity should be practical (e.g., "this O(n) space complexity is acceptable for the expected input size, but could be an issue on memory-constrained devices").</p>
+                </div>
+                <div class="bg-white p-6 rounded-xl shadow-md border border-gray-200 space-y-4">
+                    <h3 class="text-2xl font-semibold text-gray-800">1.3 Signaling Leadership and Collaboration</h3>
+                    <p class="text-gray-700 leading-relaxed">Continuous communication is non-negotiable. "Thinking out loud" prevents silence and allows the interviewer to offer guidance. Treat the interview like a pair-programming session. Drive the requirements-gathering phase by asking probing questions to clarify ambiguity—this signals experience and prevents wasted effort.</p>
+                </div>
+            </section>
+
+            <section id="game-plan" class="content-section hidden space-y-8">
+                <h2 class="section-title text-4xl font-bold">Part II: The 60-Minute Game Plan</h2>
+                <p class="text-lg text-gray-700 leading-relaxed">Time management is crucial. A structured approach ensures you demonstrate all your key skills. Here's a visual breakdown of a typical 60-minute interview. Hover over each phase to see the key objectives.</p>
+                <div class="bg-white p-6 rounded-xl shadow-md border border-gray-200">
+                    <h3 class="text-2xl font-semibold mb-4 text-center text-gray-800">Interview Phase Breakdown</h3>
+                    <div class="chart-container">
+                        <canvas id="interviewTimelineChart"></canvas>
+                    </div>
+                </div>
+            </section>
+            
+            <section id="coderpad" class="content-section hidden space-y-8">
+                <h2 class="section-title text-4xl font-bold">Part III: Mastering CoderPad</h2>
+                 <p class="text-lg text-gray-700 leading-relaxed">Familiarity with your tools frees up mental energy to focus on the problem. CoderPad is a Node.js environment, not a browser. Understanding its specifics is a key part of preparation.</p>
+                <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
+                    <div class="bg-white p-6 rounded-xl shadow-md border"><h3 class="text-xl font-semibold mb-2 text-gray-800">Node.js Runtime</h3><p class="text-gray-600 leading-relaxed">Forget <code class="bg-blue-100 text-blue-800 font-mono text-sm px-1.5 py-0.5 rounded-md">document</code> and <code class="bg-blue-100 text-blue-800 font-mono text-sm px-1.5 py-0.5 rounded-md">window</code>. Use modern ES6+ features like <code class="bg-blue-100 text-blue-800 font-mono text-sm px-1.5 py-0.5 rounded-md">async/await</code> confidently.</p></div>
+                    <div class="bg-white p-6 rounded-xl shadow-md border"><h3 class="text-xl font-semibold mb-2 text-gray-800">Strict Mode</h3><p class="text-gray-600 leading-relaxed">All your JavaScript will run in <code class="bg-blue-100 text-blue-800 font-mono text-sm px-1.5 py-0.5 rounded-md">'use strict';</code> mode. This helps catch common errors.</p></div>
+                    <div class="bg-white p-6 rounded-xl shadow-md border"><h3 class="text-xl font-semibold mb-2 text-gray-800">Built-in Libraries</h3><p class="text-gray-600 leading-relaxed">Leverage pre-installed libraries like <code class="bg-blue-100 text-blue-800 font-mono text-sm px-1.5 py-0.5 rounded-md">lodash</code> for utilities or <code class="bg-blue-100 text-blue-800 font-mono text-sm px-1.5 py-0.5 rounded-md">chai</code> for testing.</p></div>
+                    <div class="bg-white p-6 rounded-xl shadow-md border"><h3 class="text-xl font-semibold mb-2 text-gray-800">File I/O</h3><p class="text-gray-600 leading-relaxed">Use <code class="bg-blue-100 text-blue-800 font-mono text-sm px-1.5 py-0.5 rounded-md">const fs = require('fs');</code> to read data files if provided by the interviewer.</p></div>
+                    <div class="bg-white p-6 rounded-xl shadow-md border"><h3 class="text-xl font-semibold mb-2 text-gray-800">Keyboard Shortcuts</h3><p class="text-gray-600 leading-relaxed">Run code with <code class="bg-blue-100 text-blue-800 font-mono text-sm px-1.5 py-0.5 rounded-md">Cmd/Ctrl + Enter</code>. Knowing shortcuts makes you look efficient.</p></div>
+                    <div class="bg-white p-6 rounded-xl shadow-md border"><h3 class="text-xl font-semibold mb-2 text-gray-800">Drawing Mode</h3><p class="text-gray-600 leading-relaxed">For system design, the interviewer might enable Drawing Mode. Be ready to use this virtual whiteboard.</p></div>
+                </div>
+            </section>
+            
+            <section id="dos-donts" class="content-section hidden space-y-8">
+                <h2 class="section-title text-4xl font-bold">Part IV: Critical Do's & Don'ts</h2>
+                <p class="text-lg text-gray-700 leading-relaxed">Your behavior and communication are as important as your code. These points distinguish a senior candidate from a mid-level one.</p>
+                <div class="grid md:grid-cols-2 gap-8">
+                    <div class="bg-green-50 border-l-4 border-green-500 p-6 rounded-r-lg shadow-sm"><h3 class="text-2xl font-bold text-green-800 mb-4 flex items-center gap-3"><i class="fas fa-check-circle"></i>Do These</h3><ul class="space-y-3 text-green-900 list-disc list-inside"><li><strong>Think Out Loud:</strong> Continuously narrate your thought process.</li><li><strong>Clarify Everything:</strong> Drive the requirements discussion. Define inputs, outputs, and edge cases.</li><li><strong>Discuss Trade-offs:</strong> Analyze multiple solutions and their time/space/maintainability trade-offs.</li><li><strong>Write Clean Code:</strong> Use descriptive names and modular functions.</li><li><strong>Test Your Work:</strong> Proactively define and walk through test cases.</li></ul></div>
+                    <div class="bg-red-50 border-l-4 border-red-500 p-6 rounded-r-lg shadow-sm"><h3 class="text-2xl font-bold text-red-800 mb-4 flex items-center gap-3"><i class="fas fa-times-circle"></i>Don't Do These</h3><ul class="space-y-3 text-red-900 list-disc list-inside"><li><strong>Jump to Coding:</strong> Never start coding without a clear, communicated plan.</li><li><strong>Stay Silent When Stuck:</strong> Articulate the problem and turn it into a collaborative discussion.</li><li><strong>Be Defensive:</strong> Treat hints and feedback as part of a pair-programming exercise.</li><li><strong>Ignore Edge Cases:</strong> Forgetting <code class="bg-blue-100 text-blue-800 font-mono text-sm px-1.5 py-0.5 rounded-md">null</code> or empty arrays is a red flag.</li><li><strong>Give Up:</strong> Show resilience. A calm, methodical approach to debugging is a huge positive signal.</li></ul></div>
+                </div>
+            </section>
+            
+            <section id="practice" class="content-section hidden space-y-8">
+                <h2 class="section-title text-4xl font-bold">Part V: The Gauntlet: Practice Problems</h2>
+                <p class="text-lg text-gray-700 leading-relaxed">This is your interactive practice area. These problems test more than just algorithms; they assess your understanding of asynchronous JavaScript, API design, and architectural patterns. Click a problem to review the senior-level approach and solution.</p>
+                <div id="problem-list" class="grid grid-cols-1 lg:grid-cols-2 gap-4"></div>
+            </section>
+        </main>
+    </div>
+
+    <!-- Modal Structure -->
+    <div id="problem-modal" class="fixed inset-0 bg-black/60 flex items-center justify-center p-4 z-50 hidden">
+        <div id="modal-panel" class="bg-white rounded-xl shadow-2xl w-full max-w-4xl max-h-[90vh] flex flex-col">
+            <div class="p-4 border-b border-gray-200 flex justify-between items-center flex-shrink-0">
+                <h3 id="modal-title" class="section-title text-2xl font-bold">Problem Details</h3>
+                <button id="modal-close-btn" class="text-gray-500 hover:text-gray-800 transition-colors">
+                    <i class="fas fa-times text-2xl"></i>
+                </button>
+            </div>
+            <div id="modal-content" class="p-6 overflow-y-auto space-y-6">
+                <!-- Problem details will be injected here -->
+            </div>
+        </div>
+    </div>
+
+
+    <!-- Footer -->
+    <footer class="bg-gray-900 text-gray-400 py-8 w-full">
+        <div class="container mx-auto px-6 text-center">
+            <div class="mb-4 flex justify-center space-x-6">
+                <a href="https://github.com/vpk11" target="_blank" class="text-gray-400 hover:text-white transition duration-300 icon-link" title="GitHub"><i class="fab fa-github text-2xl"></i></a>
+                <a href="https://linkedin.com/in/vpk11" target="_blank" class="text-gray-400 hover:text-white transition duration-300 icon-link" title="LinkedIn"><i class="fab fa-linkedin text-2xl"></i></a>
+                <a href="https://www.xing.com/profile/Vishnuprasad_Kamalon" target="_blank" class="text-gray-400 hover:text-white transition duration-300 icon-link" title="Xing"><i class="fab fa-xing text-2xl"></i></a>
+            </div>
+            <p class="text-sm">© <span id="currentYear"></span> Vishnuprasad Kamalon. All rights reserved.</p>
+            <p class="text-xs text-gray-500 mt-1">Built with Tailwind CSS & JavaScript.</p>
+        </div>
+    </footer>
+
+<script>
+document.addEventListener('DOMContentLoaded', () => {
+    
+    const problems = [
+        {
+            id: 1,
+            title: "Asynchronous Request Throttler",
+            statement: "Write a function `createThrottledFetcher(maxConcurrent)` that returns a new function, `throttledFetch(url)`. This new function should behave like `fetch` but ensure no more than `maxConcurrent` requests are active at any time. Additional requests should be queued.",
+            approach: "The key is to manage a queue of pending tasks and a count of active requests. A closure will maintain the state (queue, active count). A central `processQueue` function attempts to run a task whenever a slot is free. When a fetch completes (resolves or rejects), it frees a slot and calls `processQueue` again to keep the pipeline full.",
+            questions: [
+                "What should `throttledFetch` return? (A Promise)",
+                "How should errors be handled? (They should free up a slot)",
+                "What is the queuing strategy? (FIFO is a good default)",
+            ],
+            solution: `function createThrottledFetcher(maxConcurrent) {
+    let activeRequests = 0;
+    const queue = [];
+
+    async function processQueue() {
+        if (activeRequests >= maxConcurrent || queue.length === 0) {
+            return;
+        }
+
+        activeRequests++;
+        const task = queue.shift();
+
+        try {
+            console.log(\`Starting fetch for: \${task.url}\`);
+            // Simulating fetch with a delay
+            const response = await new Promise(res => setTimeout(() => res({ok: true, url: task.url}), 1000 + Math.random() * 1000));
+            task.resolve(response);
+        } catch (error) {
+            task.reject(error);
+        } finally {
+            activeRequests--;
+            processQueue();
+        }
+    }
+
+    return function throttledFetch(url) {
+        return new Promise((resolve, reject) => {
+            queue.push({ url, resolve, reject });
+            processQueue();
+        });
+    };
+}`
+        },
+        {
+            id: 2,
+            title: "Deep Object Difference",
+            statement: "Write a function `deepDiff(obj1, obj2)` that recursively compares two objects. It should return a new object representing only the keys and values that are different.",
+            approach: "A recursive approach is natural here. The base case is when values are not both objects. The recursive step is for nested objects. A key insight is to iterate over the union of keys from both objects to catch keys present in one but not the other. A `Set` is perfect for this. Assume objects are DAGs to avoid circular reference issues in an interview context.",
+            questions: [
+                "How should differences be formatted? (e.g., `[oldVal, newVal]`)",
+                "How should arrays be handled? (Treat as primitives for simplicity)",
+                "What about `null` or `undefined` values? (`hasOwnProperty` is the source of truth)",
+            ],
+            solution: `function deepDiff(obj1, obj2) {
+    const isObject = (obj) => obj && typeof obj === 'object' && !Array.isArray(obj);
+
+    function findDiffs(o1, o2) {
+        if (o1 === o2) return {};
+
+        const diffs = {};
+        const allKeys = new Set([...Object.keys(o1), ...Object.keys(o2)]);
+
+        for (const key of allKeys) {
+            const val1 = o1[key];
+            const val2 = o2[key];
+
+            if (isObject(val1) && isObject(val2)) {
+                const nestedDiff = findDiffs(val1, val2);
+                if (Object.keys(nestedDiff).length > 0) {
+                    diffs[key] = nestedDiff;
+                }
+            } else if (val1 !== val2) {
+                diffs[key] = [val1, val2];
+            }
+        }
+        return diffs;
+    }
+
+    return findDiffs(obj1, obj2);
+}`
+        },
+        {
+            id: 3,
+            title: "Simple Event Emitter Class",
+            statement: "Implement an `EventEmitter` class with `on`, `emit`, and `off` methods.",
+            approach: "Use a `Map` where keys are event names and values are arrays (or Sets) of listener functions. `on` adds a listener. `emit` iterates through the listeners for an event and calls them. `off` removes a specific listener. A key detail for `emit` is to iterate over a *copy* of the listener array, so modifications during emission (e.g., a listener removing itself) don't break the loop.",
+            questions: [
+                "Should a listener be added more than once? (No, use a Set or check existence)",
+                "What if `emit` is called for an unknown event? (Fail silently)",
+                "How does `off` work? (Requires specific listener to remove)",
+            ],
+            solution: `class EventEmitter {
+    constructor() {
+        this.listeners = new Map();
+    }
+
+    on(eventName, listener) {
+        if (!this.listeners.has(eventName)) {
+            this.listeners.set(eventName, new Set());
+        }
+        this.listeners.get(eventName).add(listener);
+    }
+
+    emit(eventName, ...args) {
+        if (!this.listeners.has(eventName)) return;
+        
+        // Iterate over a copy in case a listener modifies the set during emission.
+        [...this.listeners.get(eventName)].forEach(listener => {
+            listener(...args);
+        });
+    }
+
+    off(eventName, listenerToRemove) {
+        if (!this.listeners.has(eventName)) return;
+
+        this.listeners.get(eventName).delete(listenerToRemove);
+    }
+}`
+        },
+        {
+            id: 4,
+            title: "Create a `memoize` Decorator",
+            statement: "Write a higher-order function `memoize(fn)` that takes a function and returns a memoized version of it. The memoized function should cache its results for given inputs.",
+            approach: "The `memoize` function will return a new function that closes over a cache (a `Map` is ideal). When the new function is called, it creates a key from the arguments. If the key exists in the cache, it returns the cached value. Otherwise, it calls the original function, stores the result in the cache, and then returns it.",
+            questions: [
+                "How to handle functions with multiple arguments? (JSON.stringify the args array is a simple key)",
+                "What about non-primitive arguments like objects? (JSON.stringify has limitations which should be noted)",
+                "Should the cache have an eviction policy? (Good follow-up, but not required for base solution)",
+            ],
+            solution: `function memoize(fn) {
+    const cache = new Map();
+    return function(...args) {
+        const key = JSON.stringify(args);
+        if (cache.has(key)) {
+            return cache.get(key);
+        }
+        const result = fn.apply(this, args);
+        cache.set(key, result);
+        return result;
+    };
+}`
+        },
+        {
+            id: 5,
+            title: "DOM Updater with Batching",
+            statement: "Write a function `createBatchedUpdater()` that returns an `update(element, property, value)` function. Multiple calls to `update` within the same JavaScript event loop tick should be batched together and applied to the DOM in a single `requestAnimationFrame` callback to prevent layout thrashing.",
+            approach: "The key is to avoid touching the DOM immediately. We queue updates in a `Map` where keys are DOM elements. A flag `isUpdateScheduled` tracks if `requestAnimationFrame` has been called for the current tick. When `update` is called, it adds the update to the `Map`. If no update is scheduled, it calls `rAF` and sets the flag. The `rAF` callback applies all batched updates and resets the state.",
+            questions: ["How should conflicting updates to the same property be handled? (Last one wins)", "Are we updating styles or attributes? (Focus on styles)"],
+            solution: `function createBatchedUpdater() {
+    let updates = new Map();
+    let updateScheduled = false;
+
+    function applyUpdates() {
+        updates.forEach((props, element) => {
+            Object.assign(element.style, props);
+        });
+        updates.clear();
+        updateScheduled = false;
+    }
+
+    return function queueUpdate(element, property, value) {
+        if (!updates.has(element)) {
+            updates.set(element, {});
+        }
+        updates.get(element)[property] = value;
+
+        if (!updateScheduled) {
+            updateScheduled = true;
+            requestAnimationFrame(applyUpdates);
+        }
+    };
+}`
+        },
+        {
+            id: 6,
+            title: "Promise-based `fetch` with Retries",
+            statement: "Write a function `fetchWithRetry(url, options, retries)` that attempts to `fetch` a URL and retries on failure, up to a specified number of times, ideally with exponential backoff.",
+            approach: "An `async` function with a `for` loop is a clean way to handle this. Inside the loop, a `try...catch` block wraps the `fetch` call. If it succeeds (and the HTTP status is ok), return the result. If it fails, the `catch` block handles the error. If there are retries left, wait for a moment (exponential backoff) and continue the loop. If all retries are exhausted, re-throw the last error.",
+            questions: [
+                "What constitutes a 'retryable' error? (Network error vs. a 404 response)",
+                "What should the backoff strategy be? (Fixed delay, exponential)",
+            ],
+            solution: `async function fetchWithRetry(url, options, retries = 3, backoff = 500) {
+    let lastError;
+    for (let i = 0; i < retries; i++) {
+        try {
+            const response = await fetch(url, options);
+            if (!response.ok) throw new Error(\`HTTP error! status: \${response.status}\`);
+            return response;
+        } catch (error) {
+            lastError = error;
+            if (i < retries - 1) {
+                const delay = backoff * Math.pow(2, i);
+                await new Promise(res => setTimeout(res, delay));
+            }
+        }
+    }
+    throw lastError;
+}`
+        },
+         {
+            id: 7,
+            title: "JSON Log Analyzer",
+            statement: "You are given a large log file where each line is a JSON object. Write a Node.js script `analyzeLogs(filePath)` that reads the file as a stream and calculates aggregate metrics without loading the entire file into memory.",
+            approach: "Use Node.js streams. `fs.createReadStream` piped to `readline.createInterface` allows processing the file line-by-line. A 'line' event listener will parse each JSON string (wrapped in a try-catch for malformed lines) and update aggregate metrics. A 'close' event listener resolves a promise with the final metrics.",
+            questions: ["What is the format of the log? What metrics to calculate?", "How to handle malformed lines?"],
+            solution: `const fs = require('fs');
+const readline = require('readline');
+
+function analyzeLogs(filePath) {
+    return new Promise((resolve, reject) => {
+        const metrics = { lines: 0, errors: 0, totalTime: 0 };
+        const stream = fs.createReadStream(filePath);
+        const rl = readline.createInterface({ input: stream, crlfDelay: Infinity });
+
+        rl.on('line', (line) => {
+            metrics.lines++;
+            try {
+                const log = JSON.parse(line);
+                if (log.level === 'error') metrics.errors++;
+                if (log.duration) metrics.totalTime += log.duration;
+            } catch (e) { /* ignore malformed */ }
+        });
+
+        rl.on('close', () => resolve(metrics));
+        rl.on('error', reject);
+    });
+}`
+        },
+        {
+            id: 8,
+            title: "Simple State Management Store",
+            statement: "Implement a `createStore(reducer, initialState)` function that creates a simple Redux-like state store. It should return an object with `getState()`, `dispatch(action)`, and `subscribe(listener)`.",
+            approach: "Use a closure to encapsulate `state` and `listeners`. `getState` returns state. `dispatch` calls the reducer to get the new state, updates it, and then notifies all listeners. `subscribe` adds a listener and returns an `unsubscribe` function.",
+            questions: ["What is the reducer signature?", "Should state be immutable?", "What should `subscribe` return?"],
+            solution: `function createStore(reducer, initialState) {
+    let state = initialState;
+    const listeners = new Set();
+
+    function getState() {
+        return state;
+    }
+
+    function dispatch(action) {
+        state = reducer(state, action);
+        listeners.forEach(listener => listener());
+    }
+
+    function subscribe(listener) {
+        listeners.add(listener);
+        return () => listeners.delete(listener); // Unsubscribe function
+    }
+
+    dispatch({ type: '@@INIT' }); // Initialize state
+    return { getState, dispatch, subscribe };
+}`
+        },
+        {
+            id: 9,
+            title: "Function Composition Pipeline",
+            statement: "Write a function `pipe(...funcs)` that takes a sequence of functions and returns a new function. This new function, when called, pipes an initial value through each function in sequence. The pipe must handle asynchronous functions.",
+            approach: "Use `Array.prototype.reduce` to chain the functions. The initial value for the reduce should be a resolved Promise (`Promise.resolve(initialValue)`). In each step of the reduce, chain a `.then()` to the accumulator Promise, which passes the resolved value to the next function. This naturally handles both sync and async functions.",
+            questions: ["How to handle a mix of sync/async functions? (Pipeline becomes async)", "How is error handling managed? (Promise rejection chain)"],
+            solution: `const pipe = (...funcs) => 
+    (initialValue) => funcs.reduce(
+        (acc, func) => acc.then(func), 
+        Promise.resolve(initialValue)
+    );`
+        },
+        {
+            id: 10,
+            title: "Implement Promise.allSettled",
+            statement: "Write your own implementation of `Promise.allSettled`. It should take an array of Promises and return a single Promise that always resolves with an array of result objects describing the outcome of each promise.",
+            approach: "The key is to never reject. Map over the input promises, transforming each one into a new promise that is guaranteed to fulfill. Attach `.then` and `.catch` to each promise. The `.then` handler will resolve with a success object `{status: 'fulfilled', value}`. The `.catch` handler will also resolve, but with a failure object `{status: 'rejected', reason}`. Because every promise in this new array is guaranteed to fulfill, we can safely pass it to `Promise.all`.",
+            questions: ["What is the exact structure of the result objects?", "How does it differ from `Promise.all`?"],
+            solution: `function promiseAllSettled(promises) {
+    const settledPromises = promises.map(p => 
+        Promise.resolve(p)
+            .then(value => ({ status: 'fulfilled', value }))
+            .catch(reason => ({ status: 'rejected', reason }))
+    );
+    return Promise.all(settledPromises);
+}`
+        },
+        {
+            id: 11, title: "Implement debounce",
+            statement: "Write a higher-order function `debounce(func, delay)` that takes a function and a delay time. The returned function, when called, should execute `func` only after `delay` milliseconds have passed without any new calls.",
+            approach: "Use `setTimeout`. Every time the debounced function is called, clear any existing timer with `clearTimeout` and set a new one. This resets the waiting period. The actual function `func` is only called inside the `setTimeout` callback. Use a closure to hold the timer ID between calls.",
+            questions: ["How should `this` and arguments be handled? (Preserved with `apply`)", "Can we add an `immediate` option?"],
+            solution: `function debounce(func, delay) {
+    let timeoutId;
+    return function(...args) {
+        const context = this;
+        clearTimeout(timeoutId);
+        timeoutId = setTimeout(() => {
+            func.apply(context, args);
+        }, delay);
+    };
+}`
+        },
+        {
+            id: 12, title: "Implement throttle",
+            statement: "Write a higher-order function `throttle(func, limit)` that returns a new function. This new function, when invoked, will only call the original `func` at most once per `limit` milliseconds.",
+            approach: "Use a boolean flag, `inThrottle`, to track the cooldown period. When called, if `inThrottle` is false, execute the function, set the flag to true, and start a `setTimeout`. The timeout's job is to set the flag back to false after the `limit` has passed. This prevents new calls during the cooldown.",
+            questions: ["Should the first call execute immediately?", "Should a call made during cooldown be executed after it ends?"],
+            solution: `function throttle(func, limit) {
+    let inThrottle = false;
+    return function(...args) {
+        if (!inThrottle) {
+            func.apply(this, args);
+            inThrottle = true;
+            setTimeout(() => inThrottle = false, limit);
+        }
+    };
+}`
+        },
+        {
+            id: 13, title: "Implement Promise.all",
+            statement: "Write a function `promiseAll(promises)` that takes an array of Promises and returns a single Promise that resolves with an array of all resolved values, or rejects if any of the input Promises reject.",
+            approach: "Return a new Promise. Iterate the input promises, keeping a counter and a results array. For each promise, use `.then` to place its result at the correct index in the results array and increment the counter. If the counter equals the total, resolve the main promise. If any promise rejects, immediately reject the main promise.",
+            questions: ["What if the input array is empty? (Resolve with [])", "What if it contains non-promise values? (Treat as resolved)"],
+            solution: `function promiseAll(promises) {
+    return new Promise((resolve, reject) => {
+        const results = new Array(promises.length);
+        let completed = 0;
+        if (promises.length === 0) return resolve([]);
+
+        promises.forEach((promise, index) => {
+            Promise.resolve(promise).then(value => {
+                results[index] = value;
+                completed++;
+                if (completed === promises.length) {
+                    resolve(results);
+                }
+            }).catch(reject);
+        });
+    });
+}`
+        },
+        {
+            id: 14, title: "JSON Stringify with Circular Refs",
+            statement: "Implement a function `stringify(value)` that converts a JavaScript value to a JSON string, but handles circular references by replacing them with the string `'[Circular]'`.",
+            approach: "Use a recursive helper function and a `Set` to track visited objects in the current path. Before serializing an object, add it to the set. If it's encountered again, it's a circular reference. After serializing, remove it from the set so it can appear legitimately elsewhere.",
+            questions: ["How to handle `undefined`, `Function`? (Omit or nullify like native)", "What is a circular reference?"],
+            solution: `function stringify(value) {
+    const visited = new Set();
+    function serialize(val) {
+        if (val === null || typeof val !== 'object') {
+            return typeof val === 'string' ? \`"\${val}"\` : String(val);
+        }
+        if (visited.has(val)) return '"[Circular]"';
+        visited.add(val);
+        let result;
+        if (Array.isArray(val)) {
+            result = \`[\${val.map(v => serialize(v) || 'null').join(',')}]\`;
+        } else {
+            const pairs = Object.keys(val).map(k => {
+                const v = serialize(val[k]);
+                return v !== undefined ? \`"\${k}":\${v}\` : undefined;
+            }).filter(Boolean);
+            result = \`{\${pairs.join(',')}}\`;
+        }
+        visited.delete(val);
+        return result;
+    }
+    return serialize(value);
+}`
+        },
+        {
+            id: 15, title: "Object Key-Path Accessor (get)",
+            statement: "Implement a function `get(obj, path, defaultValue)` that retrieves the value at a specified path in a nested object (e.g., `'a.b[0].c'`). If the path is invalid, return `defaultValue`.",
+            approach: "First, parse the path string into an array of keys (e.g., `['a', 'b', '0', 'c']`). A regex replace can convert `[0]` to `.0`. Then, use `Array.prototype.reduce` to traverse the object, with the object itself as the initial accumulator. In each step, access the next key on the current accumulator.",
+            questions: ["What are valid path separators? (dot/bracket)", "How to handle invalid `obj` or `path` input?"],
+            solution: `function get(obj, path, defaultValue) {
+    const keys = path.replace(/\\[(\\w+)\\]/g, '.$1').replace(/^\\./, '').split('.');
+    return keys.reduce((acc, key) => {
+        return (acc && acc[key] !== undefined) ? acc[key] : defaultValue;
+    }, obj);
+}`
+        },
+        {
+            id: 16, title: "Implement curry",
+            statement: "Write a higher-order function `curry(fn)` that takes a function and returns a curried version of it. The curried function should accept arguments one at a time or in groups until it has all the arguments `fn` expects.",
+            approach: "Use a recursive higher-order function. The returned `curried` function collects arguments. When called, it checks if it has received enough arguments based on `fn.length`. If yes, it executes `fn`. If not, it returns a new function that is ready to accept the remaining arguments.",
+            questions: ["How to determine the number of expected arguments? (`fn.length`)", "What if it's called with more arguments than expected?"],
+            solution: `function curry(fn) {
+    return function curried(...args) {
+        if (args.length >= fn.length) {
+            return fn.apply(this, args);
+        } else {
+            return function(...args2) {
+                return curried.apply(this, args.concat(args2));
+            };
+        }
+    };
+}`
+        },
+        {
+            id: 17, title: "Implement Array.prototype.flat()",
+            statement: "Write a function `flatten(array, depth = 1)` that flattens a nested array up to a specified `depth`.",
+            approach: "A recursive solution is intuitive. Use `reduce` to build the new array. For each element, if it's an array and `depth > 0`, recursively call `flatten` with `depth - 1` and spread the result into the accumulator. Otherwise, just push the element.",
+            questions: ["How to handle `depth = Infinity`?", "How to handle empty slots?"],
+            solution: `function flatten(array, depth = 1) {
+    if (depth < 1) return array.slice();
+    return array.reduce((acc, val) => {
+        return acc.concat(Array.isArray(val) ? flatten(val, depth - 1) : val);
+    }, []);
+}`
+        },
+        {
+            id: 18, title: "Build a Pub/Sub System",
+            statement: "Implement a `PubSub` (Publish/Subscribe) class that allows objects to subscribe to topics, publish messages to topics, and unsubscribe from topics.",
+            approach: "Use a `Map` where keys are topics and values are `Set`s of callbacks. Using a `Set` for callbacks automatically handles uniqueness. `subscribe` adds a callback to the `Set`. `publish` iterates over the `Set` and calls each callback. `unsubscribe` removes a callback from the `Set`.",
+            questions: ["Can a callback subscribe multiple times? (No)", "How does `unsubscribe` work?"],
+            solution: `class PubSub {
+    constructor() {
+        this.topics = new Map();
+    }
+    subscribe(topic, callback) {
+        if (!this.topics.has(topic)) {
+            this.topics.set(topic, new Set());
+        }
+        this.topics.get(topic).add(callback);
+    }
+    publish(topic, data) {
+        if (this.topics.has(topic)) {
+            this.topics.get(topic).forEach(cb => cb(data));
+        }
+    }
+    unsubscribe(topic, callback) {
+        if (this.topics.has(topic)) {
+            this.topics.get(topic).delete(callback);
+        }
+    }
+}`
+        },
+        {
+            id: 19, title: "API Response Cache with TTL",
+            statement: "Write a HOF `createCachedFunction(asyncFunc, ttl)` that takes an async function and a time-to-live (TTL). The returned function should cache results. Calls with the same arguments within the TTL period should return the cached result.",
+            approach: "Use a `Map` for the cache. The key is stringified arguments. The value is an object with the result and an `expiry` timestamp. When called, check if a non-expired entry exists. If so, return it. Otherwise, call the original function, store the new result and expiry in the cache, and return it.",
+            questions: ["How to generate a cache key? (`JSON.stringify`)", "Should rejections be cached? (No)"],
+            solution: `function createCachedFunction(asyncFunc, ttl) {
+    const cache = new Map();
+    return async function(...args) {
+        const key = JSON.stringify(args);
+        if (cache.has(key)) {
+            const { value, expiry } = cache.get(key);
+            if (Date.now() < expiry) return value;
+        }
+        const result = await asyncFunc.apply(this, args);
+        cache.set(key, { value: result, expiry: Date.now() + ttl });
+        return result;
+    };
+}`
+        },
+        {
+            id: 20, title: "Implement Array.prototype.filter",
+            statement: "Implement your own version of `Array.prototype.filter`. Your function should be named `myFilter` and added to `Array.prototype`. It should take a callback and an optional `thisArg`.",
+            approach: "Add `myFilter` to `Array.prototype`. Inside, `this` refers to the array. Loop through the array. For each element, call the `callback` using `.call(thisArg, ...)` to set the `this` context. If the callback returns a truthy value, push the element to a results array. Return the results.",
+            questions: ["What arguments does the callback receive? (`element`, `index`, `array`)", "How to handle `thisArg`?"],
+            solution: `Array.prototype.myFilter = function(callback, thisArg) {
+    if (typeof callback !== 'function') throw new TypeError();
+    const result = [];
+    for (let i = 0; i < this.length; i++) {
+        if (Object.prototype.hasOwnProperty.call(this, i)) {
+            if (callback.call(thisArg, this[i], i, this)) {
+                result.push(this[i]);
+            }
+        }
+    }
+    return result;
+};`
+        }
+    ];
+
+    const navLinks = document.querySelectorAll('.sidebar-item');
+    const sections = document.querySelectorAll('.content-section');
+    const modal = document.getElementById('problem-modal');
+    const modalPanel = document.getElementById('modal-panel');
+    const modalTitle = document.getElementById('modal-title');
+    const modalContent = document.getElementById('modal-content');
+    const closeModalBtn = document.getElementById('modal-close-btn');
+
+
+    function updateActiveNav(hash) {
+        navLinks.forEach(link => {
+            if (link.getAttribute('href') === hash) {
+                link.classList.add('active');
+            } else {
+                link.classList.remove('active');
+            }
+        });
+    }
+
+    function showSection(hash) {
+        sections.forEach(section => {
+            if (`#${section.id}` === hash) {
+                section.classList.remove('hidden');
+                section.classList.add('animate-fade-in');
+            } else {
+                section.classList.add('hidden');
+            }
+        });
+        updateActiveNav(hash);
+    }
+    
+    document.getElementById('nav-list').addEventListener('click', (e) => {
+        if (e.target.tagName === 'A') {
+            e.preventDefault();
+            const targetId = e.target.getAttribute('href');
+            showSection(targetId);
+        }
+    });
+
+    const timelineCtx = document.getElementById('interviewTimelineChart');
+    if (timelineCtx) {
+        new Chart(timelineCtx, {type: 'bar', data: {labels: ['Setup & Intro (5m)', 'Clarification (10m)', 'Solutioning (10m)', 'Implementation (25m)', 'Testing & Closing (10m)'], datasets: [{label: 'Minutes Allocated', data: [5, 10, 10, 25, 10], backgroundColor: ['rgba(54, 162, 235, 0.6)','rgba(75, 192, 192, 0.6)','rgba(255, 206, 86, 0.6)','rgba(255, 99, 132, 0.6)','rgba(153, 102, 255, 0.6)'], borderColor: ['#36A2EB','#4BC0C0','#FFCE56','#FF6384','#9966FF'], borderWidth: 1}]}, options: {indexAxis: 'y', maintainAspectRatio: false, plugins: {legend: {display: false}, tooltip: {callbacks: {label: (ctx) => `${ctx.dataset.label}: ${ctx.parsed.x} minutes`}}}, scales: {x: {beginAtZero: true, grid: { color: '#e5e7eb' }, title: {display: true, text: 'Time (Minutes)'}}, y: {grid: { display: false }}} }});
+    }
+
+    const problemListContainer = document.getElementById('problem-list');
+    
+    function formatText(text) {
+        if (!text) return '';
+        let formattedText = text.replace(/</g, "&lt;").replace(/>/g, "&gt;");
+        formattedText = formattedText.replace(/\*\*(.*?)\*\*/g, '<strong class="font-semibold text-gray-900">$1</strong>');
+        formattedText = formattedText.replace(/`([^`]+)`/g, '<code class="bg-blue-100 text-blue-800 font-mono text-sm px-1.5 py-0.5 rounded-md">$1</code>');
+        return formattedText;
+    }
+    
+    function showModal(problem) {
+        modalTitle.textContent = problem.title;
+        modalContent.innerHTML = `
+            <div>
+                <h4 class="text-lg font-semibold mb-2 text-gray-800">Problem Statement</h4>
+                <p class="text-gray-600 leading-relaxed">${formatText(problem.statement)}</p>
+            </div>
+            <div>
+                <h4 class="text-lg font-semibold mb-2 text-gray-800">Senior-Level Approach</h4>
+                <p class="text-gray-600 leading-relaxed">${formatText(problem.approach)}</p>
+            </div>
+            <div>
+                <h4 class="text-lg font-semibold mb-2 text-gray-800">Clarifying Questions to Ask</h4>
+                <ul class="list-disc list-inside text-gray-600 space-y-2 leading-relaxed">
+                    ${problem.questions.map(q => `<li>${formatText(q)}</li>`).join('')}
+                </ul>
+            </div>
+            <div>
+                <h4 class="text-lg font-semibold mb-2 text-gray-800">Example Solution</h4>
+                <pre><code class="language-javascript">${problem.solution}</code></pre>
+            </div>
+        `;
+        modal.classList.remove('hidden');
+        modal.classList.add('modal-enter-active');
+        modalPanel.classList.add('modal-panel-enter-active');
+        document.body.style.overflow = 'hidden';
+    }
+
+    function hideModal() {
+        modal.classList.add('modal-leave-active');
+        modalPanel.classList.add('modal-panel-leave-active');
+        setTimeout(() => {
+            modal.classList.add('hidden');
+            modal.classList.remove('modal-enter-active', 'modal-leave-active');
+            modalPanel.classList.remove('modal-panel-enter-active', 'modal-panel-leave-active');
+        }, 300);
+        document.body.style.overflow = '';
+    }
+
+    function renderProblemList() {
+        problemListContainer.innerHTML = problems.map(p => `<div class="bg-white p-4 rounded-lg shadow-md border border-gray-200 cursor-pointer hover:border-blue-500 hover:shadow-lg transition-all duration-300 problem-item" data-id="${p.id}"><h4 class="text-xl font-semibold text-gray-800 pointer-events-none">${p.title}</h4></div>`).join('');
+    }
+
+    problemListContainer.addEventListener('click', (e) => {
+        const problemItem = e.target.closest('.problem-item');
+        if (problemItem) {
+            const problemId = parseInt(problemItem.dataset.id);
+            const problem = problems.find(p => p.id === problemId);
+            if (problem) {
+                showModal(problem);
+            }
+        }
+    });
+    
+    closeModalBtn.addEventListener('click', hideModal);
+    modal.addEventListener('click', (e) => {
+        if (e.target === modal) {
+            hideModal();
+        }
+    });
+
+    document.getElementById('currentYear').textContent = new Date().getFullYear();
+    renderProblemList();
+    showSection('#overview');
+});
+</script>
+
+</body>
+</html>

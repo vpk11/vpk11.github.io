@@ -4,24 +4,93 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Resume - Vishnuprasad Kamalon</title>
-    <meta http-equiv="refresh" content="0; url=/assets/vpk_resume_02.pdf">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/2.10.377/pdf.min.js"></script>
     <style>
-        body, html {
-            margin: 0;
-            padding: 0;
-            height: 100%;
-            overflow: hidden; /* To prevent scrollbars on the HTML page itself */
-        }
-        .pdf-embed {
-            width: 100%;
-            height: 100vh; /* Viewport height */
-            border: none;
-        }
+        body, html { margin: 0; padding: 0; background-color: #525659; font-family: sans-serif; }
+        #pdf-viewer-container { text-align: center; }
+        #pdf-controls { background-color: #333; padding: 10px; text-align: center; position: sticky; top: 0; z-index: 100; }
+        #pdf-controls button, #page-info { color: white; background: #555; border: none; padding: 8px 12px; border-radius: 4px; margin: 0 5px; }
+        canvas { border: 1px solid black; }
     </style>
 </head>
 <body>
-    <embed src="/assets/vpk_resume_02.pdf" type="application/pdf" class="pdf-embed" />
 
-    <p>If you are not redirected or the PDF does not display, please <a href="/assets/vpk_resume_02.pdf">click here to view the PDF</a>.</p>
+<div id="pdf-controls">
+    <button id="prev-page">Previous</button>
+    <span id="page-info">Page <span id="page-num"></span> / <span id="page-count"></span></span>
+    <button id="next-page">Next</button>
+</div>
+
+<div id="pdf-viewer-container">
+    <canvas id="pdf-canvas"></canvas>
+</div>
+
+<script>
+    const url = '/assets/vpk_resume_02.pdf';
+    const pdfjsLib = window['pdfjs-dist/build/pdf'];
+    pdfjsLib.GlobalWorkerOptions.workerSrc = `https://cdnjs.cloudflare.com/ajax/libs/pdf.js/2.10.377/pdf.worker.min.js`;
+
+    const canvas = document.getElementById('pdf-canvas');
+    const ctx = canvas.getContext('2d');
+    
+    let pdfDoc = null;
+    let pageNum = 1;
+    let pageRendering = false;
+    let pageNumPending = null;
+
+    const pageNumSpan = document.getElementById('page-num');
+    const pageCountSpan = document.getElementById('page-count');
+
+    function renderPage(num) {
+        pageRendering = true;
+        pdfDoc.getPage(num).then(function(page) {
+            const viewport = page.getViewport({ scale: 1.5 });
+            canvas.height = viewport.height;
+            canvas.width = viewport.width;
+
+            const renderContext = {
+                canvasContext: ctx,
+                viewport: viewport
+            };
+            const renderTask = page.render(renderContext);
+
+            renderTask.promise.then(function() {
+                pageRendering = false;
+                if (pageNumPending !== null) {
+                    renderPage(pageNumPending);
+                    pageNumPending = null;
+                }
+            });
+        });
+        pageNumSpan.textContent = num;
+    }
+
+    function queueRenderPage(num) {
+        if (pageRendering) {
+            pageNumPending = num;
+        } else {
+            renderPage(num);
+        }
+    }
+
+    document.getElementById('prev-page').addEventListener('click', function() {
+        if (pageNum <= 1) return;
+        pageNum--;
+        queueRenderPage(pageNum);
+    });
+
+    document.getElementById('next-page').addEventListener('click', function() {
+        if (pageNum >= pdfDoc.numPages) return;
+        pageNum++;
+        queueRenderPage(pageNum);
+    });
+
+    pdfjsLib.getDocument(url).promise.then(function(pdfDoc_) {
+        pdfDoc = pdfDoc_;
+        pageCountSpan.textContent = pdfDoc.numPages;
+        renderPage(pageNum);
+    });
+</script>
+
 </body>
 </html>

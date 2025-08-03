@@ -1,0 +1,301 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Senior Ruby Interview Playbook | Live Coding Challenges</title>
+    <meta name="description" content="An interactive playbook and learning path for mastering the senior Ruby live coding interview, covering common easy, medium, and hard questions with multiple solutions.">
+    <meta name="keywords" content="Ruby, Live Coding Interview, Senior Software Engineer, Algorithms, Data Structures, Interview Preparation, Vishnuprasad Kamalon, vpk11, vpk">
+    <meta name="author" content="Vishnuprasad Kamalon">
+
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Roboto+Slab:wght@700&family=Fira+Code&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #f8fafc; /* Tailwind gray-50 */
+        }
+        .code-block, pre code {
+            font-family: 'Fira Code', monospace;
+        }
+        .section-title {
+            font-family: 'Roboto Slab', serif;
+            color: #1e3a8a; /* Tailwind blue-900 */
+        }
+        .sidebar-item.active {
+            background-color: #dbeafe; /* blue-200 */
+            color: #1e3a8a; /* blue-900 */
+            font-weight: 600;
+        }
+        .sidebar-item:hover {
+            background-color: #eff6ff; /* blue-50 */
+        }
+        .nav-link {
+            position: relative;
+            padding-bottom: 4px;
+        }
+        .nav-link::after {
+            content: '';
+            position: absolute;
+            left: 0;
+            bottom: 0;
+            width: 0;
+            height: 2px;
+            background-color: #3b82f6; /* Tailwind blue-500 */
+            transition: width 0.3s ease;
+        }
+        .nav-link:hover::after {
+            width: 100%;
+        }
+        .icon-link i {
+            transition: transform 0.2s ease-in-out, color 0.2s ease-in-out;
+        }
+        .icon-link:hover i {
+            transform: scale(1.2);
+            color: #3b82f6; /* Tailwind blue-500 */
+        }
+        pre {
+            background-color: #111827; /* gray-900 */
+            color: #e5e7eb; /* gray-200 */
+            padding: 1.25rem;
+            border-radius: 0.5rem;
+            overflow-x: auto;
+            font-size: 0.9em;
+            line-height: 1.6;
+        }
+        .animate-fade-in {
+            animation: fadeIn 0.5s ease-in-out;
+        }
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        /* Accordion-specific styles */
+        .accordion-header {
+            cursor: pointer;
+            user-select: none;
+        }
+        .accordion-header:hover {
+            background-color: #f3f4f6; /* gray-100 */
+        }
+        .accordion-header .chevron {
+            transition: transform 0.3s ease;
+        }
+        .accordion-header.active .chevron {
+            transform: rotate(90deg);
+        }
+        .accordion-content {
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.4s ease-in-out;
+        }
+        .accordion-content.open {
+            max-height: 2000px; /* A large value to ensure it can contain all content */
+        }
+    </style>
+</head>
+<body class="text-gray-800 antialiased flex flex-col min-h-screen">
+
+    <!-- Header & Navigation -->
+    <header class="bg-white shadow-lg sticky top-0 z-40">
+        <nav class="container mx-auto px-4 sm:px-6 lg:px-8 py-3">
+            <div class="flex justify-between items-center">
+                <div class="flex items-center gap-4">
+                    <a href="#" title="Back" class="text-gray-700 hover:text-blue-600 icon-link">
+                        <i class="fas fa-arrow-left text-2xl"></i>
+                    </a>
+                    <a href="#" class="flex items-center space-x-3 text-3xl font-bold text-blue-700 hover:text-blue-800 transition-colors duration-300" style="font-family: 'Roboto Slab', serif;">
+                        <span>Ruby Interview Playbook</span>
+                    </a>
+                </div>
+            </div>
+        </nav>
+    </header>
+
+    <div class="flex flex-col md:flex-row flex-grow">
+        <!-- Sidebar Navigation -->
+        <nav id="sidebar" class="w-full md:w-80 bg-white p-4 md:p-6 shadow-lg overflow-y-auto flex-shrink-0 border-r border-gray-200">
+            <h1 class="section-title text-2xl font-bold mb-2 px-2">Questions</h1>
+            <p class="text-sm text-gray-500 mb-6 px-2">Select a problem to review.</p>
+            <div id="nav-list">
+                <!-- Navigation items will be injected here by JavaScript -->
+            </div>
+        </nav>
+
+        <!-- Main Content -->
+        <main id="content-container" class="flex-1 p-4 sm:p-6 md:p-10 bg-gray-50">
+            <!-- Problem content will be injected here by JavaScript -->
+        </main>
+    </div>
+
+    <!-- Footer -->
+    <footer class="bg-gray-900 text-gray-400 py-8 w-full">
+        <div class="container mx-auto px-6 text-center">
+            <div class="mb-4 flex justify-center space-x-6">
+                <a href="#" target="_blank" class="text-gray-400 hover:text-white transition duration-300 icon-link" title="GitHub"><i class="fab fa-github text-2xl"></i></a>
+                <a href="#" target="_blank" class="text-gray-400 hover:text-white transition duration-300 icon-link" title="LinkedIn"><i class="fab fa-linkedin text-2xl"></i></a>
+            </div>
+            <p class="text-sm">© <span id="currentYear"></span> Vishnuprasad Kamalon. All rights reserved.</p>
+            <p class="text-xs text-gray-500 mt-1">Built with Tailwind CSS & JavaScript.</p>
+        </div>
+    </footer>
+
+    <!-- The JSON data is no longer here -->
+
+<script>
+document.addEventListener('DOMContentLoaded', () => {
+    const navList = document.getElementById('nav-list');
+    const contentContainer = document.getElementById('content-container');
+
+    // Fetch data from external JSON file
+    fetch('playbook.json')
+        .then(response => {
+            if (!response.ok) {
+                throw new Error('Network response was not ok ' + response.statusText);
+            }
+            return response.json();
+        })
+        .then(playbookData => {
+            // All the logic that depends on the data now runs inside this .then() block
+            runPlaybook(playbookData);
+        })
+        .catch(error => {
+            console.error('There was a problem fetching the playbook data:', error);
+            contentContainer.innerHTML = `<div class="p-4 bg-red-100 border-l-4 border-red-500 text-red-700 rounded-lg"><p><strong>Error:</strong> Could not load interview questions from <code>playbook.json</code>. Please ensure the file exists and is in the same directory as the HTML file.</p></div>`;
+        });
+
+    function runPlaybook(playbookData) {
+        const problemsByDifficulty = {
+            'EASY': playbookData.slice(0, 10),
+            'MEDIUM': playbookData.slice(10, 26),
+            'HARD': playbookData.slice(26, 44)
+        };
+
+        function renderPageContent() {
+            navList.innerHTML = '';
+            contentContainer.innerHTML = '';
+
+            Object.keys(problemsByDifficulty).forEach((difficulty) => {
+                const accordionHeader = document.createElement('div');
+                accordionHeader.className = `accordion-header flex items-center justify-between p-3 rounded-lg font-bold text-gray-800 hover:bg-gray-100 transition-colors duration-200`;
+                accordionHeader.innerHTML = `
+                    <span class="text-lg">${difficulty} (${problemsByDifficulty[difficulty].length})</span>
+                    <i class="fas fa-chevron-right chevron text-gray-400"></i>
+                `;
+                
+                const accordionContent = document.createElement('div');
+                accordionContent.className = `accordion-content transition-all duration-400 ease-in-out`;
+
+                const ul = document.createElement('ul');
+                ul.className = 'space-y-2 py-2';
+
+                problemsByDifficulty[difficulty].forEach(problem => {
+                    const li = document.createElement('li');
+                    const anchor = document.createElement('a');
+                    anchor.href = `#${problem.id}`;
+                    anchor.className = `sidebar-item block p-3 rounded-lg font-medium text-gray-600 hover:bg-blue-50 hover:text-blue-700 transition-colors duration-200`;
+                    anchor.innerHTML = `<span>${problem.title}</span>`;
+                    anchor.setAttribute('data-target', problem.id);
+                    li.appendChild(anchor);
+                    ul.appendChild(li);
+                });
+
+                accordionContent.appendChild(ul);
+                navList.appendChild(accordionHeader);
+                navList.appendChild(accordionContent);
+            });
+
+            playbookData.forEach((problem, index) => {
+                const section = document.createElement('section');
+                section.id = problem.id;
+                section.className = `content-section space-y-8 animate-fade-in hidden`;
+
+                const problemHtml = `
+                    <h2 class="section-title text-4xl font-bold">${problem.title}</h2>
+                    <div class="bg-white p-6 rounded-xl shadow-md border border-gray-200 space-y-4">
+                        <p class="text-gray-700 leading-relaxed"><strong>Problem:</strong> ${problem.problem}</p>
+                        ${problem.solutions.map(solution => `
+                            <h3 class="text-2xl font-semibold text-gray-800">${solution.title}</h3>
+                            <pre><code class="language-ruby">${solution.code}</code></pre>
+                        `).join('')}
+                        <div class="bg-blue-50 border-l-4 border-blue-500 p-4 rounded-r-lg shadow-sm">
+                            <h4 class="text-lg font-semibold text-blue-800 mb-2">Tips to Remember:</h4>
+                            <ul class="list-disc list-inside space-y-1 text-blue-900">
+                                ${problem.tips.map(tip => `<li>${tip}</li>`).join('')}
+                            </ul>
+                        </div>
+                    </div>
+                `;
+                section.innerHTML = problemHtml;
+                contentContainer.appendChild(section);
+            });
+
+            // Make the first accordion open by default
+            const firstAccordionHeader = navList.querySelector('.accordion-header');
+            if(firstAccordionHeader) {
+                firstAccordionHeader.classList.add('active');
+                firstAccordionHeader.nextElementSibling.classList.add('open');
+            }
+
+            // Highlight the first question and show its content
+            const firstQuestionLink = navList.querySelector(`a[href="#${playbookData[0].id}"]`);
+            if (firstQuestionLink) {
+                firstQuestionLink.classList.add('active');
+            }
+            const firstQuestionContent = document.getElementById(playbookData[0].id);
+            if (firstQuestionContent) {
+                firstQuestionContent.classList.remove('hidden');
+            }
+        }
+
+        function toggleAccordion(header) {
+            const content = header.nextElementSibling;
+            header.classList.toggle('active');
+            content.classList.toggle('open');
+        }
+
+        function updateContentAndNav(targetId) {
+            const contentSections = document.querySelectorAll('.content-section');
+            const navItems = document.querySelectorAll('.sidebar-item');
+            
+            contentSections.forEach(section => section.classList.add('hidden'));
+            navItems.forEach(item => item.classList.remove('active'));
+
+            const targetSection = document.querySelector(targetId);
+            if (targetSection) {
+                targetSection.classList.remove('hidden');
+                targetSection.classList.add('animate-fade-in');
+                const activeLink = document.querySelector(`a[href="${targetId}"]`);
+                if (activeLink) activeLink.classList.add('active');
+            }
+        }
+
+        // --- Event Listeners ---
+
+        navList.addEventListener('click', (e) => {
+            const header = e.target.closest('.accordion-header');
+            if (header) {
+                toggleAccordion(header);
+            }
+            
+            const target = e.target.closest('a.sidebar-item');
+            if (target) {
+                e.preventDefault();
+                const targetId = target.getAttribute('href');
+                updateContentAndNav(targetId);
+                contentContainer.scrollTo(0, 0);
+            }
+        });
+
+        // Initial render and set current year in the footer
+        renderPageContent();
+        document.getElementById('currentYear').textContent = new Date().getFullYear();
+    }
+});
+</script>
+
+</body>
+</html>

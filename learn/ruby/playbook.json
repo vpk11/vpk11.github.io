@@ -1,0 +1,735 @@
+[
+    {
+        "id": "question-1",
+        "title": "Reverse a String",
+        "problem": "Write a function that takes a string and returns it in reverse order.",
+        "solutions": [
+            {
+                "title": "Solution 1: Without <code>String#reverse</code>",
+                "code": "def reverse_string_manual(str)\n  reversed_str = \"\"\n  i = str.length - 1\n  while i >= 0\n    reversed_str << str[i]\n    i -= 1\n  end\n  reversed_str\nend"
+            },
+            {
+                "title": "Solution 2: With Built-in Methods",
+                "code": "def reverse_string_builtin(str)\n  str.reverse\nend"
+            }
+        ],
+        "tips": [
+            "The manual way is a classic \"iterate from the back\" pattern. Initialize an empty string and build it up character by character from the end of the original string.",
+            "For common tasks like this, Ruby almost always has a direct, expressive built-in method. <code>String#reverse</code> is the prime example and the preferred method in production code."
+        ]
+    },
+    {
+        "id": "question-2",
+        "title": "FizzBuzz",
+        "problem": "Print numbers from 1 to 100. For multiples of 3, print \"Fizz\". For multiples of 5, print \"Buzz\". For multiples of both 3 and 5, print \"FizzBuzz\".",
+        "solutions": [
+            {
+                "title": "Solution 1: Standard <code>if/elsif</code>",
+                "code": "def fizzbuzz_classic\n  (1..100).each do |num|\n    if num % 15 == 0\n      puts \"FizzBuzz\"\n    elsif num % 3 == 0\n      puts \"Fizz\"\n    elsif num % 5 == 0\n      puts \"Buzz\"\n    else\n      puts num\n    end\n  end\nend"
+            },
+            {
+                "title": "Solution 2: String Concatenation Approach",
+                "code": "def fizzbuzz_clever\n  (1..100).each do |num|\n    output = \"\"\n    output << \"Fizz\" if num % 3 == 0\n    output << \"Buzz\" if num % 5 == 0\n    puts output.empty? ? num : output\n  end\nend"
+            }
+        ],
+        "tips": [
+            "The modulo operator (<code>%</code>) is key. <code>num % x == 0</code> checks if <code>num</code> is a multiple of <code>x</code>.",
+            "In the classic solution, the order of checks is critical. You <strong>must</strong> check for the most specific condition (<code>% 15</code>) first.",
+            "The clever solution is more extensible. If you needed to add \"Jazz\" for multiples of 7, you just add one more line."
+        ]
+    },
+    {
+        "id": "question-3",
+        "title": "Check for Palindrome",
+        "problem": "Write a function that checks if a string is a palindrome, ignoring case and non-alphanumeric characters.",
+        "solutions": [
+            {
+                "title": "Solution 1: Without <code>String#reverse</code>",
+                "code": "def is_palindrome_manual(str)\n  normalized_str = str.downcase.gsub(/[^a-z0-9]/, '')\n  left = 0\n  right = normalized_str.length - 1\n  while left < right\n    return false if normalized_str[left] != normalized_str[right]\n    left += 1\n    right -= 1\n  end\n  true\nend"
+            },
+            {
+                "title": "Solution 2: With Built-in Methods",
+                "code": "def is_palindrome_builtin(str)\n  normalized_str = str.downcase.gsub(/[^a-z0-9]/, '')\n  normalized_str == normalized_str.reverse\nend"
+            }
+        ],
+        "tips": [
+            "This is a two-step problem: <strong>1. Normalize</strong>, then <strong>2. Check</strong>. Don't forget the normalization step.",
+            "The manual check uses a \"two-pointer\" technique, a common and efficient pattern for array/string comparisons.",
+            "The built-in check is a simple, elegant, and highly readable comparison."
+        ]
+    },
+    {
+        "id": "question-4",
+        "title": "Find the Missing Number",
+        "problem": "You are given an array containing <code>n</code> distinct numbers taken from <code>0, 1, 2, ..., n</code>. Find the one number that is missing from the array.",
+        "solutions": [
+            {
+                "title": "Solution 1: Without Built-in <code>sum</code> or Set operations",
+                "code": "def find_missing_number_math(arr)\n  n = arr.length\n  expected_sum = n * (n + 1) / 2\n  actual_sum = 0\n  arr.each { |num| actual_sum += num }\n  expected_sum - actual_sum\nend"
+            },
+            {
+                "title": "Solution 2: With Built-in Methods",
+                "code": "def find_missing_number_builtin(arr)\n  n = arr.length\n  expected_range = (0..n).to_a\n  (expected_range - arr).first\nend"
+            }
+        ],
+        "tips": [
+            "<strong>Math Approach:</strong> This is very fast (<code>O(n)</code>) and uses constant space (<code>O(1)</code>). The trick is knowing the sum formula.",
+            "<strong>Set Theory Approach:</strong> This is more readable and intuitive for many developers. Create the perfect array and \"subtract\" the given array."
+        ]
+    },
+    {
+        "id": "question-5",
+        "title": "Remove Duplicates from an Array",
+        "problem": "Write a function that removes duplicate elements from an array, returning a new array with only unique elements. The order of elements in the output should be the order of their first appearance.",
+        "solutions": [
+            {
+                "title": "Solution 1: Without <code>Array#uniq</code>",
+                "code": "def remove_duplicates_manual(arr)\n  unique_elements = []\n  seen = {}\n\n  arr.each do |element|\n    unless seen[element]\n      unique_elements << element\n      seen[element] = true\n    end\n  end\n  unique_elements\nend"
+            },
+            {
+                "title": "Solution 2: With Built-in Methods",
+                "code": "def remove_duplicates_builtin(arr)\n  arr.uniq\nend"
+            }
+        ],
+        "tips": [
+            "The manual solution's efficiency comes from using a hash (<code>seen</code>) for fast lookups (<code>O(1)</code>).",
+            "<code>Array#uniq</code> is the canonical, idiomatic Ruby way to solve this. It is highly optimized and should be your go-to solution."
+        ]
+    },
+    {
+        "id": "question-6",
+        "title": "Factorial Calculation",
+        "problem": "Write a function that calculates the factorial of a non-negative integer <code>n</code>. The factorial of <code>n</code>, denoted as <code>n!</code>, is the product of all positive integers up to <code>n</code>. <code>0!</code> is defined as <code>1</code>.",
+        "solutions": [
+            {
+                "title": "Solution 1: Without <code>reduce</code> (Iterative)",
+                "code": "def factorial_iterative(n)\n  return nil if n < 0\n  return 1 if n == 0\n\n  result = 1\n  (1..n).each do |i|\n    result *= i\n  end\n  result\nend"
+            },
+            {
+                "title": "Solution 2: With Built-in Methods (and Recursion)",
+                "code": "def factorial_builtin(n)\n  return nil if n < 0\n  return 1 if n == 0\n  (1..n).reduce(:*)\nend"
+            }
+        ],
+        "tips": [
+            "<strong>Edge Cases:</strong> Always handle the base cases first: negative numbers (undefined) and <code>n = 0</code> (result is 1).",
+            "<strong>Iteration vs. Recursion:</strong> The iterative approach is often safer in production code as it avoids the risk of a \"stack level too deep\" error for very large <code>n</code>.",
+            "<strong><code>reduce</code> (or <code>inject</code>):</strong> This is a powerful tool from <code>Enumerable</code> for \"reducing\" a collection down to a single value."
+        ]
+    },
+    {
+        "id": "question-7",
+        "title": "Sum of Array Elements",
+        "problem": "Given an array of numbers, compute their sum.",
+        "solutions": [
+            {
+                "title": "Solution 1: Without <code>Array#sum</code>",
+                "code": "def sum_array_manual(arr)\n  sum = 0\n  arr.each do |number|\n    sum += number\n  end\n  sum\nend"
+            },
+            {
+                "title": "Solution 2: With Built-in Methods",
+                "code": "def sum_array_builtin(arr)\n  arr.sum\nend"
+            }
+        ],
+        "tips": [
+            "This is a fundamental <code>Enumerable</code> task. The pattern of initializing a variable and iterating to build it up is essential.",
+            "For such a common task, a built-in method (<code>.sum</code>) is always preferred for readability and conciseness.",
+            "Knowing <code>reduce</code> is a plus. It shows a deeper understanding of the <code>Enumerable</code> module."
+        ]
+    },
+    {
+        "id": "question-8",
+        "title": "Title Case a String",
+        "problem": "Write a function that takes a string of words and converts it to title case, where the first letter of each word is capitalized and the rest of the letters are lowercase.",
+        "solutions": [
+            {
+                "title": "Solution 1: Without <code>String#capitalize</code>",
+                "code": "def title_case_manual(str)\n  words = str.split(' ')\n  capitalized_words = []\n  words.each do |word|\n    next if word.empty?\n    first_letter = word[0].upcase\n    rest_of_word = word[1..-1].downcase\n    capitalized_words << (first_letter + rest_of_word)\n  end\n  capitalized_words.join(' ')\nend"
+            },
+            {
+                "title": "Solution 2: With Built-in Methods",
+                "code": "def title_case_builtin(str)\n  str.split(' ').map(&:capitalize).join(' ')\nend"
+            }
+        ],
+        "tips": [
+            "This is a classic <strong>\"split-map-join\"</strong> pattern. You split the string, operate on each unit, and then join them back together.",
+            "<code>map(&:capitalize)</code> is a powerful shortcut for <code>map { |word| word.capitalize }</code>."
+        ]
+    },
+    {
+        "id": "question-9",
+        "title": "Count Vowels in a String",
+        "problem": "Write a function to count the number of vowels (<code>a</code>, <code>e</code>, <code>i</code>, <code>o</code>, <code>u</code>) in a given string. The function should be case-insensitive.",
+        "solutions": [
+            {
+                "title": "Solution 1: Without <code>String#count</code>",
+                "code": "def count_vowels_manual(str)\n  count = 0\n  vowels = \"aeiou\"\n  str.downcase.each_char do |char|\n    if vowels.include?(char)\n      count += 1\n    end\n  end\n  count\nend"
+            },
+            {
+                "title": "Solution 2: With Built-in Methods",
+                "code": "def count_vowels_builtin(str)\n  str.downcase.count('aeiou')\nend"
+            }
+        ],
+        "tips": [
+            "<strong>Normalization First:</strong> Always handle the case-insensitivity requirement first.",
+            "<code>String#count</code> is the perfect tool for this job. It takes a character set and counts all occurrences of any of them."
+        ]
+    },
+    {
+        "id": "question-10",
+        "title": "Find the Maximum Value in an Array",
+        "problem": "Given an array of integers, find the largest integer in the array without using <code>Array#max</code>.",
+        "solutions": [
+            {
+                "title": "Solution 1: Without <code>Array#max</code>",
+                "code": "def find_max_manual(arr)\n  return nil if arr.empty?\n  max_value = arr[0]\n  (1...arr.length).each do |i|\n    if arr[i] > max_value\n      max_value = arr[i]\n    end\n  end\n  max_value\nend"
+            },
+            {
+                "title": "Solution 2: With Built-in Methods",
+                "code": "def find_max_builtin(arr)\n  arr.max\nend"
+            }
+        ],
+        "tips": [
+            "<strong>The Empty Array Edge Case:</strong> Always consider what should happen if the array is empty.",
+            "<strong>Initialization:</strong> In the manual solution, initialize your <code>max_value</code> to the first element of the array, not to <code>0</code>, to handle negative numbers correctly.",
+            "As always, the built-in <code>arr.max</code> is the simplest and best way to do this in real-world Ruby code."
+        ]
+    },
+    {
+        "id": "question-11",
+        "title": "Two Sum",
+        "problem": "Given an array of integers <code>nums</code> and an integer <code>target</code>, return the <em>indices</em> of the two numbers that add up to <code>target</code>.",
+        "solutions": [
+            {
+                "title": "Solution 1: Brute Force (O(n²))",
+                "code": "def two_sum_brute_force(nums, target)\n (0...nums.length).each do |i|\n (i + 1...nums.length).each do |j|\n return [i, j] if nums[i] + nums[j] == target\n end\n end\nend"
+            },
+            {
+                "title": "Solution 2: Optimized with a Hash Map (O(n))",
+                "code": "def two_sum_optimized(nums, target)\n num_to_index = {}\n\n nums.each_with_index do |num, index|\n complement = target - num\n if num_to_index.key?(complement)\n return [num_to_index[complement], index]\n end\n num_to_index[num] = index\n end\nend"
+            }
+        ],
+        "tips": [
+            "When you see a problem that involves finding pairs or checking for existence, think of a <strong>Hash Map</strong>.",
+            "The key insight is the time/space trade-off. By using extra space for the hash, you reduce time complexity from <code>O(n²)</code> to <code>O(n)</code>.",
+            "The logic is: for each number <code>x</code>, look for <code>target - x</code> in your hash of previously seen numbers."
+        ]
+    },
+    {
+        "id": "question-12",
+        "title": "Group Anagrams",
+        "problem": "Given an array of strings <code>strs</code>, group the anagrams together. You can return the answer in any order.",
+        "solutions": [
+            {
+                "title": "Solution 1: Hash Map with sorted key",
+                "code": "def group_anagrams(strs)\n groups = {}\n strs.each do |str|\n  key = str.chars.sort.join\n  groups[key] ||= []\n  groups[key] << str\n end\n groups.values\nend"
+            }
+        ],
+        "tips": [
+            "The key idea is that anagrams, when sorted, become the same string. This sorted string can be used as a key in a hash map.",
+            "The time complexity is <code>O(N * K log K)</code>, where N is the number of strings and K is the maximum length of a string, due to the sorting operation inside the loop."
+        ]
+    },
+    {
+        "id": "question-13",
+        "title": "Longest Palindrome",
+        "problem": "Given a string `s`, return the length of the longest palindrome that can be built with those letters. Letters are case-sensitive.",
+        "solutions": [
+            {
+                "title": "Solution 1: Frequency Counter",
+                "code": "def longest_palindrome(s)\n  freq = s.chars.tally\n  length = 0\n  odd_found = false\n\n  freq.values.each do |count|\n    length += (count / 2) * 2\n    if count % 2 == 1\n      odd_found = true\n    end\n  end\n\n  length + (odd_found ? 1 : 0)\nend"
+            }
+        ],
+        "tips": [
+            "To form a palindrome, all characters must have an even count, except for at most one character which can have an odd count (to be placed in the center).",
+            "The `tally` method is a great, concise way to get character frequencies in Ruby."
+        ]
+    },
+    {
+        "id": "question-14",
+        "title": "Merge Two Sorted Lists",
+        "problem": "You are given the heads of two sorted linked lists `list1` and `list2`. Merge the two lists into a single sorted list. The new list should be made by splicing together the nodes of the first two lists. Return the head of the merged linked list.",
+        "solutions": [
+            {
+                "title": "Solution 1: Iterative Approach",
+                "code": "# Assuming a Node class exists with `value` and `next` attributes\ndef merge_two_lists(list1, list2)\n  dummy = Node.new(0)\n  current = dummy\n  \n  while list1 && list2\n    if list1.value <= list2.value\n      current.next = list1\n      list1 = list1.next\n    else\n      current.next = list2\n      list2 = list2.next\n    end\n    current = current.next\n  end\n  \n  current.next = list1 || list2\n  dummy.next\nend"
+            }
+        ],
+        "tips": [
+            "This problem is a great example of using a 'dummy' node to simplify the logic and avoid edge cases at the head of the new list.",
+            "The `||` operator in Ruby is useful for handling the remaining list, which is guaranteed to be sorted, so it can be appended directly."
+        ]
+    },
+    {
+        "id": "question-15",
+        "title": "Valid Parentheses",
+        "problem": "Given a string `s` containing just the characters `(`, `)`, `{`, `}`, `[` and `]`, determine if the input string is valid. An input string is valid if open brackets must be closed by the same type of brackets and open brackets must be closed in the correct order.",
+        "solutions": [
+            {
+                "title": "Solution 1: Using a Stack",
+                "code": "def is_valid_parentheses(s)\n  stack = []\n  map = { ')' => '(', ']' => '[', '}' => '{' }\n\n  s.each_char do |char|\n    if map.values.include?(char) # It's an opening bracket\n      stack << char\n    elsif map.keys.include?(char) # It's a closing bracket\n      return false if stack.empty? || stack.pop != map[char]\n    end\n  end\n\n  stack.empty?\nend"
+            }
+        ],
+        "tips": [
+            "This is the quintessential stack problem. A stack's LIFO (Last-In, First-Out) nature perfectly matches the requirement of matching nested pairs.",
+            "Using a hash map to store the pairings (`{ ')' => '(' }`) makes the code clean and easy to extend if more types of brackets are added."
+        ]
+    },
+    {
+        "id": "question-16",
+        "title": "Implement `flatten`",
+        "problem": "Write a function to flatten a nested array, without using the built-in `Array#flatten` method.",
+        "solutions": [
+            {
+                "title": "Solution 1: Recursive Approach",
+                "code": "def flatten_array(arr)\n  result = []\n  arr.each do |element|\n    if element.is_a?(Array)\n      result.concat(flatten_array(element))\n    else\n      result << element\n    end\n  end\n  result\nend"
+            }
+        ],
+        "tips": [
+            "This is a classic recursive problem. The base case is when you encounter a non-array element.",
+            "The recursive step is to call the function on any sub-arrays and `concat` their results to your main `result` array."
+        ]
+    },
+    {
+        "id": "question-17",
+        "title": "Search Insert Position",
+        "problem": "Given a sorted array of distinct integers and a target value, return the index if the target is found. If not, return the index where it would be if it were inserted in order.",
+        "solutions": [
+            {
+                "title": "Solution 1: Binary Search",
+                "code": "def search_insert(nums, target)\n  low = 0\n  high = nums.length - 1\n\n  while low <= high\n    mid = low + (high - low) / 2\n\n    if nums[mid] == target\n      return mid\n    elsif nums[mid] < target\n      low = mid + 1\n    else\n      high = mid - 1\n    end\n  end\n  low\nend"
+            }
+        ],
+        "tips": [
+            "This problem is a direct application of the <strong>Binary Search</strong> algorithm.",
+            "The key is to understand that after the loop terminates, `low` will be pointing to the correct insertion point."
+        ]
+    },
+    {
+        "id": "question-18",
+        "title": "Best Time to Buy and Sell Stock",
+        "problem": "You are given an array `prices` where `prices[i]` is the price of a given stock on the <code>i</code>th day. Find the maximum profit you can achieve. You may complete at most one transaction (i.e., buy one and sell one share of the stock).",
+        "solutions": [
+            {
+                "title": "Solution 1: One Pass with Two Variables",
+                "code": "def max_profit(prices)\n  min_price = Float::INFINITY\n  max_profit = 0\n\n  prices.each do |price|\n    if price < min_price\n      min_price = price\n    elsif price - min_price > max_profit\n      max_profit = price - min_price\n    end\n  end\n\n  max_profit\nend"
+            }
+        ],
+        "tips": [
+            "This is a dynamic programming problem that can be solved with a simple greedy approach.",
+            "The two variables, `min_price` and `max_profit`, are updated as you iterate through the prices. `min_price` keeps track of the lowest price seen so far, and `max_profit` stores the largest profit found."
+        ]
+    },
+    {
+        "id": "question-19",
+        "title": "Contains Duplicate",
+        "problem": "Given an integer array `nums`, return `true` if any value appears at least twice in the array, and `false` if every element is distinct.",
+        "solutions": [
+            {
+                "title": "Solution 1: Using a Set",
+                "code": "def contains_duplicate(nums)\n  seen = Set.new\n  nums.each do |num|\n    return true if seen.include?(num)\n    seen.add(num)\n  end\n  false\nend"
+            },
+            {
+                "title": "Solution 2: With Ruby's built-in methods",
+                "code": "def contains_duplicate_builtin(nums)\n  nums.uniq.length != nums.length\nend"
+            }
+        ],
+        "tips": [
+            "The most efficient way to solve this is with a Set or a Hash, which provides `O(1)` average time complexity for lookups.",
+            "The Ruby-specific solution is concise and leverages the highly optimized `uniq` method."
+        ]
+    },
+    {
+        "id": "question-20",
+        "title": "Move Zeroes",
+        "problem": "Given an integer array `nums`, move all `0`'s to the end of it while maintaining the relative order of the non-zero elements. You must do this in-place without making a copy of the array.",
+        "solutions": [
+            {
+                "title": "Solution 1: Two Pointers",
+                "code": "def move_zeroes(nums)\n  insert_pos = 0\n  nums.each do |num|\n    if num != 0\n      nums[insert_pos] = num\n      insert_pos += 1\n    end\n  end\n  (insert_pos...nums.length).each do |i|\n    nums[i] = 0\n  end\n  nums\nend"
+                }
+            ],
+            "tips": [
+                "This is a classic 'in-place' algorithm problem. The two-pointer approach is a very common solution.",
+                "One pointer (`insert_pos`) tracks where the next non-zero element should go. The other pointer (`num` in the `each` loop) iterates through the array."
+            ]
+    },
+    {
+            "id": "question-21",
+            "title": "Maximum Subarray",
+            "problem": "Given an integer array <code>nums</code>, find the contiguous subarray (containing at least one number) which has the largest sum and return its sum.",
+            "solutions": [
+                {
+                    "title": "Solution: Kadane's Algorithm",
+                    "code": "def max_subarray(nums)\n  max_so_far = nums[0]\n  current_max = nums[0]\n\n  (1...nums.length).each do |i|\n    num = nums[i]\n    current_max = [num, current_max + num].max\n    max_so_far = [max_so_far, current_max].max\n  end\n\n  max_so_far\nend"
+                }
+            ],
+            "tips": [
+                "This is a classic dynamic programming problem known as <strong>Kadane's Algorithm</strong>.",
+                "The key idea is that at each position, the maximum subarray ending there is either the number itself (starting a new subarray) or the number plus the max subarray that ended at the previous position (extending it).",
+                "Keep two variables: one for the max sum ending at the current position, and one for the global max sum found so far."
+            ]
+        },
+        {
+            "id": "question-22",
+            "title": "Binary Search",
+            "problem": "Given a sorted array of integers <code>nums</code> and a <code>target</code> value, write a function to search for the <code>target</code>. If it exists, return its index. Otherwise, return <code>nil</code>. You must write an algorithm with <code>O(log n)</code> runtime complexity.",
+            "solutions": [
+                {
+                    "title": "Solution 1: Iterative Binary Search",
+                    "code": "def binary_search_iterative(nums, target)\n  low = 0\n  high = nums.length - 1\n\n  while low <= high\n    mid = low + (high - low) / 2\n\n    if nums[mid] == target\n      return mid\n    elsif nums[mid] < target\n      low = mid + 1\n    else\n      high = mid - 1\n    end\n  end\n\n  nil\nend"
+                }
+            ],
+            "tips": [
+                "Binary search only works on <strong>sorted</strong> data.",
+                "The core idea is <strong>divide and conquer</strong>. Repeatedly divide the search interval in half.",
+                "Keep track of <code>low</code>, <code>high</code>, and <code>mid</code> pointers. Be careful with off-by-one errors in updating <code>low</code> and <code>high</code>."
+            ]
+        },
+        {
+            "id": "question-23",
+            "title": "First Non-Repeating Character",
+            "problem": "Given a string <code>s</code>, find the first non-repeating character in it and return its index. If it does not exist, return <code>-1</code>.",
+            "solutions": [
+                {
+                    "title": "Solution 1: Two-Pass with Hash",
+                    "code": "def first_uniq_char_manual(s)\n  char_counts = {}\n\n  s.each_char do |char|\n    char_counts[char] = (char_counts[char] || 0) + 1\n  end\n\n  s.each_char.with_index do |char, index|\n    return index if char_counts[char] == 1\n  end\n\n  -1\nend"
+            }
+            ],
+            "tips": [
+                "This is another problem where a <strong>hash map</strong> is the perfect tool for tracking frequency.",
+                "The most straightforward approach is <strong>two passes</strong>. First pass to build the frequency map, second pass to check for the first character with a count of 1.",
+                "Iterate through the original string in the second pass to maintain the correct order."
+            ]
+        },
+        {
+            "id": "question-24",
+            "title": "Implement a Queue using Two Stacks",
+            "problem": "Implement a <code>Queue</code> class that supports <code>enqueue</code> (add an item to the back) and <code>dequeue</code> (remove an item from the front) using only two stacks.",
+            "solutions": [
+                {
+                    "title": "Solution: The Two-Stack Queue Implementation",
+                    "code": "class MyQueue\n  def initialize\n    @in_stack = []\n    @out_stack = []\n  end\n\n  def enqueue(value)\n    @in_stack.push(value)\n  end\n\n  def dequeue\n    if @out_stack.empty?\n      while !@in_stack.empty?\n        @out_stack.push(@in_stack.pop)\n      end\n    end\n    @out_stack.pop\n  end\n\n  def empty?\n    @in_stack.empty? && @out_stack.empty?\n  end\nend"
+                }
+            ],
+            "tips": [
+                "A Queue is FIFO (First-In, First-Out). A Stack is LIFO (Last-In, First-Out).",
+                "Use one stack (<code>@in_stack</code>) for normal enqueues.",
+                "When a dequeue is requested, if the second stack (<code>@out_stack</code>) is empty, \"pour\" all elements from the in-stack to the out-stack. This pour-over reverses the order, creating the FIFO behavior.",
+                "This leads to an <strong>amortized O(1)</strong> time complexity for dequeue operations."
+            ]
+        },
+        {
+            "id": "question-25",
+            "title": "Merge Sorted Arrays",
+            "problem": "You are given two sorted integer arrays <code>nums1</code> and <code>nums2</code>, and integers <code>m</code> and <code>n</code> representing the number of initialized elements. Merge <code>nums2</code> into <code>nums1</code> as one sorted array. The array <code>nums1</code> has a size of <code>m + n</code> to hold the additional elements.",
+            "solutions": [
+                {
+                    "title": "Solution 1: Three Pointers (In-Place)",
+                    "code": "def merge_sorted_arrays(nums1, m, nums2, n)\n  p1 = m - 1\n  p2 = n - 1\n  write_idx = m + n - 1\n\n  while p2 >= 0\n    if p1 >= 0 && nums1[p1] > nums2[p2]\n      nums1[write_idx] = nums1[p1]\n      p1 -= 1\n    else\n      nums1[write_idx] = nums2[p2]\n      p2 -= 1\n    end\n    write_idx -= 1\n  end\n  nums1\nend"
+            }
+            ],
+            "tips": [
+                "The key to solving this in-place efficiently is to <strong>work backwards</strong> from the end of the arrays.",
+                "Use three pointers: one for the end of the initial elements in <code>nums1</code>, one for the end of <code>nums2</code>, and one for the end of the <code>nums1</code> array (the write position).",
+                "Compare the elements at the <code>nums1</code> and <code>nums2</code> pointers and place the larger one at the write position. Decrement the pointers accordingly."
+            ]
+        },
+        {
+            "id": "question-26",
+            "title": "Product of Array Except Self",
+            "problem": "Given an integer array <code>nums</code>, return an array <code>answer</code> such that <code>answer[i]</code> is equal to the product of all the elements of <code>nums</code> except <code>nums[i]</code>. You must write an algorithm that runs in <code>O(n)</code> time and without using the division operation.",
+            "solutions": [
+                {
+                    "title": "Solution: Prefix and Postfix Products",
+                    "code": "def product_except_self(nums)\n  n = nums.length\n  answer = Array.new(n, 1)\n\n  prefix_product = 1\n  (0...n).each do |i|\n    answer[i] = prefix_product\n    prefix_product *= nums[i]\n  end\n\n  postfix_product = 1\n  (n - 1).downto(0) do |i|\n    answer[i] *= postfix_product\n    postfix_product *= nums[i]\n  end\n\n  answer\nend"
+                }
+            ],
+            "tips": [
+                "The constraints (<code>O(n)</code> time, no division) are the key to this problem.",
+                "The trick is to realize that the product except self at index <code>i</code> is <code>(product of all elements to the left)</code> * <code>(product of all elements to the right)</code>.",
+                "This can be solved in two passes: first, a left-to-right pass to calculate all the prefix products. Second, a right-to-left pass to calculate the postfix products and multiply them into the result."
+            ]
+        },
+    {
+            "id": "question-27",
+            "title": "Longest Substring Without Repeating Characters",
+            "problem": "Given a string `s`, find the length of the longest substring without repeating characters.",
+            "solutions": [
+                {
+                    "title": "Solution 1: Sliding Window",
+                    "code": "def length_of_longest_substring(s)\n  chars = Set.new\n  left = 0\n  max_len = 0\n  \n  (0...s.length).each do |right|\n    while chars.include?(s[right])\n      chars.delete(s[left])\n      left += 1\n    end\n    chars.add(s[right])\n    max_len = [max_len, right - left + 1].max\n  end\n\n  max_len\nend"
+                }
+            ],
+            "tips": [
+                "This is a key 'sliding window' problem. The window expands on the right and contracts on the left.",
+                "A `Set` is used for efficient `O(1)` lookups to check for duplicate characters."
+            ]
+        },
+        {
+            "id": "question-28",
+            "title": "Add Two Numbers (Linked Lists)",
+            "problem": "You are given two non-empty linked lists representing two non-negative integers. The digits are stored in reverse order, and each of their nodes contains a single digit. Add the two numbers and return the sum as a linked list.",
+            "solutions": [
+                {
+                    "title": "Solution 1: Iterative Traversal",
+                    "code": "def add_two_numbers(l1, l2)\n  dummy = ListNode.new(0)\n  current = dummy\n  carry = 0\n  \n  while l1 || l2 || carry != 0\n    val1 = l1 ? l1.val : 0\n    val2 = l2 ? l2.val : 0\n    \n    sum = val1 + val2 + carry\n    carry = sum / 10\n    current.next = ListNode.new(sum % 10)\n    current = current.next\n    \n    l1 = l1.next if l1\n    l2 = l2.next if l2\n  end\n  \n  dummy.next\nend"
+                }
+            ],
+            "tips": [
+                "This problem tests your ability to handle linked list traversal and basic arithmetic.",
+                "Using a 'dummy' head node simplifies the creation of the new list. The `carry` variable is crucial for handling sums greater than 9."
+            ]
+        },
+        {
+            "id": "question-29",
+            "title": "Integer to Roman",
+            "problem": "Given an integer, convert it to a Roman numeral.",
+            "solutions": [
+                {
+                    "title": "Solution 1: Greedy Algorithm",
+                    "code": "def int_to_roman(num)\n  map = {\n    1000 => 'M', 900 => 'CM', 500 => 'D', 400 => 'CD',\n    100 => 'C', 90 => 'XC', 50 => 'L', 40 => 'XL',\n    10 => 'X', 9 => 'IX', 5 => 'V', 4 => 'IV', 1 => 'I'\n  }\n\n  roman = ''\n  map.keys.each do |val|\n    while num >= val\n      roman += map[val]\n      num -= val\n    end\n  end\n  roman\nend"
+                }
+            ],
+            "tips": [
+                "This problem can be solved with a simple greedy approach. Define a map of values and their Roman numeral symbols.",
+                "Iterate from the largest value to the smallest, and repeatedly append the symbol while the number is greater than or equal to the current value."
+            ]
+        },
+        {
+            "id": "question-30",
+            "title": "3Sum",
+            "problem": "Given an integer array `nums`, return all the triplets `[nums[i], nums[j], nums[k]]` such that `i != j`, `i != k`, and `j != k`, and `nums[i] + nums[j] + nums[k] == 0`. Notice that the solution set must not contain duplicate triplets.",
+            "solutions": [
+                {
+                    "title": "Solution 1: Two Pointers with Sorting",
+                    "code": "def three_sum(nums)\n  nums.sort!\n  result = []\n  (0...nums.length - 2).each do |i|\n    next if i > 0 && nums[i] == nums[i-1]\n    \n    left = i + 1\n    right = nums.length - 1\n    \n    while left < right\n      sum = nums[i] + nums[left] + nums[right]\n      if sum == 0\n        result << [nums[i], nums[left], nums[right]]\n        left += 1\n        right -= 1\n        while left < right && nums[left] == nums[left-1]\n          left += 1\n        end\n        while left < right && nums[right] == nums[right+1]\n          right -= 1\n        end\n      elsif sum < 0\n        left += 1\n      else\n        right -= 1\n      end\n    end\n  end\n  result\nend"
+                }
+            ],
+            "tips": [
+                "This problem is a good combination of sorting and the two-pointer technique.",
+                "Sorting the array first allows you to efficiently find pairs that sum to a target and to skip duplicate values easily."
+            ]
+        },
+        {
+            "id": "question-31",
+            "title": "String to Integer (atoi)",
+            "problem": "Implement the `my_atoi(string s)` function, which converts a string to a 32-bit signed integer. The function must discard all leading whitespace, then find the first sequence of digits, with an optional sign, and convert it to an integer. If the integer overflows, return `INT_MAX` or `INT_MIN`.",
+            "solutions": [
+                {
+                    "title": "Solution 1: Manual Parsing",
+                    "code": "INT_MAX = 2**31 - 1\nINT_MIN = -2**31\n\ndef my_atoi(s)\n  s = s.strip\n  return 0 if s.empty?\n  \n  sign = 1\n  i = 0\n  \n  if s[i] == '-' \n    sign = -1\n    i += 1\n  elsif s[i] == '+'\n    i += 1\n  end\n  \n  result = 0\n  while i < s.length && ('0'..'9').include?(s[i])\n    digit = s[i].to_i\n    result = result * 10 + digit\n    if sign == 1 && result > INT_MAX\n      return INT_MAX\n    elsif sign == -1 && result * sign < INT_MIN\n      return INT_MIN\n    end\n    i += 1\n  end\n  \n  result * sign\nend"
+                }
+            ],
+            "tips": [
+                "This problem tests your ability to handle multiple edge cases: leading whitespace, optional signs, non-digit characters, and integer overflow.",
+                "Remember to check for overflow at each step of the calculation, not just at the end."
+            ]
+        },
+        {
+            "id": "question-32",
+            "title": "Container With Most Water",
+            "problem": "Given `n` non-negative integers `a1, a2, ..., an` where each represents a point at coordinate `(i, ai)`. `n` vertical lines are drawn such that the two endpoints of line `i` is at `(i, ai)` and `(i, 0)`. Find two lines, which, together with the x-axis forms a container, such that the container contains the most water. Return the maximum amount of water a container can store.",
+            "solutions": [
+                {
+                    "title": "Solution 1: Two Pointers",
+                    "code": "def max_area(height)\n  left = 0\n  right = height.length - 1\n  max_area = 0\n  \n  while left < right\n    current_area = [height[left], height[right]].min * (right - left)\n    max_area = [max_area, current_area].max\n    \n    if height[left] < height[right]\n      left += 1\n    else\n      right -= 1\n    end\n  end\n  \n  max_area\nend"
+                }
+            ],
+            "tips": [
+                "This problem is a great application of the two-pointer approach on a sorted-like structure (in this case, the two ends of the array).",
+                "The key insight is that to maximize the area, you should try to move the pointer with the smaller height, as moving the larger one will not increase the height of the container."
+            ]
+        },
+        {
+            "id": "question-33",
+            "title": "Reverse Linked List",
+            "problem": "Given the head of a singly linked list, reverse the list, and return the reversed list.",
+            "solutions": [
+                {
+                    "title": "Solution 1: Iterative Approach",
+                    "code": "# Assuming a Node class with `value` and `next` attributes\ndef reverse_list(head)\n  prev = nil\n  current = head\n  \n  while current\n    next_node = current.next\n    current.next = prev\n    prev = current\n    current = next_node\n  end\n  \n  prev\nend"
+                }
+            ],
+            "tips": [
+                "This is a fundamental linked list manipulation problem. You need to keep track of the previous, current, and next nodes.",
+                "The iterative approach is generally preferred because it uses constant space complexity (`O(1)`)."
+            ]
+        },
+        {
+            "id": "question-34",
+            "title": "Generate Parentheses",
+            "problem": "Given `n` pairs of parentheses, write a function to generate all combinations of well-formed parentheses.",
+            "solutions": [
+                {
+                    "title": "Solution 1: Backtracking",
+                    "code": "def generate_parenthesis(n)\n  result = []\n  \n  def backtrack(s, open_count, close_count, n, result)\n    if s.length == 2 * n\n      result << s\n      return\n    end\n    \n    if open_count < n\n      backtrack(s + '(', open_count + 1, close_count, n, result)\n    end\n    \n    if close_count < open_count\n      backtrack(s + ')', open_count, close_count, n, result)\n    end\n  end\n  \n  backtrack('', 0, 0, n, result)\n  result\nend"
+                }
+            ],
+            "tips": [
+                "This is a classic backtracking problem.",
+                "The two key rules for a well-formed parenthesis sequence are: 1) The number of opening parentheses must not exceed `n`, and 2) The number of closing parentheses must not exceed the number of opening parentheses."
+            ]
+        },
+        {
+            "id": "question-35",
+            "title": "Merge k Sorted Lists",
+            "problem": "You are given an array of `k` linked-lists `lists`, each sorted in ascending order. Merge all the linked-lists into one sorted linked list and return it.",
+            "solutions": [
+                {
+                    "title": "Solution 1: Divide and Conquer",
+                    "code": "# This solution requires a helper function `merge_two_lists` from question 14.\ndef merge_k_lists(lists)\n  return nil if lists.empty?\n  \n  interval = 1\n  while interval < lists.length\n    (0...lists.length - interval).step(interval * 2) do |i|\n      lists[i] = merge_two_lists(lists[i], lists[i + interval])\n    end\n    interval *= 2\n  end\n  \n  lists[0]\nend"
+                }
+            ],
+            "tips": [
+                "This can be solved by repeatedly merging two lists at a time. The divide-and-conquer approach is efficient, as it merges pairs of lists and then merges the results, and so on.",
+                "A Min-Heap is another common and efficient solution with a time complexity of `O(N log k)`, where N is the total number of nodes and k is the number of lists."
+            ]
+        },
+        {
+            "id": "question-36",
+            "title": "Median of Two Sorted Arrays",
+            "problem": "Given two sorted arrays `nums1` and `nums2` of size `m` and `n` respectively, return the median of the two sorted arrays. The overall run time complexity should be `O(log(m+n))`.",
+            "solutions": [
+                {
+                    "title": "Solution: Binary Search on Partitions",
+                    "code": "def find_median_sorted_arrays(nums1, nums2)\n  # Ensure nums1 is the smaller array to optimize search space.\n  nums1, nums2 = nums2, nums1 if nums1.length > nums2.length\n\n  m, n = nums1.length, nums2.length\n  low, high = 0, m\n  half_len = (m + n + 1) / 2\n\n  while low <= high\n    partition1 = low + (high - low) / 2\n    partition2 = half_len - partition1\n\n    max_left1 = (partition1 == 0) ? -Float::INFINITY : nums1[partition1 - 1]\n    min_right1 = (partition1 == m) ? Float::INFINITY : nums1[partition1]\n\n    max_left2 = (partition2 == 0) ? -Float::INFINITY : nums2[partition2 - 1]\n    min_right2 = (partition2 == n) ? Float::INFINITY : nums2[partition2]\n\n    if max_left1 <= min_right2 && max_left2 <= min_right1\n      if (m + n).even?\n        return ([max_left1, max_left2].max + [min_right1, min_right2].min) / 2.0\n      else\n        return [max_left1, max_left2].max\n      end\n    elsif max_left1 > min_right2\n      high = partition1 - 1\n    else\n      low = partition1 + 1\n    end\n  end\nend"
+                }
+            ],
+            "tips": [
+                "This is a very difficult problem with a non-obvious `O(log(m+n))` solution.",
+                "The core idea is to find the correct `partition` in both arrays such that all elements on the left are less than or equal to all elements on the right of the partition.",
+                "This is a prime example of a problem where describing the algorithm and explaining the time complexity is as important as a full implementation."
+            ]
+        },
+        {
+            "id": "question-37",
+            "title": "LRU (Least Recently Used) Cache",
+            "problem": "Design and implement a data structure for a Least Recently Used (LRU) Cache. It must support <code>get(key)</code> and <code>put(key, value)</code> in <code>O(1)</code> average time complexity. When the cache is full, a <code>put</code> should evict the least recently used item.",
+            "solutions": [
+                {
+                    "title": "Solution: Hash Map + Doubly Linked List",
+                    "code": "class LRUCache\n  class Node\n    attr_accessor :key, :val, :prev, :next\n    def initialize(key, val); @key, @val = key, val; end\n  end\n\n  def initialize(capacity)\n    @capacity = capacity\n    @cache = {}\n    @head = Node.new(nil, nil)\n    @tail = Node.new(nil, nil)\n    @head.next = @tail\n    @tail.prev = @head\n  end\n\n  def get(key)\n    node = @cache[key]\n    return -1 unless node\n    move_to_front(node)\n    node.val\n  end\n\n  def put(key, value)\n    if (node = @cache[key])\n      node.val = value\n      move_to_front(node)\n    else\n      new_node = Node.new(key, value)\n      @cache[key] = new_node\n      add_to_front(new_node)\n      if @cache.size > @capacity\n        lru_node = @tail.prev\n        remove_node(lru_node)\n        @cache.delete(lru_node.key)\n      end\n    end\n  end\n\n  private\n  def remove_node(node); node.prev.next=node.next; node.next.prev=node.prev; end\n  def add_to_front(node); node.next=@head.next; @head.next.prev=node; @head.next=node; node.prev=@head; end\n  def move_to_front(node); remove_node(node); add_to_front(node); end\nend"
+                }
+            ],
+            "tips": [
+                "To achieve <code>O(1)</code> for both <code>get</code> and <code>put</code>, you need to combine two data structures.",
+                "A <strong>Hash Map</strong> provides <code>O(1)</code> lookup of keys to find nodes in the list.",
+                "A <strong>Doubly Linked List</strong> maintains the usage order. The head is most-recent, the tail is least-recent. It provides <code>O(1)</code> add/remove operations if you have a direct reference to the node.",
+                "Using dummy <code>head</code> and <code>tail</code> nodes simplifies the pointer logic for adding/removing from the list."
+            ]
+        },
+        {
+            "id": "question-38",
+            "title": "Word Ladder",
+            "problem": "Given a <code>begin_word</code>, an <code>end_word</code>, and a <code>word_list</code>, find the length of the shortest transformation sequence from <code>begin_word</code> to <code>end_word</code> such that only one letter can be changed at a time and each transformed word must exist in the word list.",
+            "solutions": [
+                {
+                    "title": "Solution: Breadth-First Search (BFS)",
+                    "code": "require 'set'\n\ndef ladder_length(begin_word, end_word, word_list)\n  word_set = Set.new(word_list)\n  return 0 unless word_set.include?(end_word)\n\n  queue = [[begin_word, 1]] # [word, path_length]\n  visited = Set.new([begin_word])\n\n  while (current_word, level = queue.shift)\n    return level if current_word == end_word\n\n    (0...current_word.length).each do |i|\n      original_char = current_word[i]\n      ('a'..'z').each do |char|\n        current_word[i] = char\n        if word_set.include?(current_word) && !visited.include?(current_word)\n          visited.add(current_word.dup)\n          queue.push([current_word.dup, level + 1])\n        end\n      end\n      current_word[i] = original_char # Restore word\n    end\n  end\n\n  0 # Not reachable\nend"
+                }
+            ],
+            "tips": [
+                "\"Shortest path\" in an unweighted graph immediately implies <strong>Breadth-First Search (BFS)</strong>.",
+                "The words are nodes, and an edge exists between them if they are one letter apart. You don't build this graph explicitly.",
+                "Instead of comparing every word to every other word, it's faster to generate all possible one-letter mutations of the current word and check if they exist in the <code>word_set</code>.",
+                "A <code>visited</code> set is crucial to prevent infinite loops and avoid redundant work."
+            ]
+        },
+        {
+            "id": "question-39",
+            "title": "Trapping Rain Water",
+            "problem": "Given an array of non-negative integers representing an elevation map, compute how much water it can trap after raining.",
+            "solutions": [
+                {
+                    "title": "Solution: Two Pointers (O(1) Space)",
+                    "code": "def trap_two_pointers(height)\n  left, right = 0, height.length - 1\n  left_max, right_max = 0, 0\n  total_water = 0\n\n  while left < right\n    if height[left] < height[right]\n      height[left] >= left_max ? (left_max = height[left]) : (total_water += left_max - height[left])\n      left += 1\n    else\n      height[right] >= right_max ? (right_max = height[right]) : (total_water += right_max - height[right])\n      right -= 1\n    end\n  end\n  total_water\nend"
+                }
+            ],
+            "tips": [
+                "The water trapped above any bar `i` is determined by <code>min(tallest_bar_to_left, tallest_bar_to_right) - height[i]</code>.",
+                "The optimal <strong>two-pointer</strong> solution uses <code>O(1)</code> space. It works by recognizing that the water level for the shorter of the two outer walls is determined only by its own local max, allowing you to process one side at a time."
+            ]
+        },
+        {
+            "id": "question-40",
+            "title": "Minimum Window Substring",
+            "problem": "Given two strings <code>s</code> and <code>t</code>, return the minimum window in <code>s</code> which will contain all the characters in <code>t</code>. If there is no such window in <code>s</code> that covers all characters in <code>t</code>, return the empty string <code>\"\"</code>.",
+            "solutions": [
+                {
+                    "title": "Solution: Sliding Window",
+                    "code": "def min_window(s, t)\n  return \"\" if t.size > s.size\n\n  t_counts = t.chars.tally\n  required = t_counts.size\n  formed = 0\n  window_counts = Hash.new(0)\n\n  left = 0\n  min_len = Float::INFINITY\n  result_start = 0\n\n  (0...s.size).each do |right|\n    char = s[right]\n    window_counts[char] += 1\n\n    if t_counts.key?(char) && window_counts[char] == t_counts[char]\n      formed += 1\n    end\n\n    while left <= right && formed == required\n      if right - left + 1 < min_len\n        min_len = right - left + 1\n        result_start = left\n      end\n\n      left_char = s[left]\n      window_counts[left_char] -= 1\n      if t_counts.key?(left_char) && window_counts[left_char] < t_counts[left_char]\n        formed -= 1\n      end\n      left += 1\n    end\n  end\n\n  min_len == Float::INFINITY ? \"\" : s[result_start, min_len]\nend"
+                }
+            ],
+            "tips": [
+                "This is a classic <strong>Sliding Window</strong> problem.",
+                "Use two pointers, <code>left</code> and <code>right</code>, to define the current window.",
+                "Use a hash map to store the character counts required by string <code>t</code>, and another to store the counts in the current window.",
+                "Algorithm: 1. Expand the window by moving the <code>right</code> pointer. 2. Once the window is valid, contract it by moving the <code>left</code> pointer to find the smallest possible valid window."
+            ]
+        },
+        {
+            "id": "question-41",
+            "title": "Serialize and Deserialize a Binary Tree",
+            "problem": "Design an algorithm to serialize a binary tree to a string and deserialize that string back to the tree. A binary tree node has a value, and <code>left</code> and <code>right</code> pointers.",
+            "solutions": [
+                {
+                    "title": "Solution: Pre-order Traversal",
+                    "code": "# TreeNode Definition needed\ndef serialize(root)\n  return 'null' unless root\n  \"#{root.val},#{serialize(root.left)},#{serialize(root.right)}\"\nend\n\ndef deserialize(data)\n  nodes = data.split(',')\n  build_tree = lambda do\n    val = nodes.shift\n    return nil if val == 'null'\n    node = TreeNode.new(val.to_i)\n    node.left = build_tree.call()\n    node.right = build_tree.call()\n    node\n  end\n  build_tree.call()\nend"
+                }
+            ],
+            "tips": [
+                "The key is to choose a traversal method that unambiguously represents the tree structure.",
+                "<strong>Pre-order traversal</strong> (Root, Left, Right) is a great choice because the root is always first, making reconstruction straightforward.",
+                "Crucially, you must encode <code>nil</code> children (e.g., with a special marker like \"null\" or \"#\"). Without this, you cannot distinguish between a node with one child and a node with two.",
+                "Deserialization then becomes a recursive process. Using a queue (or <code>Array#shift</code>) on the split data is very helpful."
+            ]
+        },
+        {
+            "id": "question-42",
+            "title": "Longest Consecutive Sequence",
+            "problem": "Given an unsorted array of integers <code>nums</code>, return the length of the longest consecutive elements sequence. You must write an algorithm that runs in <code>O(n)</code> time.",
+            "solutions": [
+                {
+                    "title": "Solution: Using a Set",
+                    "code": "require 'set'\n\ndef longest_consecutive(nums)\n  return 0 if nums.empty?\n\n  num_set = Set.new(nums)\n  max_length = 0\n\n  num_set.each do |num|\n    if !num_set.include?(num - 1)\n      current_num = num\n      current_length = 1\n\n      while num_set.include?(current_num + 1)\n        current_num += 1\n        current_length += 1\n      end\n\n      max_length = [max_length, current_length].max\n    end\n  end\n\n  max_length\nend"
+                }
+            ],
+            "tips": [
+                "Sorting the array would lead to an <code>O(n log n)</code> solution, which does not meet the constraint.",
+                "The optimal <code>O(n)</code> solution uses a <strong>Set</strong> for <code>O(1)</code> average time lookups.",
+                "The key insight is to only start counting a sequence when you find its starting number (i.e., when <code>num - 1</code> is not in the set). This ensures each number is visited as the start of a `while` loop at most once."
+            ]
+        },
+        {
+            "id": "question-43",
+            "title": "Regular Expression Matching",
+            "problem": "Given an input string <code>s</code> and a pattern <code>p</code>, implement regular expression matching with support for <code>'.'</code> and <code>'*'</code>. <code>'.'</code> matches any single character. <code>'*'</code> matches zero or more of the preceding element.",
+            "solutions": [
+                {
+                    "title": "Solution: Dynamic Programming",
+                    "code": "def is_match(s, p)\n  m, n = s.length, p.length\n  dp = Array.new(m + 1) { Array.new(n + 1, false) }\n  dp[0][0] = true\n\n  (1..n).each { |j| dp[0][j] = dp[0][j - 2] if p[j - 1] == '*' }\n\n  (1..m).each do |i|\n    (1..n).each do |j|\n      if p[j - 1] == '.' || p[j - 1] == s[i - 1]\n        dp[i][j] = dp[i - 1][j - 1]\n      elsif p[j - 1] == '*'\n        dp[i][j] = dp[i][j - 2]\n        if p[j - 2] == '.' || p[j - 2] == s[i - 1]\n          dp[i][j] = dp[i][j] || dp[i - 1][j]\n        end\n      end\n    end\n  end\n\n  dp[m][n]\nend"
+                }
+            ],
+            "tips": [
+                "This is a classic and difficult <strong>Dynamic Programming</strong> problem.",
+                "A bottom-up DP approach uses a 2D table `dp[i][j]` that stores whether the first `i` characters of `s` match the first `j` characters of `p`.",
+                "The state transitions are the core logic. The `*` character is the tricky part: it can either match zero preceding elements (making it dependent on `dp[i][j-2]`) or one/more preceding elements (dependent on `dp[i-1][j]`)."
+            ]
+        },
+        {
+            "id": "question-44",
+            "title": "Course Schedule",
+            "problem": "There are a total of <code>numCourses</code> courses you have to take, labeled from <code>0</code> to <code>numCourses - 1</code>. You are given an array <code>prerequisites</code> where <code>prerequisites[i] = [a, b]</code> indicates that you must take course <code>b</code> first if you want to take course <code>a</code>. Return <code>true</code> if you can finish all courses. Otherwise, return <code>false</code>.",
+            "solutions": [
+                {
+                    "title": "Solution: Topological Sort via DFS",
+                    "code": "def can_finish(num_courses, prerequisites)\n  adj = Hash.new { |h, k| h[k] = [] }\n  prerequisites.each { |course, prereq| adj[course] << prereq }\n\n  visited = Array.new(num_courses, 0) # 0=unvisited, 1=visiting, 2=visited\n\n  dfs = lambda do |course|\n    return false if visited[course] == 1 # Cycle detected\n    return true if visited[course] == 2 # Already processed\n\n    visited[course] = 1 # Mark as visiting\n\n    (adj[course] || []).each do |prereq|\n      return false unless dfs.call(prereq)\n    end\n\n    visited[course] = 2 # Mark as visited\n    true\n  end\n\n  (0...num_courses).all? { |course| dfs.call(course) }\nend"
+                }
+            ],
+            "tips": [
+                "This problem is equivalent to detecting if a directed graph has a <strong>cycle</strong>. If there's a cycle, it's impossible to finish.",
+                "This can be solved with a <strong>Topological Sort</strong> algorithm, commonly implemented with Depth-First Search (DFS).",
+                "You need to track the state of each node: unvisited, visiting, and visited. If a DFS traversal encounters a node that is currently in the 'visiting' state, you've found a cycle."
+            ]
+        }
+]

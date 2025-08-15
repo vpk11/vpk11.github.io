@@ -92,6 +92,22 @@
         .fade-enter-from, .fade-leave-to {
             opacity: 0;
         }
+        
+        /* Toast Animation */
+        .toast-enter-active {
+            transition: all 0.3s ease-out;
+        }
+        .toast-leave-active {
+            transition: all 0.3s ease-in;
+        }
+        .toast-enter-from {
+            transform: translateX(100%);
+            opacity: 0;
+        }
+        .toast-leave-to {
+            transform: translateX(100%);
+            opacity: 0;
+        }
     </style>
 </head>
 <body class="font-sans antialiased text-gray-800">
@@ -125,28 +141,30 @@
             <!-- Tab Navigation -->
             <div class="mb-6" role="tablist" aria-label="Fragen-Kategorien">
                 <div class="border-b border-gray-200">
-                    <nav class="-mb-px flex space-x-8" aria-label="Tabs">
+                    <nav class="-mb-px flex space-x-1 sm:space-x-8" aria-label="Tabs">
                         <button 
                             @click="switchTab('general')"
                             :class="activeTab === 'general' ? 'border-blue-500 text-blue-600' : 'border-transparent text-gray-500 hover:text-gray-700 hover:border-gray-300'"
-                            class="whitespace-nowrap py-2 px-1 border-b-2 font-medium text-sm transition-colors duration-200"
+                            class="flex-1 sm:flex-none whitespace-nowrap py-2 px-2 sm:px-1 border-b-2 font-medium text-xs sm:text-sm transition-colors duration-200"
                             role="tab"
                             :aria-selected="activeTab === 'general'"
                             :aria-controls="'general-panel'"
                             id="general-tab">
-                            Allgemeine Fragen
-                            <span class="ml-2 bg-gray-100 text-gray-900 py-0.5 px-2.5 rounded-full text-xs">{{ generalQuestions.length }}</span>
+                            <span class="hidden sm:inline">Allgemeine Fragen</span>
+                            <span class="sm:hidden">Allgemein</span>
+                            <span class="ml-1 sm:ml-2 bg-gray-100 text-gray-900 py-0.5 px-1.5 sm:px-2.5 rounded-full text-xs">{{ generalQuestions.length }}</span>
                         </button>
                         <button 
                             @click="switchTab('state')"
                             :class="activeTab === 'state' ? 'border-blue-500 text-blue-600' : 'border-transparent text-gray-500 hover:text-gray-700 hover:border-gray-300'"
-                            class="whitespace-nowrap py-2 px-1 border-b-2 font-medium text-sm transition-colors duration-200"
+                            class="flex-1 sm:flex-none whitespace-nowrap py-2 px-2 sm:px-1 border-b-2 font-medium text-xs sm:text-sm transition-colors duration-200"
                             role="tab"
                             :aria-selected="activeTab === 'state'"
                             :aria-controls="'state-panel'"
                             id="state-tab">
-                            Hessen-spezifische Fragen
-                            <span class="ml-2 bg-gray-100 text-gray-900 py-0.5 px-2.5 rounded-full text-xs">{{ stateQuestions.length }}</span>
+                            <span class="hidden sm:inline">Hessen-spezifische Fragen</span>
+                            <span class="sm:hidden">Hessen</span>
+                            <span class="ml-1 sm:ml-2 bg-gray-100 text-gray-900 py-0.5 px-1.5 sm:px-2.5 rounded-full text-xs">{{ stateQuestions.length }}</span>
                         </button>
                     </nav>
                 </div>
@@ -354,6 +372,20 @@
             </div>
             
         </section>
+        
+        <!-- Toast Notification -->
+        <transition name="toast">
+            <div v-if="showToast" 
+                 class="fixed top-4 right-4 z-50 bg-red-500 text-white px-6 py-3 rounded-lg shadow-lg max-w-sm"
+                 role="alert"
+                 aria-live="assertive"
+                 aria-atomic="true">
+                <div class="flex items-center">
+                    <i class="fas fa-exclamation-triangle mr-2" aria-hidden="true"></i>
+                    <span>{{ toastMessage }}</span>
+                </div>
+            </div>
+        </transition>
         </div>
     </main>
 
@@ -416,6 +448,10 @@
                     // Loading states
                     isLoadingGeneral: false,
                     isLoadingState: false,
+                    
+                    // Toast notification
+                    showToast: false,
+                    toastMessage: '',
                 }
             },
             computed: {
@@ -457,6 +493,15 @@
                     this.activeTab = tab;
                 },
 
+                // Toast notification
+                showToastMessage(message) {
+                    this.toastMessage = message;
+                    this.showToast = true;
+                    setTimeout(() => {
+                        this.showToast = false;
+                    }, 3000);
+                },
+
                 // General Questions Methods
                 nextGeneralQuestion() {
                     if (this.currentGeneralIndex < this.generalQuestions.length - 1) {
@@ -482,6 +527,9 @@
                         const index = this.jumpToGeneralQuestionNumber - 1;
                         this.currentGeneralIndex = index;
                         this.showGeneralAnswer = this.generalAnswers[this.currentGeneralQuestion?.id] !== undefined;
+                        this.jumpToGeneralQuestionNumber = null;
+                    } else if (this.jumpToGeneralQuestionNumber) {
+                        this.showToastMessage(`Frage ${this.jumpToGeneralQuestionNumber} existiert nicht. Bitte geben Sie eine Zahl zwischen 1 und ${this.generalQuestions.length} ein.`);
                         this.jumpToGeneralQuestionNumber = null;
                     }
                 },
@@ -519,6 +567,9 @@
                         const index = this.jumpToStateQuestionNumber - 1;
                         this.currentStateIndex = index;
                         this.showStateAnswer = this.stateAnswers[this.currentStateQuestion?.id] !== undefined;
+                        this.jumpToStateQuestionNumber = null;
+                    } else if (this.jumpToStateQuestionNumber) {
+                        this.showToastMessage(`Frage ${this.jumpToStateQuestionNumber} existiert nicht. Bitte geben Sie eine Zahl zwischen 1 und ${this.stateQuestions.length} ein.`);
                         this.jumpToStateQuestionNumber = null;
                     }
                 },

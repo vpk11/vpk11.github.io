@@ -91,7 +91,7 @@
                 <article id="day1" class="bg-white rounded-lg shadow-lg overflow-hidden transition-all duration-500" :class="{ 'max-h-full': selected === 1, 'max-h-20': selected !== 1 }">
                     <button @click="selected = (selected === 1 ? null : 1)" class="w-full text-left p-6 flex justify-between items-center focus:outline-none">
                         <span class="text-2xl font-bold text-blue-800 mr-4">1</span>
-                        <div><h3 class="text-xl md:text-2xl font-bold text-gray-800">Arrival at Ricadi & Sunset in Tropea</h3><time datetime="2024-08-26" class="text-gray-500">Tuesday, 26th August</time></div>
+                        <div class="text-center flex-1"><h3 class="text-xl md:text-2xl font-bold text-gray-800">Arrival at Ricadi & Sunset in Tropea</h3><time datetime="2024-08-26" class="text-gray-500 block">Tuesday, 26th August</time></div>
                         <svg class="w-6 h-6 text-blue-800 transform transition-transform" :class="{ 'rotate-180': selected === 1 }" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path></svg>
                     </button>
                     <div id="day1-content" class="p-6 pt-0" x-show="selected === 1">
@@ -107,7 +107,7 @@
                 <article id="day2" class="bg-white rounded-lg shadow-lg overflow-hidden transition-all duration-500" :class="{ 'max-h-full': selected === 2, 'max-h-20': selected !== 2 }">
                     <button @click="selected = (selected === 2 ? null : 2)" class="w-full text-left p-6 flex justify-between items-center focus:outline-none">
                         <span class="text-2xl font-bold text-amber-600 mr-4">2</span>
-                        <div><h3 class="text-xl md:text-2xl font-bold text-gray-800">Tropea Beach Day & Exploring Capo Vaticano</h3><time datetime="2024-08-27" class="text-gray-500">Wednesday, 27th August</time></div>
+                        <div class="text-center flex-1"><h3 class="text-xl md:text-2xl font-bold text-gray-800">Tropea Beach Day & Exploring Capo Vaticano</h3><time datetime="2024-08-27" class="text-gray-500 block">Wednesday, 27th August</time></div>
                         <svg class="w-6 h-6 text-amber-600 transform transition-transform" :class="{ 'rotate-180': selected === 2 }" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path></svg>
                     </button>
                     <div id="day2-content" class="p-6 pt-0" x-show="selected === 2">
@@ -123,7 +123,7 @@
                 <article id="day3" class="bg-white rounded-lg shadow-lg overflow-hidden transition-all duration-500" :class="{ 'max-h-full': selected === 3, 'max-h-20': selected !== 3 }">
                     <button @click="selected = (selected === 3 ? null : 3)" class="w-full text-left p-6 flex justify-between items-center focus:outline-none">
                          <span class="text-2xl font-bold text-cyan-600 mr-4">3</span>
-                         <div><h3 class="text-xl md:text-2xl font-bold text-gray-800">Voyage on the Coast of the Gods</h3><time datetime="2024-08-28" class="text-gray-500">Thursday, 28th August</time></div>
+                         <div class="text-center flex-1"><h3 class="text-xl md:text-2xl font-bold text-gray-800">Voyage on the Coast of the Gods</h3><time datetime="2024-08-28" class="text-gray-500 block">Thursday, 28th August</time></div>
                         <svg class="w-6 h-6 text-cyan-600 transform transition-transform" :class="{ 'rotate-180': selected === 3 }" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path></svg>
                     </button>
                     <div id="day3-content" class="p-6 pt-0" x-show="selected === 3">
@@ -139,7 +139,7 @@
                 <article id="day4" class="bg-white rounded-lg shadow-lg overflow-hidden transition-all duration-500" :class="{ 'max-h-full': selected === 4, 'max-h-20': selected !== 4 }">
                     <button @click="selected = (selected === 4 ? null : 4)" class="w-full text-left p-6 flex justify-between items-center focus:outline-none">
                          <span class="text-2xl font-bold text-purple-600 mr-4">4</span>
-                         <div><h3 class="text-xl md:text-2xl font-bold text-gray-800">The Mythical Allure of Scilla by Train</h3><time datetime="2024-08-29" class="text-gray-500">Friday, 29th August</time></div>
+                         <div class="text-center flex-1"><h3 class="text-xl md:text-2xl font-bold text-gray-800">The Mythical Allure of Scilla by Train</h3><time datetime="2024-08-29" class="text-gray-500 block">Friday, 29th August</time></div>
                         <svg class="w-6 h-6 text-purple-600 transform transition-transform" :class="{ 'rotate-180': selected === 4 }" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path></svg>
                     </button>
                     <div id="day4-content" class="p-6 pt-0" x-show="selected === 4">
@@ -155,7 +155,7 @@
                 <article id="day5" class="bg-white rounded-lg shadow-lg overflow-hidden transition-all duration-500" :class="{ 'max-h-full': selected === 5, 'max-h-20': selected !== 5 }">
                     <button @click="selected = (selected === 5 ? null : 5)" class="w-full text-left p-6 flex justify-between items-center focus:outline-none">
                         <span class="text-2xl font-bold text-rose-600 mr-4">5</span>
-                        <div><h3 class="text-xl md:text-2xl font-bold text-gray-800">Last Swim & Farewell Departure</h3><time datetime="2024-08-30" class="text-gray-500">Saturday, 30th August</time></div>
+                        <div class="text-center flex-1"><h3 class="text-xl md:text-2xl font-bold text-gray-800">Last Swim & Farewell Departure</h3><time datetime="2024-08-30" class="text-gray-500 block">Saturday, 30th August</time></div>
                         <svg class="w-6 h-6 text-rose-600 transform transition-transform" :class="{ 'rotate-180': selected === 5 }" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path></svg>
                     </button>
                     <div id="day5-content" class="p-6 pt-0" x-show="selected === 5">

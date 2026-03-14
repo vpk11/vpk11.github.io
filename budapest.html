@@ -1,0 +1,971 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Budapest Trip — 14–16 March 2026</title>
+  <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
+  
+  <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&family=Rajdhani:wght@300;400;500;600;700&family=Share+Tech+Mono&display=swap" rel="stylesheet">
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    body {
+      background-color: #030712;
+      font-family: 'Rajdhani', sans-serif;
+      overflow-x: hidden;
+      color: #e2e8f0;
+    }
+    body::before {
+      content: '';
+      position: fixed;
+      inset: 0;
+      background: repeating-linear-gradient(0deg, transparent, transparent 2px, rgba(0,245,255,0.012) 2px, rgba(0,245,255,0.012) 4px);
+      pointer-events: none;
+      z-index: 9999;
+    }
+    .grid-bg {
+      background-image: linear-gradient(rgba(0,245,255,0.03) 1px, transparent 1px), linear-gradient(90deg, rgba(0,245,255,0.03) 1px, transparent 1px);
+      background-size: 48px 48px;
+    }
+    /* Neon colours */
+    .nc { color: #00f5ff; }
+    .np { color: #ff006e; }
+    .nv { color: #bf00ff; }
+    .ng { color: #39ff14; }
+    .ny { color: #ffea00; }
+    .glow-c { text-shadow: 0 0 8px #00f5ff, 0 0 20px #00f5ff; }
+    .glow-p { text-shadow: 0 0 8px #ff006e, 0 0 20px #ff006e; }
+    .glow-v { text-shadow: 0 0 8px #bf00ff, 0 0 20px #bf00ff; }
+    /* Cards */
+    .card {
+      background: linear-gradient(135deg, rgba(13,17,23,0.97), rgba(18,26,38,0.97));
+      border: 1px solid rgba(0,245,255,0.18);
+      border-radius: 12px;
+      backdrop-filter: blur(12px);
+      transition: transform 0.25s ease, box-shadow 0.25s ease, border-color 0.25s ease;
+    }
+    .card:hover {
+      transform: translateY(-3px);
+      border-color: rgba(0,245,255,0.55);
+      box-shadow: 0 0 30px rgba(0,245,255,0.18), 0 8px 32px rgba(0,0,0,0.5);
+    }
+    .card-pink { border-color: rgba(255,0,110,0.18); }
+    .card-pink:hover { border-color: rgba(255,0,110,0.55); box-shadow: 0 0 30px rgba(255,0,110,0.18), 0 8px 32px rgba(0,0,0,0.5); }
+    .card-purple { border-color: rgba(191,0,255,0.18); }
+    .card-purple:hover { border-color: rgba(191,0,255,0.55); box-shadow: 0 0 30px rgba(191,0,255,0.18), 0 8px 32px rgba(0,0,0,0.5); }
+    /* Neon border box glow */
+    .box-c { box-shadow: 0 0 16px rgba(0,245,255,0.25), inset 0 0 16px rgba(0,245,255,0.04); }
+    .box-p { box-shadow: 0 0 16px rgba(255,0,110,0.25), inset 0 0 16px rgba(255,0,110,0.04); }
+    .box-v { box-shadow: 0 0 16px rgba(191,0,255,0.25), inset 0 0 16px rgba(191,0,255,0.04); }
+    /* Badges */
+    .badge { font-family: 'Share Tech Mono', monospace; font-size: 0.7rem; padding: 2px 8px; border-radius: 4px; border: 1px solid; white-space: nowrap; display: inline-block; }
+    .badge-c { background: rgba(0,245,255,0.08); border-color: rgba(0,245,255,0.4); color: #00f5ff; }
+    .badge-p { background: rgba(255,0,110,0.08); border-color: rgba(255,0,110,0.4); color: #ff006e; }
+    .badge-v { background: rgba(191,0,255,0.08); border-color: rgba(191,0,255,0.4); color: #bf00ff; }
+    .badge-g { background: rgba(57,255,20,0.08); border-color: rgba(57,255,20,0.4); color: #39ff14; }
+    .badge-y { background: rgba(255,234,0,0.08); border-color: rgba(255,234,0,0.4); color: #ffea00; }
+    /* Timeline */
+    .tl-line-c { width: 2px; background: linear-gradient(to bottom, #00f5ff, #00a8b0); box-shadow: 0 0 8px rgba(0,245,255,0.6); flex-shrink:0; }
+    .tl-line-p { width: 2px; background: linear-gradient(to bottom, #ff006e, #a00045); box-shadow: 0 0 8px rgba(255,0,110,0.6); flex-shrink:0; }
+    .tl-line-v { width: 2px; background: linear-gradient(to bottom, #bf00ff, #7a00a8); box-shadow: 0 0 8px rgba(191,0,255,0.6); flex-shrink:0; }
+    .dot { width: 10px; height: 10px; border-radius: 50%; flex-shrink: 0; }
+    .dot-c { background: #00f5ff; box-shadow: 0 0 8px #00f5ff, 0 0 16px #00f5ff; }
+    .dot-p { background: #ff006e; box-shadow: 0 0 8px #ff006e, 0 0 16px #ff006e; }
+    .dot-v { background: #bf00ff; box-shadow: 0 0 8px #bf00ff, 0 0 16px #bf00ff; }
+    /* Day header */
+    .day-header {
+      font-family: 'Orbitron', sans-serif;
+      letter-spacing: 0.08em;
+    }
+    /* Map button */
+    .map-btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      padding: 8px 16px;
+      border-radius: 8px;
+      font-family: 'Share Tech Mono', monospace;
+      font-size: 0.78rem;
+      letter-spacing: 0.05em;
+      text-decoration: none;
+      border: 1px solid;
+      transition: all 0.2s ease;
+      cursor: pointer;
+    }
+    .map-btn-c {
+      background: rgba(0,245,255,0.08);
+      border-color: rgba(0,245,255,0.5);
+      color: #00f5ff;
+    }
+    .map-btn-c:hover {
+      background: rgba(0,245,255,0.18);
+      box-shadow: 0 0 16px rgba(0,245,255,0.4);
+    }
+    .map-btn-p {
+      background: rgba(255,0,110,0.08);
+      border-color: rgba(255,0,110,0.5);
+      color: #ff006e;
+    }
+    .map-btn-p:hover {
+      background: rgba(255,0,110,0.18);
+      box-shadow: 0 0 16px rgba(255,0,110,0.4);
+    }
+    .map-btn-v {
+      background: rgba(191,0,255,0.08);
+      border-color: rgba(191,0,255,0.5);
+      color: #bf00ff;
+    }
+    .map-btn-v:hover {
+      background: rgba(191,0,255,0.18);
+      box-shadow: 0 0 16px rgba(191,0,255,0.4);
+    }
+    /* Warning block */
+    .warn {
+      background: rgba(255,234,0,0.06);
+      border-left: 3px solid #ffea00;
+      border-radius: 0 8px 8px 0;
+      padding: 10px 14px;
+      font-size: 0.88rem;
+      color: #d4c44a;
+    }
+    /* Tip block */
+    .tip {
+      background: rgba(57,255,20,0.05);
+      border-left: 3px solid #39ff14;
+      border-radius: 0 8px 8px 0;
+      padding: 10px 14px;
+      font-size: 0.88rem;
+      color: #8ecb68;
+    }
+    /* Section divider */
+    .divider {
+      height: 1px;
+      background: linear-gradient(90deg, transparent, rgba(0,245,255,0.4), transparent);
+    }
+    /* Pulse animation for live dot */
+    @keyframes pulse-c {
+      0%, 100% { box-shadow: 0 0 8px #00f5ff, 0 0 16px #00f5ff; }
+      50% { box-shadow: 0 0 16px #00f5ff, 0 0 32px #00f5ff, 0 0 48px rgba(0,245,255,0.4); }
+    }
+    .pulse-c { animation: pulse-c 2s ease-in-out infinite; }
+    @keyframes flicker {
+      0%,100%{opacity:1} 92%{opacity:1} 93%{opacity:0.8} 94%{opacity:1} 96%{opacity:0.9} 97%{opacity:1}
+    }
+    .flicker { animation: flicker 4s infinite; }
+    /* Hero gradient */
+    .hero-grad {
+      background: radial-gradient(ellipse 80% 50% at 50% 0%, rgba(0,245,255,0.12) 0%, transparent 60%),
+                  radial-gradient(ellipse 60% 40% at 80% 50%, rgba(191,0,255,0.08) 0%, transparent 50%),
+                  radial-gradient(ellipse 60% 40% at 20% 50%, rgba(255,0,110,0.08) 0%, transparent 50%);
+    }
+    /* Stat cards */
+    .stat-card {
+      background: rgba(13,17,23,0.8);
+      border: 1px solid rgba(0,245,255,0.15);
+      border-radius: 10px;
+      padding: 16px;
+      text-align: center;
+    }
+    /* Scrollbar */
+    ::-webkit-scrollbar { width: 6px; }
+    ::-webkit-scrollbar-track { background: #030712; }
+    ::-webkit-scrollbar-thumb { background: rgba(0,245,255,0.3); border-radius: 3px; }
+    ::-webkit-scrollbar-thumb:hover { background: rgba(0,245,255,0.6); }
+    /* Responsive */
+    @media (max-width: 640px) {
+      .hide-sm { display: none; }
+    }
+  </style>
+</head>
+<body class="grid-bg min-h-screen">
+
+  <!-- HERO -->
+  <header class="hero-grad relative overflow-hidden pt-16 pb-12 px-4">
+    <div class="max-w-4xl mx-auto text-center">
+      <!-- Top badge -->
+      <div class="inline-flex items-center gap-2 badge badge-c mb-6" style="font-size:0.75rem; padding:4px 14px;">
+        <span class="dot dot-c pulse-c" style="width:7px;height:7px;"></span>
+        TRIP INTEL // 14–16 MAR 2026
+      </div>
+
+      <!-- Main title -->
+      <h1 class="flicker" style="font-family:'Orbitron',sans-serif; font-size:clamp(2rem,6vw,3.8rem); font-weight:900; line-height:1.1; color:#00f5ff; text-shadow:0 0 20px #00f5ff, 0 0 40px #00f5ff, 0 0 80px rgba(0,245,255,0.4);">
+        BUDAPEST<br><span style="color:#ff006e; text-shadow:0 0 20px #ff006e,0 0 40px #ff006e;">MISSION PLAN</span>
+      </h1>
+
+      <p style="font-family:'Rajdhani',sans-serif; font-size:1.15rem; color:rgba(226,232,240,0.6); margin-top:16px; letter-spacing:0.12em; text-transform:uppercase;">
+        Nürnberg → Budapest → Berlin
+      </p>
+
+      <!-- Stat strip -->
+      <div style="display:grid; grid-template-columns:repeat(4,1fr); gap:12px; margin-top:36px; max-width:640px; margin-left:auto; margin-right:auto;">
+        <div class="stat-card">
+          <div style="font-family:'Share Tech Mono',monospace; font-size:1.5rem; color:#00f5ff; text-shadow:0 0 10px #00f5ff;">3</div>
+          <div style="font-size:0.72rem; color:#94a3b8; letter-spacing:0.08em; text-transform:uppercase; margin-top:2px;">Days</div>
+        </div>
+        <div class="stat-card">
+          <div style="font-family:'Share Tech Mono',monospace; font-size:1.5rem; color:#ff006e; text-shadow:0 0 10px #ff006e;">18+</div>
+          <div style="font-size:0.72rem; color:#94a3b8; letter-spacing:0.08em; text-transform:uppercase; margin-top:2px;">Stops</div>
+        </div>
+        <div class="stat-card">
+          <div style="font-family:'Share Tech Mono',monospace; font-size:1.5rem; color:#bf00ff; text-shadow:0 0 10px #bf00ff;">2</div>
+          <div style="font-size:0.72rem; color:#94a3b8; letter-spacing:0.08em; text-transform:uppercase; margin-top:2px;">Sides</div>
+        </div>
+        <div class="stat-card">
+          <div style="font-family:'Share Tech Mono',monospace; font-size:1.5rem; color:#39ff14; text-shadow:0 0 10px #39ff14;">€0</div>
+          <div style="font-size:0.72rem; color:#94a3b8; letter-spacing:0.08em; text-transform:uppercase; margin-top:2px;">Most sights</div>
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <!-- MAIN CONTENT -->
+  <main style="max-width:900px; margin:0 auto; padding:32px 16px 80px;">
+
+    <!-- FLIGHT INFO STRIP -->
+    <div class="card" style="padding:20px 24px; margin-bottom:32px; display:flex; flex-wrap:wrap; gap:16px; align-items:center; justify-content:space-between;">
+      <div style="display:flex; align-items:center; gap:10px;">
+        <i data-lucide="plane" style="width:20px;height:20px;color:#00f5ff;"></i>
+        <div>
+          <div style="font-size:0.72rem; color:#64748b; letter-spacing:0.1em; text-transform:uppercase; font-family:'Share Tech Mono',monospace;">Inbound</div>
+          <div style="font-size:1rem; font-weight:600; color:#e2e8f0;">NUE → BUD &nbsp;<span style="color:#00f5ff; font-family:'Share Tech Mono',monospace;">15:50–17:20</span></div>
+        </div>
+      </div>
+      <div style="width:1px; height:36px; background:rgba(0,245,255,0.2);" class="hide-sm"></div>
+      <div style="display:flex; align-items:center; gap:10px;">
+        <i data-lucide="plane-landing" style="width:20px;height:20px;color:#ff006e;"></i>
+        <div>
+          <div style="font-size:0.72rem; color:#64748b; letter-spacing:0.1em; text-transform:uppercase; font-family:'Share Tech Mono',monospace;">Outbound</div>
+          <div style="font-size:1rem; font-weight:600; color:#e2e8f0;">BUD → BER &nbsp;<span style="color:#ff006e; font-family:'Share Tech Mono',monospace;">07:15–08:45</span></div>
+        </div>
+      </div>
+      <div style="width:1px; height:36px; background:rgba(0,245,255,0.2);" class="hide-sm"></div>
+      <div style="display:flex; align-items:center; gap:10px;">
+        <i data-lucide="hotel" style="width:20px;height:20px;color:#bf00ff;"></i>
+        <div>
+          <div style="font-size:0.72rem; color:#64748b; letter-spacing:0.1em; text-transform:uppercase; font-family:'Share Tech Mono',monospace;">Hotel</div>
+          <div style="font-size:1rem; font-weight:600; color:#e2e8f0;">Budapest Holiday Harmony</div>
+          <div style="font-size:0.78rem; color:#64748b; font-family:'Share Tech Mono',monospace;">1053 Kossuth Lajos utca 2/B</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ═══════════════════════════════════════════ -->
+    <!-- DAY 1                                       -->
+    <!-- ═══════════════════════════════════════════ -->
+    <section style="margin-bottom:48px;">
+      <!-- Day header -->
+      <div style="display:flex; align-items:center; gap:16px; margin-bottom:24px;">
+        <div style="width:48px; height:48px; border-radius:10px; background:rgba(0,245,255,0.1); border:1px solid rgba(0,245,255,0.4); display:flex; align-items:center; justify-content:center; box-shadow:0 0 16px rgba(0,245,255,0.2);">
+          <span style="font-family:'Orbitron',sans-serif; font-size:1.1rem; font-weight:900; color:#00f5ff; text-shadow:0 0 10px #00f5ff;">01</span>
+        </div>
+        <div>
+          <div class="day-header" style="font-size:1.3rem; font-weight:700; color:#00f5ff; text-shadow:0 0 10px #00f5ff;">SAT 14 MARCH — ARRIVAL</div>
+          <div style="font-size:0.85rem; color:#64748b; letter-spacing:0.06em; text-transform:uppercase; font-family:'Share Tech Mono',monospace;">First contact with Budapest</div>
+        </div>
+        <!-- Google Maps Day 1 -->
+        <a class="map-btn map-btn-c" href="https://www.google.com/maps/dir/Budapest+Liszt+Ferenc+International+Airport,+Budapest/Gozsdu+Udvar,+Budapest,+1075+Hungary/Kazinczy+utca,+Budapest,+1075+Hungary" target="_blank" rel="noopener" style="margin-left:auto;">
+          <i data-lucide="map" style="width:14px;height:14px;"></i>
+          DAY 1 ROUTE
+        </a>
+      </div>
+
+      <!-- Airport info box -->
+      <div class="card box-c" style="padding:16px 20px; margin-bottom:20px;">
+        <div style="display:flex; align-items:flex-start; gap:12px;">
+          <i data-lucide="info" style="width:18px;height:18px;color:#00f5ff;flex-shrink:0;margin-top:2px;"></i>
+          <div>
+            <div style="font-weight:600; color:#00f5ff; font-size:0.95rem; margin-bottom:4px;">Airport → City Transfer</div>
+            <div style="font-size:0.9rem; color:#94a3b8; line-height:1.6;">Take the <strong style="color:#e2e8f0;">100E Airport Express Bus</strong> from Terminal 2 → Deák Ferenc tér. Pay by card on the bus. &nbsp;<span class="badge badge-y">2,500 HUF</span> &nbsp;<span class="badge badge-g">~40 MIN</span> &nbsp;<span class="badge badge-g">24/7</span></div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Timeline -->
+      <div style="display:flex; gap:16px;">
+        <div style="display:flex; flex-direction:column; align-items:center; padding-top:6px;">
+          <div class="tl-line-c" style="height:100%; min-height:200px;"></div>
+        </div>
+        <div style="flex:1; display:flex; flex-direction:column; gap:14px;">
+
+          <!-- Stop -->
+          <div class="card" style="padding:16px 18px; display:flex; flex-wrap:wrap; gap:10px; align-items:flex-start;">
+            <div style="display:flex; align-items:center; gap:8px; min-width:200px; flex:1;">
+              <div class="dot dot-c"></div>
+              <div>
+                <span class="badge badge-c" style="margin-bottom:4px; display:inline-block;">18:30</span>
+                <div style="font-weight:600; font-size:1rem; color:#e2e8f0;">Hotel Check-In</div>
+                <div style="font-size:0.83rem; color:#64748b; font-family:'Share Tech Mono',monospace;">Freshen up · Drop bags</div>
+              </div>
+            </div>
+            <span class="badge badge-g">BASE CAMP</span>
+          </div>
+
+          <div class="card" style="padding:16px 18px; display:flex; flex-wrap:wrap; gap:10px; align-items:flex-start;">
+            <div style="display:flex; align-items:center; gap:8px; min-width:200px; flex:1;">
+              <div class="dot dot-c"></div>
+              <div>
+                <span class="badge badge-c" style="margin-bottom:4px; display:inline-block;">19:15</span>
+                <div style="font-weight:600; font-size:1rem; color:#e2e8f0;">Gozsdu Court — Jewish Quarter</div>
+                <div style="font-size:0.83rem; color:#94a3b8; margin-top:2px;">Magical covered passageway lined with bars · atmospheric at night · 15-min walk from hotel</div>
+              </div>
+            </div>
+            <div style="display:flex; flex-direction:column; gap:4px; align-items:flex-end;">
+              <span class="badge badge-g">FREE</span>
+              <a class="map-btn map-btn-c" href="https://maps.google.com/?q=Gozsdu+Udvar,+Budapest" target="_blank" rel="noopener" style="padding:4px 10px; font-size:0.68rem;">
+                <i data-lucide="navigation" style="width:11px;height:11px;"></i> MAP
+              </a>
+            </div>
+          </div>
+
+          <div class="card" style="padding:16px 18px; display:flex; flex-wrap:wrap; gap:10px; align-items:flex-start;">
+            <div style="display:flex; align-items:center; gap:8px; min-width:200px; flex:1;">
+              <div class="dot dot-c"></div>
+              <div>
+                <span class="badge badge-c" style="margin-bottom:4px; display:inline-block;">19:45</span>
+                <div style="font-weight:600; font-size:1rem; color:#e2e8f0;">Dinner — Kazinczy Street</div>
+                <div style="font-size:0.83rem; color:#94a3b8; margin-top:2px;">Ruin bar district · budget Hungarian goulash ~1,500–3,000 HUF · early night before big day</div>
+              </div>
+            </div>
+            <span class="badge badge-y">~2,500 HUF</span>
+          </div>
+
+        </div>
+      </div>
+    </section>
+
+    <div class="divider" style="margin-bottom:48px;"></div>
+
+    <!-- ═══════════════════════════════════════════ -->
+    <!-- DAY 2 — PEST                                -->
+    <!-- ═══════════════════════════════════════════ -->
+    <section style="margin-bottom:48px;">
+      <div style="display:flex; align-items:center; gap:16px; margin-bottom:24px;">
+        <div style="width:48px; height:48px; border-radius:10px; background:rgba(255,0,110,0.1); border:1px solid rgba(255,0,110,0.4); display:flex; align-items:center; justify-content:center; box-shadow:0 0 16px rgba(255,0,110,0.2);">
+          <span style="font-family:'Orbitron',sans-serif; font-size:1.1rem; font-weight:900; color:#ff006e; text-shadow:0 0 10px #ff006e;">02</span>
+        </div>
+        <div>
+          <div class="day-header" style="font-size:1.3rem; font-weight:700; color:#ff006e; text-shadow:0 0 10px #ff006e;">SUN 15 MARCH — FULL PEST DAY</div>
+          <div style="font-size:0.85rem; color:#64748b; letter-spacing:0.06em; text-transform:uppercase; font-family:'Share Tech Mono',monospace;">Market · Synagogue · Basilica · Andrássy · Heroes' · Parliament</div>
+        </div>
+        <a class="map-btn map-btn-p" href="https://www.google.com/maps/dir/Great+Market+Hall+Budapest/Dohany+Street+Synagogue+Budapest/St+Stephen+Basilica+Budapest/Andrassy+Avenue+Budapest/Heroes+Square+Budapest/Varosliget+Budapest/Hungarian+Parliament+Building+Budapest/Gozsdu+Udvar+Budapest" target="_blank" rel="noopener" style="margin-left:auto;">
+          <i data-lucide="map" style="width:14px;height:14px;"></i>
+          DAY 2 ROUTE
+        </a>
+      </div>
+
+      <!-- Sunday warning -->
+      <div class="warn" style="margin-bottom:20px; display:flex; gap:8px; align-items:flex-start;">
+        <i data-lucide="alert-triangle" style="width:16px;height:16px;color:#ffea00;flex-shrink:0;margin-top:1px;"></i>
+        <span><strong style="color:#ffea00;">Sunday hours:</strong> Great Market Hall opens 10:00, closes 16:00. St. Stephen's Basilica interior opens 12:30. Dohány Synagogue closed for entry on Sundays.</span>
+      </div>
+
+      <div style="display:flex; gap:16px;">
+        <div style="display:flex; flex-direction:column; align-items:center; padding-top:6px;">
+          <div class="tl-line-p" style="height:100%; min-height:600px;"></div>
+        </div>
+        <div style="flex:1; display:flex; flex-direction:column; gap:14px;">
+
+          <div class="card card-pink" style="padding:16px 18px; display:flex; flex-wrap:wrap; gap:10px; align-items:flex-start;">
+            <div style="display:flex; align-items:center; gap:8px; min-width:200px; flex:1;">
+              <div class="dot dot-p"></div>
+              <div>
+                <span class="badge badge-p" style="margin-bottom:4px; display:inline-block;">10:00</span>
+                <div style="font-weight:600; font-size:1rem; color:#e2e8f0;">Great Market Hall</div>
+                <div style="font-size:0.83rem; color:#94a3b8; margin-top:2px;">Breakfast lángos upstairs ~600 HUF · Best & cheapest place for paprika souvenirs · Opens 10:00, closes 16:00 ⚠️</div>
+              </div>
+            </div>
+            <div style="display:flex; flex-direction:column; gap:4px; align-items:flex-end;">
+              <span class="badge badge-g">FREE ENTRY</span>
+              <a class="map-btn map-btn-p" href="https://maps.google.com/?q=Great+Market+Hall,+Budapest" target="_blank" rel="noopener" style="padding:4px 10px; font-size:0.68rem;">
+                <i data-lucide="navigation" style="width:11px;height:11px;"></i> MAP
+              </a>
+            </div>
+          </div>
+
+          <div class="card card-pink" style="padding:16px 18px; display:flex; flex-wrap:wrap; gap:10px; align-items:flex-start;">
+            <div style="display:flex; align-items:center; gap:8px; min-width:200px; flex:1;">
+              <div class="dot dot-p"></div>
+              <div>
+                <span class="badge badge-p" style="margin-bottom:4px; display:inline-block;">11:15</span>
+                <div style="font-weight:600; font-size:1rem; color:#e2e8f0;">Váci Street & Fashion Street</div>
+                <div style="font-size:0.83rem; color:#94a3b8; margin-top:2px;">Main pedestrian shopping boulevard · Walk north toward Basilica</div>
+              </div>
+            </div>
+            <div style="display:flex; flex-direction:column; gap:4px; align-items:flex-end;">
+              <span class="badge badge-g">FREE</span>
+              <a class="map-btn map-btn-p" href="https://maps.google.com/?q=Vaci+Street,+Budapest" target="_blank" rel="noopener" style="padding:4px 10px; font-size:0.68rem;">
+                <i data-lucide="navigation" style="width:11px;height:11px;"></i> MAP
+              </a>
+            </div>
+          </div>
+
+          <div class="card card-pink" style="padding:16px 18px; display:flex; flex-wrap:wrap; gap:10px; align-items:flex-start;">
+            <div style="display:flex; align-items:center; gap:8px; min-width:200px; flex:1;">
+              <div class="dot dot-p"></div>
+              <div>
+                <span class="badge badge-p" style="margin-bottom:4px; display:inline-block;">11:45</span>
+                <div style="font-weight:600; font-size:1rem; color:#e2e8f0;">Dohány Street Synagogue <span style="font-size:0.75rem; color:#64748b;">(exterior only)</span></div>
+                <div style="font-size:0.83rem; color:#94a3b8; margin-top:2px;">Europe's largest synagogue · Closed for entry on Sundays · Moorish façade & memorial garden free to see</div>
+              </div>
+            </div>
+            <div style="display:flex; flex-direction:column; gap:4px; align-items:flex-end;">
+              <span class="badge badge-g">FREE</span>
+              <a class="map-btn map-btn-p" href="https://maps.google.com/?q=Dohany+Street+Synagogue,+Budapest" target="_blank" rel="noopener" style="padding:4px 10px; font-size:0.68rem;">
+                <i data-lucide="navigation" style="width:11px;height:11px;"></i> MAP
+              </a>
+            </div>
+          </div>
+
+          <div class="card card-pink" style="padding:16px 18px; display:flex; flex-wrap:wrap; gap:10px; align-items:flex-start;">
+            <div style="display:flex; align-items:center; gap:8px; min-width:200px; flex:1;">
+              <div class="dot dot-p"></div>
+              <div>
+                <span class="badge badge-p" style="margin-bottom:4px; display:inline-block;">12:15</span>
+                <div style="font-weight:600; font-size:1rem; color:#e2e8f0;">St. Stephen's Basilica</div>
+                <div style="font-size:0.83rem; color:#94a3b8; margin-top:2px;">Stunning Neo-Classical exterior & plaza free · Interior opens 12:30 Sun (~€4) · Tower climb ~€8 optional</div>
+              </div>
+            </div>
+            <div style="display:flex; flex-direction:column; gap:4px; align-items:flex-end;">
+              <span class="badge badge-g">FREE–€8</span>
+              <a class="map-btn map-btn-p" href="https://maps.google.com/?q=St.+Stephen%27s+Basilica,+Budapest" target="_blank" rel="noopener" style="padding:4px 10px; font-size:0.68rem;">
+                <i data-lucide="navigation" style="width:11px;height:11px;"></i> MAP
+              </a>
+            </div>
+          </div>
+
+          <div class="card card-pink" style="padding:16px 18px; display:flex; flex-wrap:wrap; gap:10px; align-items:flex-start;">
+            <div style="display:flex; align-items:center; gap:8px; min-width:200px; flex:1;">
+              <div class="dot dot-p"></div>
+              <div>
+                <span class="badge badge-p" style="margin-bottom:4px; display:inline-block;">13:00</span>
+                <div style="font-weight:600; font-size:1rem; color:#e2e8f0;">Andrássy Avenue ↗ Walk NE</div>
+                <div style="font-size:0.83rem; color:#94a3b8; margin-top:2px;">UNESCO World Heritage boulevard · 2.5 km of neo-Renaissance mansions · Walk the full length to Heroes' Square</div>
+              </div>
+            </div>
+            <div style="display:flex; flex-direction:column; gap:4px; align-items:flex-end;">
+              <span class="badge badge-g">FREE</span>
+              <a class="map-btn map-btn-p" href="https://maps.google.com/?q=Andrassy+Avenue,+Budapest" target="_blank" rel="noopener" style="padding:4px 10px; font-size:0.68rem;">
+                <i data-lucide="navigation" style="width:11px;height:11px;"></i> MAP
+              </a>
+            </div>
+          </div>
+
+          <div class="card card-pink" style="padding:16px 18px; display:flex; flex-wrap:wrap; gap:10px; align-items:flex-start;">
+            <div style="display:flex; align-items:center; gap:8px; min-width:200px; flex:1;">
+              <div class="dot dot-p"></div>
+              <div>
+                <span class="badge badge-p" style="margin-bottom:4px; display:inline-block;">14:00</span>
+                <div style="font-weight:600; font-size:1rem; color:#e2e8f0;">Heroes' Square (Hősök tere)</div>
+                <div style="font-size:0.83rem; color:#94a3b8; margin-top:2px;">Iconic millennium monument · End of Andrássy · Grand art museums flanking the square</div>
+              </div>
+            </div>
+            <div style="display:flex; flex-direction:column; gap:4px; align-items:flex-end;">
+              <span class="badge badge-g">FREE</span>
+              <a class="map-btn map-btn-p" href="https://maps.google.com/?q=Heroes+Square,+Budapest" target="_blank" rel="noopener" style="padding:4px 10px; font-size:0.68rem;">
+                <i data-lucide="navigation" style="width:11px;height:11px;"></i> MAP
+              </a>
+            </div>
+          </div>
+
+          <div class="card card-pink" style="padding:16px 18px; display:flex; flex-wrap:wrap; gap:10px; align-items:flex-start;">
+            <div style="display:flex; align-items:center; gap:8px; min-width:200px; flex:1;">
+              <div class="dot dot-p"></div>
+              <div>
+                <span class="badge badge-p" style="margin-bottom:4px; display:inline-block;">14:35</span>
+                <div style="font-weight:600; font-size:1rem; color:#e2e8f0;">City Park + Vajdahunyad Castle</div>
+                <div style="font-size:0.83rem; color:#94a3b8; margin-top:2px;">Free walk behind Heroes' Square · Fairytale castle grounds at no cost · Bench lunch spot</div>
+              </div>
+            </div>
+            <div style="display:flex; flex-direction:column; gap:4px; align-items:flex-end;">
+              <span class="badge badge-g">FREE</span>
+              <a class="map-btn map-btn-p" href="https://maps.google.com/?q=Varosliget,+Budapest" target="_blank" rel="noopener" style="padding:4px 10px; font-size:0.68rem;">
+                <i data-lucide="navigation" style="width:11px;height:11px;"></i> MAP
+              </a>
+            </div>
+          </div>
+
+          <div class="card card-pink" style="padding:16px 18px; display:flex; flex-wrap:wrap; gap:10px; align-items:flex-start;">
+            <div style="display:flex; align-items:center; gap:8px; min-width:200px; flex:1;">
+              <div class="dot dot-p"></div>
+              <div>
+                <span class="badge badge-p" style="margin-bottom:4px; display:inline-block;">15:15</span>
+                <div style="font-weight:600; font-size:1rem; color:#e2e8f0;">Walk back down Andrássy + Lunch</div>
+                <div style="font-size:0.83rem; color:#94a3b8; margin-top:2px;">Stop at a bakery or étterem near Oktogon · Budget ~1,500–2,500 HUF</div>
+              </div>
+            </div>
+            <span class="badge badge-y">~2,000 HUF</span>
+          </div>
+
+          <div class="card card-pink" style="padding:16px 18px; display:flex; flex-wrap:wrap; gap:10px; align-items:flex-start;">
+            <div style="display:flex; align-items:center; gap:8px; min-width:200px; flex:1;">
+              <div class="dot dot-p"></div>
+              <div>
+                <span class="badge badge-p" style="margin-bottom:4px; display:inline-block;">16:15</span>
+                <div style="font-weight:600; font-size:1rem; color:#e2e8f0;">Hungarian Parliament Building</div>
+                <div style="font-size:0.83rem; color:#94a3b8; margin-top:2px;">Walk 20 min west to Danube riverfront · Kossuth Square exterior free · One of the most beautiful buildings on Earth</div>
+              </div>
+            </div>
+            <div style="display:flex; flex-direction:column; gap:4px; align-items:flex-end;">
+              <span class="badge badge-g">FREE</span>
+              <a class="map-btn map-btn-p" href="https://maps.google.com/?q=Hungarian+Parliament+Building,+Budapest" target="_blank" rel="noopener" style="padding:4px 10px; font-size:0.68rem;">
+                <i data-lucide="navigation" style="width:11px;height:11px;"></i> MAP
+              </a>
+            </div>
+          </div>
+
+          <div class="card card-pink" style="padding:16px 18px; display:flex; flex-wrap:wrap; gap:10px; align-items:flex-start;">
+            <div style="display:flex; align-items:center; gap:8px; min-width:200px; flex:1;">
+              <div class="dot dot-p"></div>
+              <div>
+                <span class="badge badge-p" style="margin-bottom:4px; display:inline-block;">17:00</span>
+                <div style="font-weight:600; font-size:1rem; color:#e2e8f0;">Danube Promenade — Evening Walk South</div>
+                <div style="font-size:0.83rem; color:#94a3b8; margin-top:2px;">Classic Budapest riverside stroll · Views of Chain Bridge, Buda Castle, Gellért Hill across the river · Dusk magic</div>
+              </div>
+            </div>
+            <span class="badge badge-g">FREE</span>
+          </div>
+
+          <div class="card card-pink" style="padding:16px 18px; display:flex; flex-wrap:wrap; gap:10px; align-items:flex-start;">
+            <div style="display:flex; align-items:center; gap:8px; min-width:200px; flex:1;">
+              <div class="dot dot-p"></div>
+              <div>
+                <span class="badge badge-p" style="margin-bottom:4px; display:inline-block;">18:30</span>
+                <div style="font-weight:600; font-size:1rem; color:#e2e8f0;">Dinner + Szimpla Kert Ruin Bar</div>
+                <div style="font-size:0.83rem; color:#94a3b8; margin-top:2px;">Return to Jewish Quarter · Gozsdu Court buzzing on Sunday evenings · Peek inside Szimpla Kert — Budapest's most iconic ruin bar, free entry</div>
+              </div>
+            </div>
+            <div style="display:flex; flex-direction:column; gap:4px; align-items:flex-end;">
+              <span class="badge badge-y">~3,000 HUF</span>
+              <a class="map-btn map-btn-p" href="https://maps.google.com/?q=Szimpla+Kert,+Budapest" target="_blank" rel="noopener" style="padding:4px 10px; font-size:0.68rem;">
+                <i data-lucide="navigation" style="width:11px;height:11px;"></i> MAP
+              </a>
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </section>
+
+    <div class="divider" style="margin-bottom:48px;"></div>
+
+    <!-- ═══════════════════════════════════════════ -->
+    <!-- DAY 3 — BUDA                                -->
+    <!-- ═══════════════════════════════════════════ -->
+    <section style="margin-bottom:48px;">
+      <div style="display:flex; align-items:center; gap:16px; margin-bottom:24px;">
+        <div style="width:48px; height:48px; border-radius:10px; background:rgba(191,0,255,0.1); border:1px solid rgba(191,0,255,0.4); display:flex; align-items:center; justify-content:center; box-shadow:0 0 16px rgba(191,0,255,0.2);">
+          <span style="font-family:'Orbitron',sans-serif; font-size:1.1rem; font-weight:900; color:#bf00ff; text-shadow:0 0 10px #bf00ff;">03</span>
+        </div>
+        <div>
+          <div class="day-header" style="font-size:1.3rem; font-weight:700; color:#bf00ff; text-shadow:0 0 10px #bf00ff;">MON 16 MARCH — FULL BUDA DAY</div>
+          <div style="font-size:0.85rem; color:#64748b; letter-spacing:0.06em; text-transform:uppercase; font-family:'Share Tech Mono',monospace;">Checkout · Castle · Church · Bastion · Gellért · Parliament Sunset</div>
+        </div>
+        <a class="map-btn map-btn-v" href="https://www.google.com/maps/dir/Lockers+Budapest+Dohany+utca/Szechenyi+Chain+Bridge+Budapest/Buda+Castle+Budapest/Matthias+Church+Budapest/Fishermans+Bastion+Budapest/Gellert+Hill+Budapest/Elizabeth+Bridge+Budapest/Hungarian+Parliament+Building+Budapest" target="_blank" rel="noopener" style="margin-left:auto;">
+          <i data-lucide="map" style="width:14px;height:14px;"></i>
+          DAY 3 ROUTE
+        </a>
+      </div>
+
+      <!-- Luggage info box -->
+      <div class="card box-v card-purple" style="padding:16px 20px; margin-bottom:20px;">
+        <div style="display:flex; align-items:flex-start; gap:12px;">
+          <i data-lucide="luggage" style="width:18px;height:18px;color:#bf00ff;flex-shrink:0;margin-top:2px;"></i>
+          <div>
+            <div style="font-weight:600; color:#bf00ff; font-size:0.95rem; margin-bottom:4px;">🔐 Luggage Storage — Dohány utca 30</div>
+            <div style="font-size:0.9rem; color:#94a3b8; line-height:1.6;">Self-service coin lockers · <strong style="color:#e2e8f0;">Open 24 hours</strong> · ~2,000 HUF · 10-min walk from hotel · Pick up anytime before airport bus</div>
+          </div>
+        </div>
+      </div>
+
+      <div style="display:flex; gap:16px;">
+        <div style="display:flex; flex-direction:column; align-items:center; padding-top:6px;">
+          <div class="tl-line-v" style="height:100%; min-height:700px;"></div>
+        </div>
+        <div style="flex:1; display:flex; flex-direction:column; gap:14px;">
+
+          <div class="card card-purple" style="padding:16px 18px; display:flex; flex-wrap:wrap; gap:10px; align-items:flex-start;">
+            <div style="display:flex; align-items:center; gap:8px; min-width:200px; flex:1;">
+              <div class="dot dot-v"></div>
+              <div>
+                <span class="badge badge-v" style="margin-bottom:4px; display:inline-block;">10:00</span>
+                <div style="font-weight:600; font-size:1rem; color:#e2e8f0;">Hotel Check-Out</div>
+                <div style="font-size:0.83rem; color:#94a3b8; margin-top:2px;">Relaxed checkout · Ryanair carry-on only — don't overpack!</div>
+              </div>
+            </div>
+            <span class="badge badge-v">CHECKOUT</span>
+          </div>
+
+          <div class="card card-purple" style="padding:16px 18px; display:flex; flex-wrap:wrap; gap:10px; align-items:flex-start;">
+            <div style="display:flex; align-items:center; gap:8px; min-width:200px; flex:1;">
+              <div class="dot dot-v"></div>
+              <div>
+                <span class="badge badge-v" style="margin-bottom:4px; display:inline-block;">10:15</span>
+                <div style="font-weight:600; font-size:1rem; color:#e2e8f0;">Drop Bags — Lockers Budapest</div>
+                <div style="font-size:0.83rem; color:#94a3b8; margin-top:2px;">Dohány u. 30 · 10-min walk from hotel · Open 24/7 · Self-service coin lockers</div>
+              </div>
+            </div>
+            <div style="display:flex; flex-direction:column; gap:4px; align-items:flex-end;">
+              <span class="badge badge-y">~2,000 HUF</span>
+              <a class="map-btn map-btn-v" href="https://maps.google.com/?q=Lockers+Budapest,+Dohany+utca+30,+Budapest" target="_blank" rel="noopener" style="padding:4px 10px; font-size:0.68rem;">
+                <i data-lucide="navigation" style="width:11px;height:11px;"></i> MAP
+              </a>
+            </div>
+          </div>
+
+          <div class="card card-purple" style="padding:16px 18px; display:flex; flex-wrap:wrap; gap:10px; align-items:flex-start;">
+            <div style="display:flex; align-items:center; gap:8px; min-width:200px; flex:1;">
+              <div class="dot dot-v"></div>
+              <div>
+                <span class="badge badge-v" style="margin-bottom:4px; display:inline-block;">10:30</span>
+                <div style="font-weight:600; font-size:1rem; color:#e2e8f0;">Széchenyi Chain Bridge — Cross to Buda</div>
+                <div style="font-size:0.83rem; color:#94a3b8; margin-top:2px;">15-min walk from lockers · Cross on foot — free, iconic gateway to Buda</div>
+              </div>
+            </div>
+            <div style="display:flex; flex-direction:column; gap:4px; align-items:flex-end;">
+              <span class="badge badge-g">FREE</span>
+              <a class="map-btn map-btn-v" href="https://maps.google.com/?q=Szechenyi+Chain+Bridge,+Budapest" target="_blank" rel="noopener" style="padding:4px 10px; font-size:0.68rem;">
+                <i data-lucide="navigation" style="width:11px;height:11px;"></i> MAP
+              </a>
+            </div>
+          </div>
+
+          <div class="card card-purple" style="padding:16px 18px; display:flex; flex-wrap:wrap; gap:10px; align-items:flex-start;">
+            <div style="display:flex; align-items:center; gap:8px; min-width:200px; flex:1;">
+              <div class="dot dot-v"></div>
+              <div>
+                <span class="badge badge-v" style="margin-bottom:4px; display:inline-block;">10:50</span>
+                <div style="font-weight:600; font-size:1rem; color:#e2e8f0;">Buda Castle District</div>
+                <div style="font-size:0.83rem; color:#94a3b8; margin-top:2px;">Climb the hill on foot (~15 min) · Cobbled streets, palaces, lookout terraces · All grounds free · Skip the funicular (1,400 HUF)</div>
+              </div>
+            </div>
+            <div style="display:flex; flex-direction:column; gap:4px; align-items:flex-end;">
+              <span class="badge badge-g">FREE</span>
+              <a class="map-btn map-btn-v" href="https://maps.google.com/?q=Buda+Castle,+Budapest" target="_blank" rel="noopener" style="padding:4px 10px; font-size:0.68rem;">
+                <i data-lucide="navigation" style="width:11px;height:11px;"></i> MAP
+              </a>
+            </div>
+          </div>
+
+          <div class="card card-purple" style="padding:16px 18px; display:flex; flex-wrap:wrap; gap:10px; align-items:flex-start;">
+            <div style="display:flex; align-items:center; gap:8px; min-width:200px; flex:1;">
+              <div class="dot dot-v"></div>
+              <div>
+                <span class="badge badge-v" style="margin-bottom:4px; display:inline-block;">12:00</span>
+                <div style="font-weight:600; font-size:1rem; color:#e2e8f0;">Matthias Church (Mátyás-templom)</div>
+                <div style="font-size:0.83rem; color:#94a3b8; margin-top:2px;">700-year-old Gothic masterpiece · Used as a mosque for 145 years under Ottoman rule · ⚠️ Closes 17:00 — enter by 16:00 if going inside</div>
+              </div>
+            </div>
+            <div style="display:flex; flex-direction:column; gap:4px; align-items:flex-end;">
+              <span class="badge badge-g">FREE–€9</span>
+              <a class="map-btn map-btn-v" href="https://maps.google.com/?q=Matthias+Church,+Budapest" target="_blank" rel="noopener" style="padding:4px 10px; font-size:0.68rem;">
+                <i data-lucide="navigation" style="width:11px;height:11px;"></i> MAP
+              </a>
+            </div>
+          </div>
+
+          <div class="card card-purple" style="padding:16px 18px; display:flex; flex-wrap:wrap; gap:10px; align-items:flex-start;">
+            <div style="display:flex; align-items:center; gap:8px; min-width:200px; flex:1;">
+              <div class="dot dot-v"></div>
+              <div>
+                <span class="badge badge-v" style="margin-bottom:4px; display:inline-block;">12:45</span>
+                <div style="font-weight:600; font-size:1rem; color:#e2e8f0;">Fisherman's Bastion 🏯</div>
+                <div style="font-size:0.83rem; color:#94a3b8; margin-top:2px;">50 metres from Matthias Church · Lower terraces FREE with the best Parliament views in the city · Upper towers ~€4 optional</div>
+              </div>
+            </div>
+            <div style="display:flex; flex-direction:column; gap:4px; align-items:flex-end;">
+              <span class="badge badge-g">FREE</span>
+              <a class="map-btn map-btn-v" href="https://maps.google.com/?q=Fisherman%27s+Bastion,+Budapest" target="_blank" rel="noopener" style="padding:4px 10px; font-size:0.68rem;">
+                <i data-lucide="navigation" style="width:11px;height:11px;"></i> MAP
+              </a>
+            </div>
+          </div>
+
+          <div class="card card-purple" style="padding:16px 18px; display:flex; flex-wrap:wrap; gap:10px; align-items:flex-start;">
+            <div style="display:flex; align-items:center; gap:8px; min-width:200px; flex:1;">
+              <div class="dot dot-v"></div>
+              <div>
+                <span class="badge badge-v" style="margin-bottom:4px; display:inline-block;">13:30</span>
+                <div style="font-weight:600; font-size:1rem; color:#e2e8f0;">Lunch — Castle District</div>
+                <div style="font-size:0.83rem; color:#94a3b8; margin-top:2px;">Ruszwurm Cukrászda patisserie — slice of cake ~800 HUF · Or grab a sandwich from a local pékseg</div>
+              </div>
+            </div>
+            <span class="badge badge-y">~1,500 HUF</span>
+          </div>
+
+          <div class="card card-purple" style="padding:16px 18px; display:flex; flex-wrap:wrap; gap:10px; align-items:flex-start;">
+            <div style="display:flex; align-items:center; gap:8px; min-width:200px; flex:1;">
+              <div class="dot dot-v"></div>
+              <div>
+                <span class="badge badge-v" style="margin-bottom:4px; display:inline-block;">14:30</span>
+                <div style="font-weight:600; font-size:1rem; color:#e2e8f0;">Gellért Hill — 360° Panorama</div>
+                <div style="font-size:0.83rem; color:#94a3b8; margin-top:2px;">Walk south ~25 min from Castle then climb · Single best panoramic view of ALL Budapest · Both Pest & Buda, every bridge, Parliament · ~20 min climb from riverbank</div>
+              </div>
+            </div>
+            <div style="display:flex; flex-direction:column; gap:4px; align-items:flex-end;">
+              <span class="badge badge-g">FREE</span>
+              <a class="map-btn map-btn-v" href="https://maps.google.com/?q=Gellert+Hill,+Budapest" target="_blank" rel="noopener" style="padding:4px 10px; font-size:0.68rem;">
+                <i data-lucide="navigation" style="width:11px;height:11px;"></i> MAP
+              </a>
+            </div>
+          </div>
+
+          <div class="card card-purple" style="padding:16px 18px; display:flex; flex-wrap:wrap; gap:10px; align-items:flex-start;">
+            <div style="display:flex; align-items:center; gap:8px; min-width:200px; flex:1;">
+              <div class="dot dot-v"></div>
+              <div>
+                <span class="badge badge-v" style="margin-bottom:4px; display:inline-block;">16:00</span>
+                <div style="font-weight:600; font-size:1rem; color:#e2e8f0;">Elizabeth Bridge — Cross Back to Pest</div>
+                <div style="font-size:0.83rem; color:#94a3b8; margin-top:2px;">Walk down Gellért Hill to bridge · Cross on foot — views of the hill you just climbed · Free</div>
+              </div>
+            </div>
+            <div style="display:flex; flex-direction:column; gap:4px; align-items:flex-end;">
+              <span class="badge badge-g">FREE</span>
+              <a class="map-btn map-btn-v" href="https://maps.google.com/?q=Elizabeth+Bridge,+Budapest" target="_blank" rel="noopener" style="padding:4px 10px; font-size:0.68rem;">
+                <i data-lucide="navigation" style="width:11px;height:11px;"></i> MAP
+              </a>
+            </div>
+          </div>
+
+          <div class="card card-purple" style="padding:16px 18px; display:flex; flex-wrap:wrap; gap:10px; align-items:flex-start;">
+            <div style="display:flex; align-items:center; gap:8px; min-width:200px; flex:1;">
+              <div class="dot dot-v"></div>
+              <div>
+                <span class="badge badge-v" style="margin-bottom:4px; display:inline-block;">16:30</span>
+                <div style="font-weight:600; font-size:1rem; color:#e2e8f0;">Danube Promenade North Walk</div>
+                <div style="font-size:0.83rem; color:#94a3b8; margin-top:2px;">Walk north along the Pest riverside · Buda Castle, bridges and the Danube behind you as you go · Golden light setting in</div>
+              </div>
+            </div>
+            <span class="badge badge-g">FREE</span>
+          </div>
+
+          <!-- SUNSET HIGHLIGHT -->
+          <div class="card card-purple" style="padding:20px 18px; border-color:rgba(191,0,255,0.5); box-shadow:0 0 30px rgba(191,0,255,0.2), 0 0 60px rgba(191,0,255,0.08);">
+            <div style="display:flex; flex-wrap:wrap; gap:10px; align-items:flex-start;">
+              <div style="display:flex; align-items:center; gap:8px; min-width:200px; flex:1;">
+                <div class="dot dot-v" style="width:14px;height:14px;"></div>
+                <div>
+                  <span class="badge badge-v" style="margin-bottom:4px; display:inline-block;">17:45</span>
+                  <div style="font-weight:700; font-size:1.05rem; color:#bf00ff; text-shadow:0 0 10px #bf00ff;">Parliament at Sunset 🌅</div>
+                  <div style="font-size:0.88rem; color:#94a3b8; margin-top:4px; line-height:1.6;">Arrive Kossuth Square as sunset falls (~18:00 mid-March). The Neo-Gothic Parliament glowing gold and reflected in the Danube is one of Budapest's most unforgettable sights — and completely free. Stand on the <strong style="color:#e2e8f0;">Pest riverbank between Chain Bridge and Margaret Bridge</strong> for the best photograph.</div>
+                </div>
+              </div>
+              <div style="display:flex; flex-direction:column; gap:4px; align-items:flex-end;">
+                <span class="badge badge-g">FREE</span>
+                <span class="badge badge-v">UNMISSABLE</span>
+                <a class="map-btn map-btn-v" href="https://maps.google.com/?q=Hungarian+Parliament+Building,+Kossuth+Lajos+ter,+Budapest" target="_blank" rel="noopener" style="padding:4px 10px; font-size:0.68rem;">
+                  <i data-lucide="navigation" style="width:11px;height:11px;"></i> MAP
+                </a>
+              </div>
+            </div>
+          </div>
+
+          <div class="card card-purple" style="padding:16px 18px; display:flex; flex-wrap:wrap; gap:10px; align-items:flex-start;">
+            <div style="display:flex; align-items:center; gap:8px; min-width:200px; flex:1;">
+              <div class="dot dot-v"></div>
+              <div>
+                <span class="badge badge-v" style="margin-bottom:4px; display:inline-block;">18:30</span>
+                <div style="font-weight:600; font-size:1rem; color:#e2e8f0;">Collect Bags + Last Dinner in Budapest</div>
+                <div style="font-size:0.83rem; color:#94a3b8; margin-top:2px;">15-min walk to Dohány lockers · Treat yourselves to a full Hungarian goulash or paprikash meal — last Budapest bite!</div>
+              </div>
+            </div>
+            <span class="badge badge-y">~4,000 HUF</span>
+          </div>
+
+          <!-- AIRPORT FINAL -->
+          <div class="card" style="padding:20px 18px; border-color:rgba(0,245,255,0.4); box-shadow:0 0 25px rgba(0,245,255,0.15);">
+            <div style="display:flex; flex-wrap:wrap; gap:10px; align-items:flex-start;">
+              <div style="display:flex; align-items:center; gap:8px; min-width:200px; flex:1;">
+                <div class="dot dot-c pulse-c" style="width:14px;height:14px;"></div>
+                <div>
+                  <span class="badge badge-c" style="margin-bottom:4px; display:inline-block;">21:30</span>
+                  <div style="font-weight:700; font-size:1.05rem; color:#00f5ff; text-shadow:0 0 10px #00f5ff;">100E Bus → Airport ✈️</div>
+                  <div style="font-size:0.88rem; color:#94a3b8; margin-top:4px; line-height:1.6;">Walk ~10 min to Deák Ferenc tér · Airport Express 100E · Pay by card on the bus · ~40 min ride · Arrive ~22:15 · <strong style="color:#e2e8f0;">9+ hours to rest</strong> before 07:15 Ryanair BUD→BER</div>
+                </div>
+              </div>
+              <div style="display:flex; flex-direction:column; gap:4px; align-items:flex-end;">
+                <span class="badge badge-c">2,500 HUF</span>
+                <span class="badge badge-g">24/7 SERVICE</span>
+                <a class="map-btn map-btn-c" href="https://maps.google.com/?q=Deak+Ferenc+ter,+Budapest" target="_blank" rel="noopener" style="padding:4px 10px; font-size:0.68rem;">
+                  <i data-lucide="navigation" style="width:11px;height:11px;"></i> BUS STOP
+                </a>
+              </div>
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </section>
+
+    <div class="divider" style="margin-bottom:40px;"></div>
+
+    <!-- ═══════════════════════════════════════════ -->
+    <!-- QUICK TIPS                                  -->
+    <!-- ═══════════════════════════════════════════ -->
+    <section style="margin-bottom:48px;">
+      <h2 style="font-family:'Orbitron',sans-serif; font-size:1.1rem; font-weight:700; color:#00f5ff; text-shadow:0 0 10px #00f5ff; letter-spacing:0.1em; margin-bottom:20px; display:flex; align-items:center; gap:10px;">
+        <i data-lucide="zap" style="width:18px;height:18px;"></i>
+        MISSION INTEL
+      </h2>
+      <div style="display:grid; grid-template-columns:repeat(auto-fit,minmax(260px,1fr)); gap:14px;">
+
+        <div class="card" style="padding:16px 18px;">
+          <div style="display:flex; gap:10px; align-items:flex-start;">
+            <i data-lucide="credit-card" style="width:18px;height:18px;color:#00f5ff;flex-shrink:0;margin-top:2px;"></i>
+            <div>
+              <div style="font-weight:600; color:#e2e8f0; margin-bottom:4px;">Revolut — HUF Account</div>
+              <div style="font-size:0.85rem; color:#94a3b8; line-height:1.5;">Pays from HUF balance automatically in Hungary. Pre-load HUF on weekdays for best rates. Avoid weekend conversions (1% fee on Standard plan).</div>
+            </div>
+          </div>
+        </div>
+
+        <div class="card" style="padding:16px 18px;">
+          <div style="display:flex; gap:10px; align-items:flex-start;">
+            <i data-lucide="bus" style="width:18px;height:18px;color:#ff006e;flex-shrink:0;margin-top:2px;"></i>
+            <div>
+              <div style="font-weight:600; color:#e2e8f0; margin-bottom:4px;">100E Airport Bus</div>
+              <div style="font-size:0.85rem; color:#94a3b8; line-height:1.5;">2,500 HUF · Pay by contactless card on board · Runs 24/7 · ~40 min to Deák tér · Not valid with Budapest Card or regular tickets</div>
+            </div>
+          </div>
+        </div>
+
+        <div class="card" style="padding:16px 18px;">
+          <div style="display:flex; gap:10px; align-items:flex-start;">
+            <i data-lucide="ticket" style="width:18px;height:18px;color:#bf00ff;flex-shrink:0;margin-top:2px;"></i>
+            <div>
+              <div style="font-weight:600; color:#e2e8f0; margin-bottom:4px;">Public Transport Tickets</div>
+              <div style="font-size:0.85rem; color:#94a3b8; line-height:1.5;">500 HUF per single journey · Always validate on entry · Inspectors materialize from thin air — carry your ticket at all times</div>
+            </div>
+          </div>
+        </div>
+
+        <div class="card" style="padding:16px 18px;">
+          <div style="display:flex; gap:10px; align-items:flex-start;">
+            <i data-lucide="id-card" style="width:18px;height:18px;color:#39ff14;flex-shrink:0;margin-top:2px;"></i>
+            <div>
+              <div style="font-weight:600; color:#e2e8f0; margin-bottom:4px;">Documents</div>
+              <div style="font-size:0.85rem; color:#94a3b8; line-height:1.5;">Carry passport + EU Blue Card at all times · Dependent visa holder also needs valid documentation · Both Germany & Hungary are Schengen — no passport control at the airport</div>
+            </div>
+          </div>
+        </div>
+
+        <div class="card" style="padding:16px 18px;">
+          <div style="display:flex; gap:10px; align-items:flex-start;">
+            <i data-lucide="utensils" style="width:18px;height:18px;color:#ffea00;flex-shrink:0;margin-top:2px;"></i>
+            <div>
+              <div style="font-weight:600; color:#e2e8f0; margin-bottom:4px;">Restaurant Tip</div>
+              <div style="font-size:0.85rem; color:#94a3b8; line-height:1.5;">Don't say "thank you" until you get change back — it means you don't want change. Check Hungarian vs English menu prices. Tip 10–15% if happy.</div>
+            </div>
+          </div>
+        </div>
+
+        <div class="card" style="padding:16px 18px;">
+          <div style="display:flex; gap:10px; align-items:flex-start;">
+            <i data-lucide="moon" style="width:18px;height:18px;color:#00f5ff;flex-shrink:0;margin-top:2px;"></i>
+            <div>
+              <div style="font-weight:600; color:#e2e8f0; margin-bottom:4px;">Airport Overnight</div>
+              <div style="font-size:0.85rem; color:#94a3b8; line-height:1.5;">No lounge access needed — Terminal 2B has 24h McDonald's and seating. Bring a neck pillow. 100E bus runs all night, catch it at 21:30 from Deák tér.</div>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </section>
+
+    <!-- TIP BOX -->
+    <div class="tip" style="margin-bottom:48px; display:flex; gap:10px; align-items:flex-start;">
+      <i data-lucide="lightbulb" style="width:16px;height:16px;color:#39ff14;flex-shrink:0;margin-top:1px;"></i>
+      <div>
+        <strong style="color:#39ff14;">Pro tip:</strong> For the Parliament sunset photo on Day 3, stand on the <strong>Pest riverbank between Chain Bridge and Margaret Bridge</strong>. The low March sun hits the Parliament façade from the west around 18:00 — golden, dramatic, and completely free.
+      </div>
+    </div>
+
+    <!-- ═══════════════════════════════════════════ -->
+    <!-- COST SUMMARY                                -->
+    <!-- ═══════════════════════════════════════════ -->
+    <section>
+      <h2 style="font-family:'Orbitron',sans-serif; font-size:1.1rem; font-weight:700; color:#ff006e; text-shadow:0 0 10px #ff006e; letter-spacing:0.1em; margin-bottom:20px; display:flex; align-items:center; gap:10px;">
+        <i data-lucide="banknote" style="width:18px;height:18px;"></i>
+        BUDGET SUMMARY
+      </h2>
+      <div class="card card-pink" style="padding:20px 24px; overflow-x:auto;">
+        <table style="width:100%; border-collapse:collapse; font-size:0.9rem; min-width:400px;">
+          <thead>
+            <tr style="border-bottom:1px solid rgba(255,0,110,0.3);">
+              <th style="text-align:left; padding:8px 12px; color:#ff006e; font-family:'Share Tech Mono',monospace; font-size:0.75rem; letter-spacing:0.08em; text-transform:uppercase;">Item</th>
+              <th style="text-align:right; padding:8px 12px; color:#ff006e; font-family:'Share Tech Mono',monospace; font-size:0.75rem; letter-spacing:0.08em; text-transform:uppercase;">Cost (per person)</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr style="border-bottom:1px solid rgba(255,255,255,0.05);">
+              <td style="padding:8px 12px; color:#e2e8f0;">100E Airport Bus ×2 (arrival + departure)</td>
+              <td style="padding:8px 12px; text-align:right; font-family:'Share Tech Mono',monospace; color:#00f5ff;">5,000 HUF</td>
+            </tr>
+            <tr style="border-bottom:1px solid rgba(255,255,255,0.05);">
+              <td style="padding:8px 12px; color:#e2e8f0;">Luggage storage (Dohány lockers, Day 3)</td>
+              <td style="padding:8px 12px; text-align:right; font-family:'Share Tech Mono',monospace; color:#00f5ff;">2,000 HUF total</td>
+            </tr>
+            <tr style="border-bottom:1px solid rgba(255,255,255,0.05);">
+              <td style="padding:8px 12px; color:#e2e8f0;">Meals (3 lunches + 3 dinners × 2 people)</td>
+              <td style="padding:8px 12px; text-align:right; font-family:'Share Tech Mono',monospace; color:#00f5ff;">~30,000 HUF</td>
+            </tr>
+            <tr style="border-bottom:1px solid rgba(255,255,255,0.05);">
+              <td style="padding:8px 12px; color:#94a3b8;">Optional: Matthias Church interior (Day 3)</td>
+              <td style="padding:8px 12px; text-align:right; font-family:'Share Tech Mono',monospace; color:#94a3b8;">~€9 / person</td>
+            </tr>
+            <tr style="border-bottom:1px solid rgba(255,255,255,0.05);">
+              <td style="padding:8px 12px; color:#94a3b8;">Optional: Basilica interior (Day 2)</td>
+              <td style="padding:8px 12px; text-align:right; font-family:'Share Tech Mono',monospace; color:#94a3b8;">~€4 / person</td>
+            </tr>
+            <tr>
+              <td style="padding:8px 12px; color:#39ff14; font-weight:600;">All major sights (exteriors)</td>
+              <td style="padding:8px 12px; text-align:right; font-family:'Share Tech Mono',monospace; color:#39ff14; font-weight:700;">FREE</td>
+            </tr>
+          </tbody>
+          <tfoot>
+            <tr style="border-top:1px solid rgba(255,0,110,0.4); margin-top:4px;">
+              <td style="padding:12px 12px 4px; color:#ff006e; font-weight:700; font-family:'Orbitron',monospace; font-size:0.85rem;">ESTIMATED TOTAL (2 people)</td>
+              <td style="padding:12px 12px 4px; text-align:right; font-family:'Share Tech Mono',monospace; color:#ff006e; font-weight:700; font-size:1rem;">~37,000 HUF (~€95)</td>
+            </tr>
+          </tfoot>
+        </table>
+      </div>
+    </section>
+
+  </main>
+
+  <!-- FOOTER -->
+  <footer style="border-top:1px solid rgba(0,245,255,0.1); padding:24px 16px; text-align:center;">
+    <div style="font-family:'Share Tech Mono',monospace; font-size:0.75rem; color:#334155; letter-spacing:0.1em;">
+      BUDAPEST MISSION PLAN // 14–16 MAR 2026 // NÜRNBERG → BUDAPEST → BERLIN<br>
+      <span style="color:#1e293b; margin-top:4px; display:block;">Generated with ❤️ by VPK · All sights verified · Safe travels 🇭🇺</span>
+    </div>
+  </footer>
+
+  
+
+  <script>
+    function initLucide() {
+      if (window.lucide) {
+        lucide.createIcons();
+      } else {
+        setTimeout(initLucide, 100);
+      }
+    }
+
+    // Primary CDN: jsDelivr
+    var s1 = document.createElement('script');
+    s1.src = 'https://cdn.jsdelivr.net/npm/lucide@0.475.0/dist/umd/lucide.min.js';
+    s1.onload = function() { lucide.createIcons(); };
+    s1.onerror = function() {
+      // Fallback CDN: unpkg
+      var s2 = document.createElement('script');
+      s2.src = 'https://unpkg.com/lucide@0.475.0/dist/umd/lucide.min.js';
+      s2.onload = function() { lucide.createIcons(); };
+      document.body.appendChild(s2);
+    };
+    document.body.appendChild(s1);
+  </script>
+
+</body>
+</html>

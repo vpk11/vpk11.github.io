@@ -1,452 +1,106 @@
 <!DOCTYPE html>
-<html lang="en" class="scroll-smooth">
+<html lang="en">
 <head>
-    <script async src="https://www.googletagmanager.com/gtag/js?id=G-KRKPH75MYT"></script>
-    <script>
-        window.dataLayer = window.dataLayer || [];
-        function gtag(){dataLayer.push(arguments);}
-        gtag('js', new Date());
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#f6f4ee">
+  <title>Vishnuprasad Kamalon — Software engineer & curious builder</title>
+  <meta name="description" content="I’m Vishnuprasad, a software engineer in Frankfurt. At NaroIQ, I design and build systems, shape architecture, and look after AWS infrastructure.">
+  <meta name="author" content="Vishnuprasad Kamalon">
 
-        gtag('config', 'G-KRKPH75MYT');
-    </script>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Vishnuprasad Kamalon - Software Engineer | Portfolio</title>
-    <meta name="description" content="Vishnuprasad Kamalon - Highly experienced Software Engineer with nearly 8 years in driving scalable software solutions using Ruby, Ruby on Rails, and Python. Explore my portfolio, projects, and professional experience.">
-    <meta name="keywords" content="Vishnuprasad Kamalon, vpk11, Software Engineer, Full-Stack Developer, Backend Developer, Ruby, Ruby on Rails, Python, Flask, FastAPI, Ember.js, Typescript, AWS, Docker, Kubernetes, CI/CD, Agile, DevOps, Portfolio, Software Development, Tech Portfolio, Frankfurt, GenerativeAI, GenAI, Gemini, LLM, RAG, vector db, ATScribe, LoweCLI">
-    <meta name="author" content="Vishnuprasad Kamalon">
-    <link rel="icon" href="https://placehold.co/32x32/3B82F6/FFFFFF?text=VK&font=Inter" type="image/png">
-
-    <script src="https://cdn.tailwindcss.com"></script>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" xintegrity="sha512-DTOQO9RWCH3ppGqcWaEA1BIZOC6xxalwEsw9c2QQeAIftl+Vegovlnee1c9QX4TctnWMn13TZye+giMm8e2LwA==" crossorigin="anonymous" referrerpolicy="no-referrer" />
-
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Roboto+Slab:wght@700&display=swap" rel="stylesheet">
-
-    <style>
-        body {
-            font-family: 'Inter', sans-serif;
-            background-color: #f8fafc; /* Tailwind gray-50 */
-        }
-        .hero-bg {
-            background: linear-gradient(135deg, #1e3a8a 0%, #3b82f6 100%); /* Dark blue to lighter blue gradient */
-        }
-        .section-title {
-            font-family: 'Roboto Slab', serif;
-            color: #1e3a8a; /* Tailwind blue-800 */
-        }
-        .card-hover {
-            transition: transform 0.3s ease-in-out, box-shadow 0.3s ease-in-out;
-        }
-        .card-hover:hover {
-            transform: translateY(-8px);
-            box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
-        }
-        .nav-link {
-            position: relative;
-            padding-bottom: 4px;
-        }
-        .nav-link::after {
-            content: '';
-            position: absolute;
-            left: 0;
-            bottom: 0;
-            width: 0;
-            height: 2px;
-            background-color: #3b82f6; /* Tailwind blue-500 */
-            transition: width 0.3s ease;
-        }
-        .nav-link:hover::after {
-            width: 100%;
-        }
-        .icon-link:hover i {
-            transform: scale(1.2);
-            color: #3b82f6; /* Tailwind blue-500 */
-        }
-        .icon-link i {
-            transition: transform 0.2s ease-in-out, color 0.2s ease-in-out;
-        }
-
-        /* Mobile Menu Toggle */
-        #mobile-menu {
-            display: none; /* Hidden by default, JS will toggle */
-        }
-        #mobile-menu.active {
-            display: block;
-        }
-
-        /* Smooth scroll for anchor links */
-        html {
-            scroll-behavior: smooth;
-        }
-
-        /* ATS-friendly headers (example, ensure content is also keyword rich) */
-        h1, h2, h3 {
-            font-weight: 700; /* Bold for emphasis */
-        }
-    </style>
+  <meta property="og:title" content="Vishnuprasad Kamalon — Software engineer & curious builder">
+  <meta property="og:description" content="I’m Vishnuprasad, a software engineer in Frankfurt. At NaroIQ, I design and build systems, shape architecture, and look after AWS infrastructure.">
+  <meta property="og:type" content="website">
+  <link rel="icon" href="/assets/favicon.svg" type="image/svg+xml">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="stylesheet" href="/assets/site.css">
+  <script src="/assets/site.js" defer></script>
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-KRKPH75MYT"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'G-KRKPH75MYT');
+  </script>
 </head>
-<body class="text-gray-800 antialiased">
-
-    <!-- Header & Navigation -->
-    <header class="bg-white shadow-lg sticky top-0 z-50">
-        <nav class="container mx-auto px-4 sm:px-6 lg:px-8 py-3">
-            <div class="flex justify-between items-center">
-                <a href="#" class="flex items-center space-x-3 text-3xl font-bold text-blue-700 hover:text-blue-800 transition-colors duration-300" style="font-family: 'Roboto Slab', serif;">
-                    <span>Vishnuprasad Kamalon</span>
-                </a>
-
-                <!-- Desktop Menu -->
-                <div class="hidden md:flex items-center space-x-5 lg:space-x-7">
-                    <a href="#about" class="text-gray-700 hover:text-blue-600 nav-link font-medium">About</a>
-                    <a href="#experience" class="text-gray-700 hover:text-blue-600 nav-link font-medium">Experience</a>
-                    <a href="#projects" class="text-gray-700 hover:text-blue-600 nav-link font-medium">Projects</a>
-                    <a href="#contact" class="text-gray-700 hover:text-blue-600 nav-link font-medium">Contact</a>
-                    <a href="/resume.html" target="_blank" class="text-gray-700 hover:text-blue-600 nav-link font-medium" title="View Resume">Resume</a>
-                    <span class="text-gray-300">|</span>
-                    <a href="https://github.com/vpk11" target="_blank" class="text-gray-700 hover:text-blue-600 icon-link" title="GitHub">
-                        <i class="fab fa-github text-xl"></i><span class="sr-only">GitHub</span>
-                    </a>
-                    <a href="https://linkedin.com/in/vpk11" target="_blank" class="text-gray-700 hover:text-blue-600 icon-link" title="LinkedIn">
-                        <i class="fab fa-linkedin text-xl"></i><span class="sr-only">LinkedIn</span>
-                    </a>
-                    <a href="https://www.xing.com/profile/Vishnuprasad_Kamalon" target="_blank" class="text-gray-700 hover:text-blue-600 icon-link" title="Xing">
-                        <i class="fab fa-xing text-xl"></i><span class="sr-only">Xing</span>
-                    </a>
-                </div>
-
-                <!-- Mobile Menu Button -->
-                <div class="md:hidden">
-                    <button id="mobile-menu-button" class="text-gray-700 hover:text-blue-600 focus:outline-none">
-                        <i class="fas fa-bars text-2xl"></i>
-                    </button>
-                </div>
-            </div>
-
-            <!-- Mobile Menu -->
-            <div id="mobile-menu" class="md:hidden mt-3 py-2 bg-white rounded-md shadow-xl">
-                <a href="#about" class="block px-4 py-2 text-sm text-gray-700 hover:bg-blue-50 hover:text-blue-600">About</a>
-                <a href="#experience" class="block px-4 py-2 text-sm text-gray-700 hover:bg-blue-50 hover:text-blue-600">Experience</a>
-                <a href="#projects" class="block px-4 py-2 text-sm text-gray-700 hover:bg-blue-50 hover:text-blue-600">Projects</a>
-                <a href="#contact" class="block px-4 py-2 text-sm text-gray-700 hover:bg-blue-50 hover:text-blue-600">Contact</a>
-                <hr class="my-2">
-                <a href="/resume.html" target="_blank" class="block px-4 py-2 text-sm text-gray-700 hover:bg-blue-50 hover:text-blue-600"><i class="fas fa-file-pdf w-5 mr-2"></i>Resume</a>
-                <a href="https://github.com/vpk11" target="_blank" class="block px-4 py-2 text-sm text-gray-700 hover:bg-blue-50 hover:text-blue-600"><i class="fab fa-github w-5 mr-2"></i>GitHub</a>
-                <a href="https://linkedin.com/in/vpk11" target="_blank" class="block px-4 py-2 text-sm text-gray-700 hover:bg-blue-50 hover:text-blue-600"><i class="fab fa-linkedin w-5 mr-2"></i>LinkedIn</a>
-                <a href="https://www.xing.com/profile/Vishnuprasad_Kamalon" target="_blank" class="block px-4 py-2 text-sm text-gray-700 hover:bg-blue-50 hover:text-blue-600"><i class="fab fa-xing w-5 mr-2"></i>Xing</a>
-            </div>
-        </nav>
-    </header>
-
-    <!-- Main Content -->
-    <main>
-
-        <!-- Hero Section -->
-        <section id="hero" class="hero-bg text-white py-20 md:py-32">
-            <div class="container mx-auto px-6 text-center">
-                <h1 class="text-4xl md:text-6xl font-extrabold mb-4 leading-tight" style="font-family: 'Roboto Slab', serif;">
-                    Hello, I'm Vishnuprasad Kamalon.
-                </h1>
-                <p class="text-xl md:text-2xl font-light mb-8 max-w-2xl mx-auto">
-                    A passionate <strong class="font-semibold">Software Engineer</strong> transforming ideas into high-impact, scalable software solutions.
-                </p>
-                <a href="#experience" class="bg-white text-blue-700 font-semibold px-8 py-3 rounded-lg hover:bg-gray-100 transition duration-300 text-lg shadow-md hover:shadow-xl transform hover:scale-105">
-                    View My Work
-                </a>
-            </div>
-        </section>
-
-        <!-- About Me Section -->
-        <section id="about" class="py-16 md:py-24 bg-white">
-            <div class="container mx-auto px-6">
-                <h2 class="section-title text-3xl md:text-4xl font-bold text-center mb-12">About Me</h2>
-                <img src="assets/profile-photo.jpg" alt="Vishnuprasad Kamalon - Software Engineer" class="w-40 h-40 md:w-48 md:h-48 mx-auto rounded-full mb-8 shadow-lg border-4 border-blue-200">
-                <div class="max-w-3xl mx-auto text-center md:text-left">
-                    <div class="md:flex md:items-center md:space-x-8">
-                        <div>
-                            <p class="text-gray-700 text-lg leading-relaxed mb-4">
-                                I am a highly experienced <strong class="font-medium">Software Engineer</strong> with 8 years of expertise in driving scalable software solutions. My primary focus has been on utilizing <strong class="font-medium">Ruby(Ruby on Rails), Python(FastAPI, Flask), TypeScript</strong> to build robust applications.
-                            </p>
-                            <p class="text-gray-700 text-lg leading-relaxed mb-4">
-                                I possess strong skills in cloud environments, particularly <strong class="font-medium">AWS</strong>, and I'm proficient with <strong class="font-medium">Docker</strong> and <strong class="font-medium">Kubernetes</strong> for containerization and orchestration. My experience extends to CI/CD pipelines and DevOps practices, ensuring efficient and reliable software delivery. I have a proven track record in integrating <strong class="font-medium">AI-powered capabilities</strong> to create tangible business impact.
-                            </p>
-                            <p class="text-gray-700 text-lg leading-relaxed">
-                                Passionate about leveraging technology to solve complex problems, I thrive in collaborative environments and am committed to continuous learning and adopting best practices in <strong class="font-medium">software architecture</strong> and <strong class="font-medium">Agile development (Scrum, TDD, BDD)</strong>.
-                            </p>
-                        </div>
-                    </div>
-
-                    <div class="mt-12">
-                        <h3 class="text-2xl font-semibold text-gray-800 mb-6 text-center">Core Technical Skills</h3>
-                        <div class="flex flex-wrap justify-center gap-3">
-                            <span class="bg-blue-100 text-blue-700 px-4 py-2 rounded-full text-sm font-medium shadow-sm">Ruby(Ruby on Rails)</span>
-                            <span class="bg-blue-100 text-blue-700 px-4 py-2 rounded-full text-sm font-medium shadow-sm">Python(FastAPI, Flask)</span>
-                            <span class="bg-blue-100 text-blue-700 px-4 py-2 rounded-full text-sm font-medium shadow-sm">TypeScript(Ember.js)</span>
-                            <span class="bg-blue-100 text-blue-700 px-4 py-2 rounded-full text-sm font-medium shadow-sm">MySQL</span>
-                            <span class="bg-blue-100 text-blue-700 px-4 py-2 rounded-full text-sm font-medium shadow-sm">PostgreSQL</span>
-                            <span class="bg-blue-100 text-blue-700 px-4 py-2 rounded-full text-sm font-medium shadow-sm">Amazon Redshift</span>
-                            <span class="bg-blue-100 text-blue-700 px-4 py-2 rounded-full text-sm font-medium shadow-sm">Redis</span>
-                            <span class="bg-blue-100 text-blue-700 px-4 py-2 rounded-full text-sm font-medium shadow-sm">Elasticsearch</span>
-                            <span class="bg-blue-100 text-blue-700 px-4 py-2 rounded-full text-sm font-medium shadow-sm">Kafka</span>
-                            <span class="bg-blue-100 text-blue-700 px-4 py-2 rounded-full text-sm font-medium shadow-sm">AWS</span>
-                            <span class="bg-blue-100 text-blue-700 px-4 py-2 rounded-full text-sm font-medium shadow-sm">Docker</span>
-                            <span class="bg-blue-100 text-blue-700 px-4 py-2 rounded-full text-sm font-medium shadow-sm">Kubernetes</span>
-                            <span class="bg-blue-100 text-blue-700 px-4 py-2 rounded-full text-sm font-medium shadow-sm">Jenkins</span>
-                            <span class="bg-blue-100 text-blue-700 px-4 py-2 rounded-full text-sm font-medium shadow-sm">CircleCI</span>
-                            <span class="bg-blue-100 text-blue-700 px-4 py-2 rounded-full text-sm font-medium shadow-sm">GitHub Actions</span>
-                            <span class="bg-blue-100 text-blue-700 px-4 py-2 rounded-full text-sm font-medium shadow-sm">Terraform</span>
-                            <span class="bg-blue-100 text-blue-700 px-4 py-2 rounded-full text-sm font-medium shadow-sm">HTTP</span>
-                            <span class="bg-blue-100 text-blue-700 px-4 py-2 rounded-full text-sm font-medium shadow-sm">WebSockets</span>
-                            <span class="bg-blue-100 text-blue-700 px-4 py-2 rounded-full text-sm font-medium shadow-sm">RESTful APIs</span>
-                            <span class="bg-blue-100 text-blue-700 px-4 py-2 rounded-full text-sm font-medium shadow-sm">GraphQL</span>
-                            <span class="bg-blue-100 text-blue-700 px-4 py-2 rounded-full text-sm font-medium shadow-sm">Rspec</span>
-                            <span class="bg-blue-100 text-blue-700 px-4 py-2 rounded-full text-sm font-medium shadow-sm">PyTest</span>
-                            <span class="bg-blue-100 text-blue-700 px-4 py-2 rounded-full text-sm font-medium shadow-sm">Cucumber</span>
-                            <span class="bg-blue-100 text-blue-700 px-4 py-2 rounded-full text-sm font-medium shadow-sm">Playwright</span>
-                            <span class="bg-blue-100 text-blue-700 px-4 py-2 rounded-full text-sm font-medium shadow-sm">Agile/Scrum</span>
-                            <span class="bg-blue-100 text-blue-700 px-4 py-2 rounded-full text-sm font-medium shadow-sm">TDD/BDD</span>
-                            <span class="bg-blue-100 text-blue-700 px-4 py-2 rounded-full text-sm font-medium shadow-sm">Jira</span>
-                            <span class="bg-blue-100 text-blue-700 px-4 py-2 rounded-full text-sm font-medium shadow-sm">Splunk</span>
-                            <span class="bg-blue-100 text-blue-700 px-4 py-2 rounded-full text-sm font-medium shadow-sm">Datadog</span>
-                            <span class="bg-blue-100 text-blue-700 px-4 py-2 rounded-full text-sm font-medium shadow-sm">Grafana</span>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </section>
-
-        <!-- Experience Section -->
-        <section id="experience" class="py-16 md:py-24 bg-gray-50">
-            <div class="container mx-auto px-6">
-                <h2 class="section-title text-3xl md:text-4xl font-bold text-center mb-12">Professional Experience</h2>
-                <div class="max-w-4xl mx-auto space-y-10">
-                    <!-- Clark Holding SE -->
-                    <div class="bg-white p-6 md:p-8 rounded-xl shadow-lg card-hover">
-                        <div class="flex flex-col sm:flex-row justify-between items-start sm:items-center mb-3">
-                            <h3 class="text-2xl font-semibold text-blue-700">Senior Software Engineer</h3>
-                            <p class="text-gray-500 text-sm mt-1 sm:mt-0">Clark Holding SE, Frankfurt</p>
-                        </div>
-                        <p class="text-gray-500 text-sm mb-3">November 2021 - Present</p>
-                        <p class="text-gray-700 leading-relaxed">
-                            * Led the integration of a third-party AI bot, boosting in-app appointment bookings by 10% in Q1 2025.</br>
-                            * Slashed critical page load times from over 80 seconds to under 5 by diagnosing and re-architecting an inefficient Redis data-fetching operation, eliminating request timeouts.</br>
-                            * Overhauled the CI/CD pipeline by optimizing Jenkins and Kubernetes configurations, cutting build times by 40% and accelerating developer workflows.</br>
-                            * Orchestrated a zero-downtime migration of the primary Amazon RDS PostgreSQL database from v11 to v13 utilizing a Blue/Green deployment strategy.</br>
-                            * Architected a bespoke Salesforce Marketing Cloud component to push campaign notifications to the in-app message center, driving higher user engagement with marketing initiatives.</br>
-                            * Developed a Python-based AI powered CLI tool leveraging the LangChain framework and Google's GenAI Gemini to accelerate internal code debugging and command-line assistance.</br>
-                        </p>
-                    </div>
-
-                    <!-- Synup Digital Private Limited -->
-                    <div class="bg-white p-6 md:p-8 rounded-xl shadow-lg card-hover">
-                        <div class="flex flex-col sm:flex-row justify-between items-start sm:items-center mb-3">
-                            <h3 class="text-2xl font-semibold text-blue-700">Software Engineer</h3>
-                            <p class="text-gray-500 text-sm mt-1 sm:mt-0">Synup Digital Pvt Ltd, Bangalore</p>
-                        </div>
-                        <p class="text-gray-500 text-sm mb-3">May 2019 - November 2021</p>
-                        <p class="text-gray-700 leading-relaxed">
-                            * Contributed to a 15% surge in product sales by developing the core voice-command functionality for Google Assistant, Alexa, Siri, and other major platforms.</br>
-                            * Architected and deployed a scalable, event-driven backend with Kafka and RabbitMQ, and integrated Elasticsearch and Redis to support a high-throughput microservices architecture.</br>
-                            * Constructed a high-performance reporting tool using Amazon Redshift capable of aggregating and processing over 2 billion records for business intelligence.</br>
-                            * Strengthened software quality by expanding automated test coverage from 10% to 40%, which cut production bugs by 20% and accelerated deployment frequency.</br>
-                        </p>
-                    </div>
-
-                    <!-- Imeify Private Limited -->
-                    <div class="bg-white p-6 md:p-8 rounded-xl shadow-lg card-hover">
-                        <div class="flex flex-col sm:flex-row justify-between items-start sm:items-center mb-3">
-                            <h3 class="text-2xl font-semibold text-blue-700">Co-founder & Director</h3>
-                            <p class="text-gray-500 text-sm mt-1 sm:mt-0">Imeify Pvt Ltd, Kerala</p>
-                        </div>
-                        <p class="text-gray-500 text-sm mb-3">July 2018 - January 2022</p>
-                        <p class="text-gray-700 leading-relaxed">
-                            * Defined and executed the complete technical strategy, guiding the product from concept to a market launch that attracted over 10,000 users in the first 90 days.</br>
-                            * Built the company's full-stack platform from the ground up, creating a Node.js backend, a React admin dashboard, and a native Android application (Java/SDK).</br>
-                            * Maintained a 99% crash-free user rate by implementing rigorous testing protocols and a streamlined bug-resolution workflow.</br>
-                        </p>
-                    </div>
-
-                    <!-- Foradian Technologies Private Limited -->
-                    <div class="bg-white p-6 md:p-8 rounded-xl shadow-lg card-hover">
-                        <div class="flex flex-col sm:flex-row justify-between items-start sm:items-center mb-3">
-                            <h3 class="text-2xl font-semibold text-blue-700">Software Engineer</h3>
-                            <p class="text-gray-500 text-sm mt-1 sm:mt-0">Foradian Technologies Pvt Ltd, Bangalore</p>
-                        </div>
-                        <p class="text-gray-500 text-sm mb-3">July 2017 - May 2019</p>
-                        <p class="text-gray-700 leading-relaxed">
-                            * Owned the end-to-end development of critical Fedena ERP modules, including Applicant Enquiry and Registration, enhancing the core product for educational institutions.</br>
-                            * Delivered over 50% of the core REST APIs for the Fedena Connect mobile app, establishing a robust foundation for all mobile functionality.</br>
-                            * Dramatically improved system performance by optimizing complex SQL queries in the Finance module, slashing data retrieval times from 90 seconds to under 10 seconds.</br>
-                        </p>
-                    </div>
-                </div>
-            </div>
-        </section>
-
-        <!-- Personal Projects Section -->
-        <section id="projects" class="py-16 md:py-24 bg-white">
-            <div class="container mx-auto px-6">
-                <h2 class="section-title text-3xl md:text-4xl font-bold text-center mb-12">Personal Projects</h2>
-                <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
-                    <div class="bg-gray-50 p-6 rounded-xl shadow-lg flex flex-col card-hover">
-                        <h3 class="text-xl font-semibold text-blue-700 mb-2">LoweCLI</h3>
-                        <p class="text-gray-700 leading-relaxed mb-3 flex-grow text-sm">
-                            Generative AI powered command line tool to assist developers with code debugging, command suggestions, document lookup and more.
-                        </p>
-                        <p class="text-xs text-gray-500 mb-4"><strong>Technologies:</strong> Python, FastAPI, GenAI - Gemini AI, RAG</p>
-                        <div class="mt-auto">
-                            <a href="https://github.com/vpk11/lowe-cli" target="_blank" class="inline-block bg-blue-600 text-white text-sm font-medium px-4 py-2 rounded-md hover:bg-blue-700 transition duration-300 mr-2">
-                                <i class="fab fa-github mr-1"></i> GitHub
-                            </a>
-                        </div>
-                    </div>
-
-                    <div class="bg-gray-50 p-6 rounded-xl shadow-lg flex flex-col card-hover">
-                        <h3 class="text-xl font-semibold text-blue-700 mb-2">ATScribe</h3>
-                        <p class="text-gray-700 leading-relaxed mb-3 flex-grow text-sm">
-                            Generative AI powered ATS compatible resume generator command line tool.
-                        </p>
-                        <p class="text-xs text-gray-500 mb-4"><strong>Technologies:</strong> Python, GenAI - Gemini AI, Ollama</p>
-                        <div class="mt-auto">
-                            <a href="https://github.com/vpk11/atscribe" target="_blank" class="inline-block bg-blue-600 text-white text-sm font-medium px-4 py-2 rounded-md hover:bg-blue-700 transition duration-300">
-                                <i class="fab fa-github mr-1"></i> GitHub
-                            </a>
-                        </div>
-                    </div>
-
-                    <div class="bg-gray-50 p-6 rounded-xl shadow-lg flex flex-col card-hover">
-                        <h3 class="text-xl font-semibold text-blue-700 mb-2">HackerFeed</h3>
-                        <p class="text-gray-700 leading-relaxed mb-3 flex-grow text-sm">
-                            Hackernews at your fingertips! An android app list top stories from Hackernews.
-                        </p>
-                        <p class="text-xs text-gray-500 mb-4"><strong>Technologies:</strong> Kotlin, Jetpack Compose</p>
-                        <div class="mt-auto">
-                            <a href="https://github.com/vpk11/HackerFeed" target="_blank" class="inline-block bg-blue-600 text-white text-sm font-medium px-4 py-2 rounded-md hover:bg-blue-700 transition duration-300">
-                                <i class="fab fa-github mr-1"></i> GitHub
-                            </a>
-                        </div>
-                    </div>
-
-                    <div class="bg-gray-50 p-6 rounded-xl shadow-lg flex flex-col card-hover">
-                        <h3 class="text-xl font-semibold text-blue-700 mb-2">SprachNinja</h3>
-                        <p class="text-gray-700 leading-relaxed mb-3 flex-grow text-sm">
-                            Your personal AI-powered German language learning companion.
-                        </p>
-                        <p class="text-xs text-gray-500 mb-4"><strong>Technologies:</strong> Kotlin, Jetpack Compose</p>
-                        <div class="mt-auto">
-                            <a href="https://github.com/vpk11/SprachNinja" target="_blank" class="inline-block bg-blue-600 text-white text-sm font-medium px-4 py-2 rounded-md hover:bg-blue-700 transition duration-300">
-                                <i class="fab fa-github mr-1"></i> GitHub
-                            </a>
-                        </div>
-                    </div>
-
-                    <div class="bg-gray-50 p-6 rounded-xl shadow-lg flex flex-col card-hover">
-                        <h3 class="text-xl font-semibold text-blue-700 mb-2">PyVaccine Tracker</h3>
-                        <p class="text-gray-700 leading-relaxed mb-3 flex-grow text-sm">
-                            Python app to check COVID vaccination slot availability and publish to a Telegram group.
-                        </p>
-                        <p class="text-xs text-gray-500 mb-4"><strong>Technologies:</strong> Python, Telegram API, Telegram Bot</p>
-                        <div class="mt-auto">
-                            <a href="https://github.com/vpk11/PyVaccineTracker" target="_blank" class="inline-block bg-blue-600 text-white text-sm font-medium px-4 py-2 rounded-md hover:bg-blue-700 transition duration-300">
-                                <i class="fab fa-github mr-1"></i> GitHub
-                            </a>
-                        </div>
-                    </div>
-                     <div class="bg-gray-50 p-6 rounded-xl shadow-lg flex flex-col card-hover">
-                        <h3 class="text-xl font-semibold text-blue-700 mb-2">Personal Portfolio Website</h3>
-                        <p class="text-gray-700 leading-relaxed mb-3 flex-grow text-sm">
-                            This responsive website, designed to showcase my professional profile, skills, and projects.
-                        </p>
-                        <p class="text-xs text-gray-500 mb-4"><strong>Technologies:</strong> HTML5, Tailwind CSS, JavaScript</p>
-                        <div class="mt-auto">
-                            <a href="https://github.com/vpk11/vpk11.github.io" target="_blank" class="inline-block bg-blue-600 text-white text-sm font-medium px-4 py-2 rounded-md hover:bg-blue-700 transition duration-300">
-                                <i class="fab fa-github mr-1"></i> GitHub
-                            </a>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </section>
-
-        <!-- Contact Section -->
-        <section id="contact" class="py-16 md:py-24 hero-bg text-white">
-            <div class="container mx-auto px-6 text-center">
-                <h2 class="text-3xl md:text-4xl font-bold mb-6" style="font-family: 'Roboto Slab', serif;">Let's Connect!</h2>
-                <p class="text-lg md:text-xl mb-8 max-w-xl mx-auto font-light">
-                    I'm always excited to discuss new projects, innovative ideas, or potential collaboration opportunities. Feel free to reach out!
-                </p>
-                <a href="https://linkedin.com/in/vpk11" target="_blank" class="bg-white text-blue-700 font-semibold px-8 py-3 rounded-lg hover:bg-gray-100 transition duration-300 text-lg shadow-md hover:shadow-xl transform hover:scale-105">
-                    Message me on LinkedIn <i class="fab fa-linkedin ml-2"></i>
-                </a>
-                <p class="mt-8 text-sm">
-                    You can also email me at: <a href="mailto:vishnuprasad.kamalon@gmail.com" class="underline hover:text-blue-200">vishnuprasad.kamalon@gmail.com</a>
-                </p>
-            </div>
-        </section>
-
-    </main>
-
-    <!-- Footer -->
-    <footer class="bg-gray-900 text-gray-400 py-12">
-        <div class="container mx-auto px-6 text-center">
-            <div class="mb-6 flex justify-center space-x-6">
-                <a href="https://github.com/vpk11" target="_blank" class="text-gray-400 hover:text-white transition duration-300 icon-link" title="GitHub">
-                    <i class="fab fa-github text-2xl"></i>
-                </a>
-                <a href="https://linkedin.com/in/vpk11" target="_blank" class="text-gray-400 hover:text-white transition duration-300 icon-link" title="LinkedIn">
-                    <i class="fab fa-linkedin text-2xl"></i>
-                </a>
-                <a href="https://www.xing.com/profile/Vishnuprasad_Kamalon" target="_blank" class="text-gray-400 hover:text-white transition duration-300 icon-link" title="Xing">
-                    <i class="fab fa-xing text-2xl"></i>
-                </a>
-                 <a href="/resume.html" target="_blank" class="text-gray-400 hover:text-white transition duration-300 icon-link" title="Resume">
-                    <i class="fas fa-file-pdf text-2xl"></i>
-                </a>
-            </div>
-            <p class="text-sm">&copy; <span id="currentYear"></span> Vishnuprasad Kamalon. All rights reserved.</p>
-            <p class="text-xs text-gray-500 mt-1">
-                Built with <a href="https://tailwindcss.com/" target="_blank" class="hover:text-blue-400">Tailwind CSS</a> and a sprinkle of <i class="fas fa-mug-hot text-sm mx-1"></i>.
-            </p>
+<body>
+  <a class="skip-link" href="#main">Skip to content</a>
+  <header class="site-header">
+    <nav class="navigation container" aria-label="Main navigation">
+      <a class="wordmark" href="/" aria-label="vpk. — Vishnuprasad Kamalon — home">vpk<span>.</span></a>
+      <button class="menu-toggle" type="button" aria-expanded="false" aria-controls="navigation-links">Menu +</button>
+      <div class="nav-links" id="navigation-links">
+        <a href="/#about">About</a>
+        <a href="/#experience">Experience</a>
+        <a href="/resume.html">Résumé</a>
+        <a href="/#contact" class="nav-contact">Let’s talk <span aria-hidden="true">↗</span></a>
+      </div>
+    </nav>
+  </header>
+  <main id="main">
+    <section class="hero container" aria-labelledby="intro-title">
+      <div class="hero-grid">
+        <div>
+          <p class="eyebrow"><span class="status-dot" aria-hidden="true"></span> Software engineer · Frankfurt, Germany</p>
+          <h1 id="intro-title">Hi, I’m<br>Vishnuprasad<span class="accent">.</span><br>I build things<br>that <span class="accent">make sense.</span></h1>
+          <p class="hero-description">I’m a <strong>software engineer and former co-founder</strong>, now building at <a href="https://www.naroiq.com/" target="_blank" rel="noopener noreferrer">NaroIQ ↗</a>. I work across system design, code, and cloud infrastructure—and enjoy connecting the pieces.</p>
+          <div class="actions"><a class="button" href="#about">A little about me <span aria-hidden="true">↘</span></a><a class="text-link" href="/resume.html">View my résumé <span aria-hidden="true">↗</span></a></div>
         </div>
-    </footer>
+        <figure class="portrait">
+          <img src="/assets/profile-photo.jpg" alt="Vishnuprasad Kamalon outdoors, wearing glasses and a dark hoodie" width="1334" height="1335" fetchpriority="high">
+          <span class="portrait-stamp" aria-hidden="true"><svg viewBox="0 0 40 40" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 1v38M1 20h38M6.5 6.5l27 27m0-27-27 27M12.7 2.4l14.6 35.2M2.4 12.7l35.2 14.6M2.4 27.3l35.2-14.6M12.7 37.6 27.3 2.4"/></svg></span>
+          <figcaption><span>Vishnuprasad Kamalon</span><span>Away from the keyboard ↗</span></figcaption>
+        </figure>
+      </div>
+      <div class="hero-foot"><span>Building software since 2017. Still curious.</span><div class="social-links"><a href="https://github.com/vpk11" target="_blank" rel="noopener noreferrer">GitHub <span aria-hidden="true">↗</span></a><a href="https://linkedin.com/in/vpk11" target="_blank" rel="noopener noreferrer">LinkedIn <span aria-hidden="true">↗</span></a><a href="#about">Scroll to explore <span aria-hidden="true">↓</span></a></div></div>
+    </section>
 
-    <script>
-        // Set current year in footer
-        document.getElementById('currentYear').textContent = new Date().getFullYear();
+    <section class="section container section-layout" id="about" aria-labelledby="about-title">
+      <p class="eyebrow section-label"><span class="number">01 /</span> A little about me</p>
+      <div>
+        <h2 id="about-title">Curiosity is usually<br>where it starts.</h2>
+        <div class="about-copy">
+          <p>I’m Vishnuprasad Kamalon, a software engineer based in Frankfurt. My work has taken me from building ERP software for schools in Bangalore to co-founding a company in Kerala, then into insurance and financial technology in Germany.</p>
+          <p>I joined <a href="https://www.naroiq.com/" target="_blank" rel="noopener noreferrer">NaroIQ ↗</a> as part of its <strong>founding engineering team</strong>, building services from scratch for a company that helps launch and run ETFs. Working in a team of five, I move between designing systems, writing code, and keeping things running—including the architecture and AWS infrastructure underneath.</p>
+          <p>I like understanding <strong>how things work, and how they could work better.</strong> In a small team, I get to stay close to the whole life of a system: the decisions that shape it, the code that makes it work, and the care it needs once it’s in use.</p>
+        </div>
+        <div class="focus-list" aria-label="Areas I work in"><span class="tag">System design & architecture</span><span class="tag">Backend engineering</span><span class="tag">Cloud & infrastructure</span><span class="tag">Developer experience</span><span class="tag">Applied AI</span></div>
+      </div>
+    </section>
 
-        // Mobile menu toggle
-        const menuButton = document.getElementById('mobile-menu-button');
-        const mobileMenu = document.getElementById('mobile-menu');
-        menuButton.addEventListener('click', () => {
-            mobileMenu.classList.toggle('active');
-            // Toggle icon between bars and times
-            const icon = menuButton.querySelector('i');
-            if (mobileMenu.classList.contains('active')) {
-                icon.classList.remove('fa-bars');
-                icon.classList.add('fa-times');
-            } else {
-                icon.classList.remove('fa-times');
-                icon.classList.add('fa-bars');
-            }
-        });
+    <section class="section work-section" id="experience" aria-labelledby="experience-title">
+      <div class="container section-layout">
+        <p class="eyebrow section-label"><span class="number">02 /</span> Along the way</p>
+        <div>
+          <div class="section-heading"><h2 id="experience-title">Small details.<br>Meaningful impact.</h2><a class="text-link" href="/resume.html">The full résumé <span aria-hidden="true">↗</span></a></div>
+          <div class="metrics">
+            <div class="metric"><div class="metric-value">80s <span>→ &lt;5s</span></div><p>Page loads after reworking a Redis bottleneck.</p><small>Performance at Clark</small></div>
+            <div class="metric"><div class="metric-value">40<span>%</span></div><p>Less time waiting for builds after improving CI/CD.</p><small>Developer experience at Clark</small></div>
+            <div class="metric"><div class="metric-value">10k<span>+</span></div><p>Users in the first 90 days of our product launch.</p><small>From zero at Imeify</small></div>
+          </div>
+          <div class="career-list">
+            <article class="career-row"><div><h3><a href="https://www.naroiq.com/" target="_blank" rel="noopener noreferrer">NaroIQ GmbH ↗</a></h3><p class="role">Staff Engineer · Frankfurt</p></div><span class="date">Sep 2025 — Present</span><p class="career-note">Part of the founding engineering team, building services from scratch for ETF infrastructure. In a team of five, I work across system design, development, and ongoing maintenance, alongside architecture and AWS infrastructure.</p></article>
+            <article class="career-row"><div><h3>Clark Holding SE</h3><p class="role">Senior Software Engineer · Frankfurt</p></div><span class="date">Nov 2021 — Sep 2025</span><p class="career-note">Improved backend performance, deployment workflows, and AI-assisted customer experiences in insurance technology.</p></article>
+            <article class="career-row"><div><h3>Synup</h3><p class="role">Software Engineer · Bangalore</p></div><span class="date">May 2019 — Nov 2021</span><p class="career-note">Building event-driven services, voice integrations, and reporting across billions of records.</p></article>
+            <article class="career-row"><div><h3>Imeify</h3><p class="role">Co-founder & Technical Lead · Kerala</p></div><span class="date">Jul 2018 — Jan 2022</span><p class="career-note">Taking a product from an idea to launch, building the backend, admin dashboard, and Android app along the way.</p></article>
+            <article class="career-row"><div><h3>Foradian Technologies</h3><p class="role">Software Engineer · Bangalore</p></div><span class="date">Jul 2017 — May 2019</span><p class="career-note">Building school-management tools and mobile APIs, and learning how much a well-written query can change.</p></article>
+          </div>
+        </div>
+      </div>
+    </section>
 
-        // Close mobile menu when a link is clicked
-        const mobileMenuLinks = mobileMenu.querySelectorAll('a');
-        mobileMenuLinks.forEach(link => {
-            link.addEventListener('click', (event) => {
-                // Check if the link is an anchor link to a section on the same page
-                if (link.getAttribute('href').startsWith('#')) {
-                    if (mobileMenu.classList.contains('active')) {
-                        mobileMenu.classList.remove('active');
-                        menuButton.querySelector('i').classList.remove('fa-times');
-                        menuButton.querySelector('i').classList.add('fa-bars');
-                    }
-                }
-            });
-        });
-
-    </script>
-
+    <section class="section contact-section container section-layout" id="contact" aria-labelledby="contact-title">
+      <p class="eyebrow section-label"><span class="number">03 /</span> Say hello</p>
+      <div><h2 id="contact-title">Good things start<br>with <span>a conversation.</span></h2><p class="contact-copy">Have an interesting problem, something you’re building, or a thought to share? I’d love to hear about it.</p><div class="actions"><a class="button" href="mailto:vishnuprasad.kamalon@gmail.com">Say hello <span aria-hidden="true">↗</span></a><a class="text-link" href="https://linkedin.com/in/vpk11" target="_blank" rel="noopener noreferrer">Connect on LinkedIn <span aria-hidden="true">↗</span></a></div><p class="contact-email"><a href="mailto:vishnuprasad.kamalon@gmail.com">vishnuprasad.kamalon@gmail.com</a></p></div>
+    </section>
+  </main>
+  <footer class="site-footer">
+    <div class="footer-inner container">
+      <div class="footer-signature"><a class="wordmark" href="/" aria-label="vpk. — back to home">vpk<span>.</span></a><span>© <span data-year>2026</span> Vishnuprasad Kamalon</span></div>
+      <span>A little corner of the internet.</span>
+      <div class="footer-links"><a href="https://github.com/vpk11" target="_blank" rel="noopener noreferrer">GitHub ↗</a><a href="https://linkedin.com/in/vpk11" target="_blank" rel="noopener noreferrer">LinkedIn ↗</a><a href="https://www.xing.com/profile/Vishnuprasad_Kamalon" target="_blank" rel="noopener noreferrer">Xing ↗</a></div>
+    </div>
+  </footer>
 </body>
 </html>

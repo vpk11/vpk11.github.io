@@ -1,1 +1,9 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64"><rect width="64" height="64" rx="12" fill="#f6f4ee"/><text x="9" y="44" font-family="Arial,sans-serif" font-size="38" font-weight="700" letter-spacing="-4" fill="#252720">vk</text><circle cx="53" cy="42" r="4" fill="#ad431e"/></svg>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" role="img" aria-label="vpk.">
+  <rect width="64" height="64" rx="12" fill="#f6f4ee"/>
+  <g fill="#252720">
+    <path d="M4 23h5.4l4.3 13.8L18 23h5.4l-7.1 20h-5.2Z"/>
+    <path transform="translate(2.3 0) scale(.9 1)" fill-rule="evenodd" d="M23 23h4.9v2.1c1.5-1.8 3.4-2.6 5.7-2.6 5.2 0 8.5 4.1 8.5 10.5s-3.3 10.5-8.5 10.5c-2.2 0-4.1-.8-5.5-2.4V50H23Zm9.4 4c-2.9 0-4.5 2.1-4.5 6s1.6 6 4.5 6 4.5-2.1 4.5-6-1.6-6-4.5-6Z"/>
+    <path d="M41 15h5.1v16.1l6.3-8.1h6.1l-7.6 9.5L56.5 43h-5.6l-6.8-9v9H41Z"/>
+  </g>
+  <path fill="#ad431e" d="M58 38.5h4.5V43H58Z"/>
+</svg>
